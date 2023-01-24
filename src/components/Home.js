@@ -1,4 +1,4 @@
-import { onNavigate } from "../main";
+import { onNavigate } from "../main.js";
 
 export const Home = () => {
     const HomeDiv = document.createElement('div');
@@ -9,6 +9,7 @@ export const Home = () => {
     btnLogin.textContent = 'Iniciar Sesión';
 
     btnRegister.addEventListener('click', () => onNavigate('/register'));
+    btnLogin.addEventListener('click', () => onNavigate('/login'));
 
     HomeDiv.appendChild(btnRegister);
     HomeDiv.appendChild(btnLogin);

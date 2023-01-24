@@ -1,11 +1,15 @@
+import { onNavigate } from "../main.js";
+
 export const Register = () => {
     const HomeDiv = document.createElement('div');
-    HomeDiv.textContent = "Registro"
-    const btnRegister = document.createElement('button');
+    HomeDiv.textContent = "Registro";
+    const btnHome = document.createElement('button');
 
-    btnRegister.textContent = 'Regresar a Home';
+    btnHome.textContent = 'Regresar a Home';
 
-    HomeDiv.appendChild(btnRegister);
+    btnHome.addEventListener('click', () => onNavigate('/'));
+
+    HomeDiv.appendChild(btnHome);
 
     return HomeDiv;
 };

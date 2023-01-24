@@ -1,11 +1,15 @@
+import { onNavigate } from "../main.js";
+
 export const Login = () => {
     const HomeDiv = document.createElement('div');
-    HomeDiv.textContent = "Registro"
-    const btnLogin = document.createElement('button');
+    HomeDiv.textContent = "Logueo";
+    const btnHome = document.createElement('button');
 
-    btnLogin.textContent = 'Regresar a Home';
+    btnHome.textContent = 'Regresar a Home';
 
-    HomeDiv.appendChild(btnLogin);
+    btnHome.addEventListener('click', () => onNavigate('/'));
+
+    HomeDiv.appendChild(btnHome);
 
     return HomeDiv;
 };
