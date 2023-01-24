@@ -2,14 +2,14 @@ import { onNavigate } from "../main.js";
 
 export const Login = () => {
     const HomeDiv = document.createElement('div');
-    HomeDiv.textContent = "Logueo";
-    const btnHome = document.createElement('button');
+    HomeDiv.textContent = 'Logueo';
+    const btnFeed = document.createElement('button');
 
-    btnHome.textContent = 'Regresar a Home';
+    btnFeed.textContent = 'Ingresar';
 
-    btnHome.addEventListener('click', () => onNavigate('/'));
+    btnFeed.addEventListener('click', () => onNavigate('/feed'));
 
-    HomeDiv.appendChild(btnHome);
+    HomeDiv.appendChild(btnFeed);
 
     return HomeDiv;
 };
