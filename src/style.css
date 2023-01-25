@@ -5,17 +5,94 @@ font-family: 'Alegreya Sans SC', sans-serif;*/
 @import url('https://fonts.googleapis.com/css2?family=Alegreya+Sans+SC:ital,wght@0,100;0,300;0,400;0,500;0,700;0,800;0,900;1,100;1,300;1,400;1,500;1,700;1,800;1,900&display=swap');
 
 /* Código de colores
-    #84D2C5 Verde/Azul 
-    #E4C988 Amarillo/Beige/Arena 
-    #C27664 Naranja
-    #B05A7A Rosa/Rojo
-    #2E4A45 Verde Oscuro
-    #242424 Gris
-    #FFF Blanco
+    #84D2C5 Verde/Azul -------------
+    #E4C988 Amarillo/Beige/Arena ----------------
+    #C27664 Naranja -----------------
+    #B05A7A Rosa/Rojo --------------------
+    #2E4A45 Verde Oscuro -----------------
+    #242424 Gris -------------
+    #FFF Blanco -----------
 */
+
+:root {
+    --main-bg-color: #2E4A45;
+    --title-color: #84D2C5;
+    --button-bg-color: #242424;
+    --text-color: #FFF;
+    --post-bg-color: #B05A7A;
+    /*nombre caracteristico??*/
+    --amarillo-beige-arena: #E4C988;
+    --naranja: #C27664;
+    --text-corrida:'Alegreya Sans', sans-serif;
+    --text-imprenta:'Alegreya Sans SC', sans-serif;
+}
+
 * {
-    font-family: 'Alegreya Sans', sans-serif;
+    /* font-family: 'Alegreya Sans', sans-serif; */
+    font-family: var(--text-corrida);
     background-color: #2E4A45;
     color: #fff;
     font-weight: 500;
+}
+
+.title {
+    font-size: 90px;
+    text-align: center;
+    color: var(--title-color);
+    font-weight:700;
+    margin: 30px auto 0;
+}
+.text_initial {
+    text-align: center;
+    font-size: 25px;
+    color: var(--amarillo-beige-arena);
+    font-family: var(--text-imprenta);
+}
+.button {
+    display: block;
+    background-color: var(--button-bg-color);
+    font-family: var(--text-imprenta);
+    font-size: 25px;
+    width: 250px;
+    height: fit-content;
+    margin: 25px auto;
+    /*box-shadow*/
+    border-radius: 5px;
+    padding: 5px;
+}
+.btnLogin {
+    border: 2px solid var(--title-color);
+    
+}
+.btnRegister {
+    border: 2px solid var(--amarillo-beige-arena);
+}
+
+.title_login {
+    text-align: center;
+    color: var(--text-color);
+    font-size: 30px;
+    font-family: var(--text-imprenta);
+}
+.section_login {
+    width: 250px;
+    margin: auto;
+}
+
+.text_login {
+    color: var(--post-bg-color);
+    font-size: 25px;
+    font-family: var(--text-imprenta);
+    margin:0 auto;
+}
+.input_login {
+    background-color: rgb(228, 201, 136, 25%);
+    width: 250px;
+    height: 23px;
+    margin:0 auto 10px;
+}
+.btnFeed {
+    border: 2px solid var(--title-color);
+    width: max-content;
+    padding: 10px;
 }
