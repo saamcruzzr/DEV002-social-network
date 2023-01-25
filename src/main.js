@@ -1,13 +1,15 @@
-import { home } from './lib/components/home.js';
-import { register } from './lib/components/register.js';
-import { logIn } from './lib/components/login.js';
+import { Home } from './components/Home.js';
+import { Register } from './components/Register.js';
+import { Login } from './components/Login.js';
+import { Feed } from './components/Feed.js';
 
 const rootDiv = document.getElementById('root');
 
 const routes = {
-    '/': home,
-    '/register': register,
-    '/login': logIn,
+    '/': Home,
+    '/register': Register,
+    '/login': Login,
+    '/feed': Feed,
 };
 
 export const onNavigate = (pathname) => {
@@ -16,12 +18,10 @@ export const onNavigate = (pathname) => {
         pathname,
         window.location.origin + pathname,
     );
-
-    while (rootDiv.firstChild) {
+    while(rootDiv.firstChild){
         rootDiv.removeChild(rootDiv.firstChild);
-    };
-
-    rootDiv.appendChild(routes[pathname]())
+    }
+    rootDiv.appendChild(routes[pathname]());
 };
 
 const component = routes[window.location.pathname];
