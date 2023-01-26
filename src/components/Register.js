@@ -1,9 +1,10 @@
 import { onNavigate } from "../main.js";
+import { registerUser } from '../firebase/firebase.js'
 
 export const Register = () => {
     // HomeDiv o RegisterDiv????
-    const HomeDiv = document.createElement('div');
-    HomeDiv.textContent = 'Registro';
+    const RegisterDiv = document.createElement('div');
+    RegisterDiv.textContent = 'Registro';
     const sectionRegister = `
     <h3 class="title_login">Formulario</h3>
     <section class="section_login">
@@ -11,10 +12,13 @@ export const Register = () => {
         <input type="text" class="input_login">
         <p class="text_login">Fecha de Nacimiento</p>
         <input type="text" class="input_login">
+
         <p class="text_login">Correo Electrónico</p>
-        <input type="text" class="input_login">
+        <input type="text" class="input_login" id="email">
+
         <p class="text_login">Contraseña</p>
-        <input type="text" class="input_login">
+        <input type="text" class="input_login" id="password">
+        
         <p class="text_login">Confirmar Contraseña</p>
         <input type="text" class="input_login">
     </section>
@@ -24,12 +28,16 @@ export const Register = () => {
     const btnFeed = document.createElement('button');
     btnFeed.setAttribute("class", "button btnFeed");
 
-    HomeDiv.innerHTML = sectionRegister;
+    RegisterDiv.innerHTML = sectionRegister;
     btnFeed.textContent = 'Guardar Datos';
 
-    btnFeed.addEventListener('click', () => onNavigate('/feed'));
+    btnFeed.addEventListener('click', () => {
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+        registerUser(email,password).then(() => onNavigate('/feed'))        
+    });
 
-    HomeDiv.appendChild(btnFeed);
+    RegisterDiv.appendChild(btnFeed);
 
-    return HomeDiv;
+    return RegisterDiv;
 };

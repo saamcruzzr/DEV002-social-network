@@ -1,16 +1,16 @@
 import { onNavigate } from "../main.js";
 
 export const Feed = () => {
-    const HomeDiv = document.createElement('div');
-    HomeDiv.textContent = 'Muro';
+    const FeedDiv = document.createElement('div');
+    FeedDiv.textContent = 'Muro';
     const btnHome = document.createElement('button');
 
     btnHome.textContent = 'Regresar a Inicio';
 
     btnHome.addEventListener('click', () => onNavigate('/'));
 
-    HomeDiv.appendChild(btnHome);
+    FeedDiv.appendChild(btnHome);
 
-    return HomeDiv;
+    return FeedDiv;
 
 };
