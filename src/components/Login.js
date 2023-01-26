@@ -2,8 +2,8 @@ import { onNavigate } from "../main.js";
 
 export const Login = () => {
     // HomeDiv o LoginDiv???
-    const HomeDiv = document.createElement('div');
-    HomeDiv.textContent = 'Logueo';
+    const LoginDiv = document.createElement('div');
+    LoginDiv.textContent = 'Logueo';
     const sectionLogin = `
     <h3 class="title_login">Iniciar Sesión</h3>
     <section class="section_login">
@@ -17,12 +17,12 @@ export const Login = () => {
     const btnFeed = document.createElement('button');
     btnFeed.setAttribute("class", "button btnFeed");
 
-    HomeDiv.innerHTML=sectionLogin;
+    LoginDiv.innerHTML=sectionLogin;
     btnFeed.textContent = 'Ingresar';
 
     btnFeed.addEventListener('click', () => onNavigate('/feed'));
 
-    HomeDiv.appendChild(btnFeed);
+    LoginDiv.appendChild(btnFeed);
 
-    return HomeDiv;
+    return LoginDiv;
 };
