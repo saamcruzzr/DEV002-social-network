@@ -11,10 +11,13 @@ export const Register = () => {
         <input type="text" class="input_login">
         <p class="text_login">Fecha de Nacimiento</p>
         <input type="text" class="input_login">
+
         <p class="text_login">Correo Electrónico</p>
-        <input type="text" class="input_login">
+        <input type="text" class="input_login" id="email">
+
         <p class="text_login">Contraseña</p>
-        <input type="text" class="input_login">
+        <input type="text" class="input_login" id="password">
+        
         <p class="text_login">Confirmar Contraseña</p>
         <input type="text" class="input_login">
     </section>
