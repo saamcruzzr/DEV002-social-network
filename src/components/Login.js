@@ -1,9 +1,7 @@
 import { onNavigate } from "../main.js";
 
 export const Login = () => {
-    // HomeDiv o LoginDiv???
     const LoginDiv = document.createElement('div');
-    LoginDiv.textContent = 'Logueo';
     const sectionLogin = `
     <h3 class="title_login">Iniciar Sesión</h3>
     <section class="section_login">

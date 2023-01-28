@@ -2,9 +2,7 @@ import { onNavigate } from "../main.js";
 import { registerUser } from '../firebase/firebase.js'
 
 export const Register = () => {
-    // HomeDiv o RegisterDiv????
     const RegisterDiv = document.createElement('div');
-    RegisterDiv.textContent = 'Registro';
     const sectionRegister = `
     <h3 class="title_login">Formulario</h3>
     <section class="section_login">
