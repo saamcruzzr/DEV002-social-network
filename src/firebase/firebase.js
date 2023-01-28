@@ -2,7 +2,8 @@
 // API REFERENCE JS FIREBASE https://firebase.google.com/docs/reference/js?hl=es-419
 import { firebaseConfig } from '../firebase/fconfig.js'
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.16.0/firebase-app.js";
-import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.16.0/firebase-auth.js"
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.16.0/firebase-auth.js"
+import { getFirestore, addDoc, collection } from "https://www.gstatic.com/firebasejs/9.16.0/firebase-firestore.js"
 // OJO!! CHECAR VERSIONES !!!
 
 // Your web app's Firebase configuration
@@ -10,7 +11,7 @@ import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-// const auth = getAuth(app);
+const db = getFirestore(app);
 
 //AUTENTICACIÓN https://firebase.google.com/docs/auth/web/start?hl=es-419#add-initialize-sdk
 
@@ -19,22 +20,20 @@ const auth = getAuth();
 //https://firebase.google.com/docs/reference/js/auth.md?hl=es-419#createuserwithemailandpassword
 export function registerUser (email,password){
   return createUserWithEmailAndPassword(auth, email, password)
+}
+
+export function loginUser (email,password){
+  return signInWithEmailAndPassword(auth, email, password)
   .then((userCredential) => {
     // Signed in 
     const user = userCredential.user;
     // ...
-  })
-  // .catch((error) => {
-  //   const errorCode = error.code;
-  //   const errorMessage = error.message;
-  //   // ..
-  // });
+  }) 
 }
 
- 
-
-
-
+export function addUser (user){
+  return addDoc(collection(db, "Users"), user);
+}
 //Firebase> Documentación de Firebase> JavaScript API reference> Referencia> USER interface
 //https://firebase.google.com/docs/reference/js/auth.user?hl=es-419
 //PARA CERRAR SESIÓN https://firebase.google.com/docs/reference/js/auth.md?hl=es-419#signout
