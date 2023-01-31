@@ -36,7 +36,7 @@ export function addUserGoogle(user) {
   return addDoc(collection(db, 'Users'), user);
 }
 
-// export function 
+// export function
 
 export function loginUser(email, password) {
   return signInWithEmailAndPassword(auth, email, password);
