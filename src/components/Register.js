@@ -1,10 +1,9 @@
 import { onNavigate } from '../main.js';
-import { registerUser, addUser } from '../firebase/firebase.js';
+import { registerUser, addUser, registerGoogle } from '../firebase/firebase.js';
 
 export const Register = () => {
   const RegisterDiv = document.createElement('div');
   const sectionRegister = `
-    <p id="googleRegister">continuar con Google</p>
     <h3 class='title_login'>Formulario</h3>
 
     <section class='section_login'>
@@ -22,47 +21,25 @@ export const Register = () => {
         <input type='password' class='input_login' id='password'>
           
         <label for='confirm_password' class='text_login'>Confirmar Contraseña</label>
-        <input type='password' class='input_login' id='confirm_password'>
-        <!--<button type='submit' class='btnFeed' id='btnFeed'>Guardar Datos</button>-->
-        <p>continuar con Google</p>
+        <input type='password' class='input_login' id='confirm_password'>      
       </form>
     </section>
     `;
 
-
- 
-  
-  // const formRegister = document.getElementById('register');
-  // console.log(formRegister);
-  const div = document.createElement('div');
+  const buttonsDiv = document.createElement('div');
 
   const btnFeed = document.createElement('button');
   btnFeed.setAttribute('class', 'button btnFeed');
 
-  const p = document.createElement('p');
-  p.textContent = 'prueba Google';
+  const googleRegister = document.createElement('p');
+  googleRegister.textContent = 'Continuar con Google';
+  googleRegister.setAttribute('class', 'authGoogle');
 
-  div.appendChild(btnFeed);
-  div.appendChild(p);
+  buttonsDiv.appendChild(btnFeed);
+  buttonsDiv.appendChild(googleRegister);
 
   RegisterDiv.innerHTML = sectionRegister;
   btnFeed.textContent = 'Guardar Datos';
-
-  // const googleRegister = `
-  //   <p class='text_login'>continuar con Google</p>
-  // `;
-  // RegisterDiv.innerHTML = googleRegister;
-
-  // const btnGoogle = document.getElementById('googleRegister');
-  // btnGoogle.addEventListener('click', () => {
-  //   const provider = new firebase.auth.GoogleAuthProvider();
-  //   auth.signInWithPoup(provider)
-  //     // .then(result => {
-
-  //     // })
-  // });
-
- 
 
   btnFeed.addEventListener('click', () => {
     const name = document.getElementById('name').value;
@@ -91,7 +68,29 @@ export const Register = () => {
     // });
   });
 
-  RegisterDiv.appendChild(div);
+  RegisterDiv.appendChild(buttonsDiv);
 
+  googleRegister.addEventListener('click', () => {
+    registerGoogle()
+      .then((result) => {
+        console.log('registrada con google', result);
+      // This gives you a Google Access Token. You can use it to access the Google API.
+        // const credential = GoogleAuthProvider.credentialFromResult(result);
+        // const token = credential.accessToken;
+        // The signed-in user info.
+        // const user = result.user;
+      // ...
+      });
+      // }).catch((error) => {
+      // // Handle Errors here.
+      //   const errorCode = error.code;
+      //   const errorMessage = error.message;
+      //   // The email of the user's account used.
+      //   const email = error.customData.email;
+      //   // The AuthCredential type that was used.
+      //   const credential = GoogleAuthProvider.credentialFromError(error);
+      // // ...
+      // });
+  });
   return RegisterDiv;
 };
