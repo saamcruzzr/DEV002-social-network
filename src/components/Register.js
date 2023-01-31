@@ -11,9 +11,6 @@ export const Register = () => {
         <label for='name' class='text_login'>Nombre Completo</label>
         <input type='text' class='input_login' id='name'>
 
-        <label for='date' class='text_login'>Fecha de Nacimiento</label>
-        <input type='text' class='input_login' id='date'>
-
         <label for='email' class='text_login'>Correo Electrónico</label>
         <input type='email' class='input_login' id='email'>
 
@@ -43,7 +40,7 @@ export const Register = () => {
 
   btnFeed.addEventListener('click', () => {
     const name = document.getElementById('name').value;
-    const date = document.getElementById('date').value;
+    // const date = document.getElementById('date').value;
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
     // const confirmPassword = document.getElementById('confirm_password').value;
@@ -54,7 +51,6 @@ export const Register = () => {
         addUser({
           authUid: user.uid,
           name,
-          date,
           email,
         }).then(() => {
           onNavigate('/feed');
@@ -74,23 +70,26 @@ export const Register = () => {
     registerGoogle()
       .then((result) => {
         console.log('registrada con google', result);
-      // This gives you a Google Access Token. You can use it to access the Google API.
-        // const credential = GoogleAuthProvider.credentialFromResult(result);
-        // const token = credential.accessToken;
-        // The signed-in user info.
-        // const user = result.user;
-      // ...
+        const user = result.user;
+
+        addUser({
+          authUid: user.uid,
+          name: user.displayName,
+          email: user.email,
+        }).then(() => {
+          onNavigate('/feed');
+        });
       });
-      // }).catch((error) => {
-      // // Handle Errors here.
-      //   const errorCode = error.code;
-      //   const errorMessage = error.message;
-      //   // The email of the user's account used.
-      //   const email = error.customData.email;
-      //   // The AuthCredential type that was used.
-      //   const credential = GoogleAuthProvider.credentialFromError(error);
-      // // ...
-      // });
+    // }).catch((error) => {
+    // // Handle Errors here.
+    //   const errorCode = error.code;
+    //   const errorMessage = error.message;
+    //   // The email of the user's account used.
+    //   const email = error.customData.email;
+    //   // The AuthCredential type that was used.
+    //   const credential = GoogleAuthProvider.credentialFromError(error);
+    // // ...
+    // });
   });
   return RegisterDiv;
 };

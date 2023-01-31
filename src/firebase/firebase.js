@@ -31,20 +31,8 @@ export function registerGoogle() {
   return signInWithPopup(auth, provider);
 }
 
-// Agregar usuarixs registradxs a la base de datos
-export function addUserGoogle(user) {
-  return addDoc(collection(db, 'Users'), user);
-}
-
-// export function 
-
 export function loginUser(email, password) {
   return signInWithEmailAndPassword(auth, email, password);
-  // .then((userCredential) => {
-  // Signed in
-  // const user = userCredential.user;
-  // ...
-  // });
 }
 
 // DOCUMENTACIÓN:
