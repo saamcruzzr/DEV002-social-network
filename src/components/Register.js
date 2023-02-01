@@ -7,15 +7,13 @@ export const Register = () => {
     <h3 class='title_login'>Formulario</h3>
 
     <section class='section_login'>
-      <form action='' method='post' name='register' id='register'>
+      <form novalidate action='' method='post' name='register' id='register'>
         <label for='name' class='text_login'>Nombre Completo</label>
         <input type='text' class='input_login' id='name'>
 
-        <label for='date' class='text_login'>Fecha de Nacimiento</label>
-        <input type='text' class='input_login' id='date'>
-
         <label for='email' class='text_login'>Correo Electrónico</label>
         <input type='email' class='input_login' id='email'>
+        <span class="error" aria-live="polite"></span>
 
         <label for='password' class='text_login'>Contraseña</label>
         <input type='password' class='input_login' id='password'>
@@ -43,7 +41,7 @@ export const Register = () => {
 
   btnFeed.addEventListener('click', () => {
     const name = document.getElementById('name').value;
-    const date = document.getElementById('date').value;
+    // const date = document.getElementById('date').value;
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
     // const confirmPassword = document.getElementById('confirm_password').value;
@@ -54,7 +52,6 @@ export const Register = () => {
         addUser({
           authUid: user.uid,
           name,
-          date,
           email,
         }).then(() => {
           onNavigate('/feed');
@@ -74,12 +71,15 @@ export const Register = () => {
     registerGoogle()
       .then((result) => {
         console.log('registrada con google', result);
-      // This gives you a Google Access Token. You can use it to access the Google API.
-        // const credential = GoogleAuthProvider.credentialFromResult(result);
-        // const token = credential.accessToken;
-        // The signed-in user info.
-        // const user = result.user;
-      // ...
+        const user = result.user;
+
+        addUser({
+          authUid: user.uid,
+          name: user.displayName,
+          email: user.email,
+        }).then(() => {
+          onNavigate('/feed');
+        });
       });
     // }).catch((error) => {
     // // Handle Errors here.
