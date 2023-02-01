@@ -13,18 +13,19 @@ export const Register = () => {
 
         <label for='email' class='text_login'>Correo Electrónico</label>
         <input type='email' class='input_login' id='email'>
+        <p class='error' id='errorEmail'></p>
 
         <label for='password' class='text_login'>Contraseña</label>
         <input type='password' class='input_login' id='password'>
           
         <label for='confirm_password' class='text_login'>Confirmar Contraseña</label>
-        <input type='password' class='input_login' id='confirm_password'>      
+        <input type='password' class='input_login' id='confirm_password'>
+        <p class='error' id='errorPassword'></p>  
       </form>
     </section>
     `;
 
   const buttonsDiv = document.createElement('div');
-
   const btnFeed = document.createElement('button');
   btnFeed.setAttribute('class', 'button btnFeed');
 
@@ -40,28 +41,35 @@ export const Register = () => {
 
   btnFeed.addEventListener('click', () => {
     const name = document.getElementById('name').value;
-    // const date = document.getElementById('date').value;
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
-    // const confirmPassword = document.getElementById('confirm_password').value;
-    registerUser(email, password)
-      .then((userCredential) => {
+    const confirmPassword = document.getElementById('confirm_password').value;
+    if (confirmPassword === password) {
+      registerUser(email, password)
+        .then((userCredential) => {
         // Signed in
-        const user = userCredential.user;
-        addUser({
-          authUid: user.uid,
-          name,
-          email,
-        }).then(() => {
-          onNavigate('/feed');
-        });
+          const user = userCredential.user;
+          addUser({
+            authUid: user.uid,
+            name,
+            email,
+          }).then(() => {
+            onNavigate('/feed');
+          });
         // ...
-      });
-    // .catch((error) => {
-    //   const errorCode = error.code;
-    //   const errorMessage = error.message;
-    //   // ..
-    // });
+        });
+      // .catch((error) => {
+      // const errorCode = error.code;
+      // const errorMessage = error.message;
+      // console.log(errorCode, errorMessage);
+      // ..
+      // });
+    } else {
+      const errorPassword = document.getElementById('errorPassword');
+      errorPassword.textContent = 'No coincide contraseña';
+      // errorPassword.innerHTML = 'Tas bien? Las contraseñas no coinciden';
+      // console.log("contraseña invalido");
+    }
   });
 
   RegisterDiv.appendChild(buttonsDiv);
@@ -69,7 +77,7 @@ export const Register = () => {
   googleRegister.addEventListener('click', () => {
     registerGoogle()
       .then((result) => {
-        console.log('registrada con google', result);
+        // console.log('registrada con google', result);
         const user = result.user;
 
         addUser({
