@@ -33,6 +33,7 @@ font-family: 'Alegreya Sans SC', sans-serif;*/
     background-color: #2E4A45;
     color: #fff;
     font-weight: 500;
+    /*border: 2px solid red;*/
 }
 
 .title {
@@ -56,7 +57,7 @@ font-family: 'Alegreya Sans SC', sans-serif;*/
     width: 250px;
     height: fit-content;
     margin: 25px auto;
-    /*box-shadow*/
+    box-shadow: 6px 6px 8px rgba(0, 0, 0, 0.5);
     border-radius: 5px;
     padding: 5px;
 }
@@ -73,6 +74,7 @@ font-family: 'Alegreya Sans SC', sans-serif;*/
     color: var(--text-color);
     font-size: 30px;
     font-family: var(--text-imprenta);
+    margin: 15px auto;
 }
 .section_login {
     width: 250px;
@@ -85,14 +87,39 @@ font-family: 'Alegreya Sans SC', sans-serif;*/
     font-family: var(--text-imprenta);
     margin:0 auto;
 }
+input {
+    font-size: 25px;
+    font-weight: 300;
+    font-family: var(--text-corrida);
+    outline: none;
+    letter-spacing: 1px;
+}
 .input_login {
     background-color: rgb(228, 201, 136, 25%);
     width: 250px;
     height: 23px;
     margin:0 auto 10px;
 }
+.error {
+    font-family: var(--text-imprenta);
+    font-size: 1rem;
+    font-weight: 500;
+    margin: 0;
+    letter-spacing: 1px;
+}
 .btnFeed {
     border: 2px solid var(--title-color);
     width: max-content;
     padding: 10px;
+}
+
+.authGoogle{
+    font-size: 1.3rem;
+    text-align: center;
+    color:var(--amarillo-beige-arena);
+}
+.authGoogle:hover {
+    font-size: 1.3rem;
+    text-align: center;
+    color: rgba(255, 255, 255);
 }
