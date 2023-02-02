@@ -38,16 +38,26 @@ export const Register = () => {
 
   RegisterDiv.innerHTML = sectionRegister;
   btnFeed.textContent = 'Guardar Datos';
-
   btnFeed.addEventListener('click', () => {
     const name = document.getElementById('name').value;
-    const email = document.getElementById('email').value;
+    const email = document.getElementById('email');
     const password = document.getElementById('password').value;
     const confirmPassword = document.getElementById('confirm_password').value;
+
+    // prueba-----------------------------------------
+    const form = document.getElementsByTagName('form')[1];
+    console.log(form);
+    let error = email;
+    while ((error = error.nextSibling).nodeType != 1);
+
+    // según la especificación HTML5
+    const emailRegExp = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+
+
     if (confirmPassword === password) {
-      registerUser(email, password)
+      registerUser(email.value, password)
         .then((userCredential) => {
-        // Signed in
+          // Signed in
           const user = userCredential.user;
           addUser({
             authUid: user.uid,
@@ -56,7 +66,7 @@ export const Register = () => {
           }).then(() => {
             onNavigate('/feed');
           });
-        // ...
+          // ...
         });
       // .catch((error) => {
       // const errorCode = error.code;
