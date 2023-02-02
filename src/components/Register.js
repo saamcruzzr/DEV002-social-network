@@ -44,7 +44,7 @@ export const Register = () => {
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
     const confirmPassword = document.getElementById('confirm_password').value;
-
+    // Aqui empieza el codigo de prueba
     if (name !== '') {
       console.log('continue con su registro');
       if (email) {
