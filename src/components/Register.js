@@ -44,32 +44,51 @@ export const Register = () => {
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
     const confirmPassword = document.getElementById('confirm_password').value;
-    if (confirmPassword === password) {
-      registerUser(email, password)
-        .then((userCredential) => {
-        // Signed in
-          const user = userCredential.user;
-          addUser({
-            authUid: user.uid,
-            name,
-            email,
-          }).then(() => {
-            onNavigate('/feed');
-          });
-        // ...
-        });
-      // .catch((error) => {
-      // const errorCode = error.code;
-      // const errorMessage = error.message;
-      // console.log(errorCode, errorMessage);
-      // ..
-      // });
+
+    if (name !== '') {
+      console.log('continue con su registro');
+      if (email) {
+        console.log('continue...');
+        const expReg = /^(([^<>()\[\]\\.,;:\s@”]+(\.[^<>()\[\]\\.,;:\s@”]+)*)|(“.+”))@((\[[0–9]{1,3}\.[0–9]{1,3}\.[0–9]{1,3}\.[0–9]{1,3}])|(([a-zA-Z\-0–9]+\.)+[a-zA-Z]{2,}))$/;
+        expReg.test(email);
+        if(confirmPassword === password) {
+          console.log('felicidades...');
+        } else {
+          console.log('por favor revisa tu contraseña');
+        }
+      } else {
+        console.log('por favor pon un correo valido');
+      }
     } else {
-      const errorPassword = document.getElementById('errorPassword');
-      errorPassword.textContent = 'No coincide contraseña';
-      // errorPassword.innerHTML = 'Tas bien? Las contraseñas no coinciden';
-      // console.log("contraseña invalido");
+      console.log('Pon tu nombre por favor');
     }
+
+  //   if (confirmPassword === password) {
+  //     registerUser(email, password)
+  //       .then((userCredential) => {
+  //       // Signed in
+  //         const user = userCredential.user;
+  //         addUser({
+  //           authUid: user.uid,
+  //           name,
+  //           email,
+  //         }).then(() => {
+  //           onNavigate('/feed');
+  //         });
+  //       // ...
+  //       });
+  //     // .catch((error) => {
+  //     // const errorCode = error.code;
+  //     // const errorMessage = error.message;
+  //     // console.log(errorCode, errorMessage);
+  //     // ..
+  //     // });
+  //   } else {
+  //     const errorPassword = document.getElementById('errorPassword');
+  //     errorPassword.textContent = 'No coincide contraseña';
+  //     // errorPassword.innerHTML = 'Tas bien? Las contraseñas no coinciden';
+  //     // console.log("contraseña invalido");
+  //   }
   });
 
   RegisterDiv.appendChild(buttonsDiv);
