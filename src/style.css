@@ -19,12 +19,12 @@ font-family: 'Alegreya Sans SC', sans-serif;*/
     --title-color: #84D2C5;
     --button-bg-color: #242424;
     --text-color: #FFF;
-    --post-bg-color: #B05A7A;
+    --post-bg-color: #e4729c;
     /*nombre caracteristico??*/
     --amarillo-beige-arena: #E4C988;
     --naranja: #C27664;
-    --text-corrida:'Alegreya Sans', sans-serif;
-    --text-imprenta:'Alegreya Sans SC', sans-serif;
+    --text-corrida: 'Alegreya Sans', sans-serif;
+    --text-imprenta: 'Alegreya Sans SC', sans-serif;
 }
 
 * {
@@ -40,15 +40,17 @@ font-family: 'Alegreya Sans SC', sans-serif;*/
     font-size: 90px;
     text-align: center;
     color: var(--title-color);
-    font-weight:700;
+    font-weight: 700;
     margin: 30px auto 0;
 }
+
 .text_initial {
     text-align: center;
     font-size: 25px;
     color: var(--amarillo-beige-arena);
     font-family: var(--text-imprenta);
 }
+
 .button {
     display: block;
     background-color: var(--button-bg-color);
@@ -61,10 +63,12 @@ font-family: 'Alegreya Sans SC', sans-serif;*/
     border-radius: 5px;
     padding: 5px;
 }
+
 .btnLogin {
     border: 2px solid var(--title-color);
-    
+
 }
+
 .btnRegister {
     border: 2px solid var(--amarillo-beige-arena);
 }
@@ -76,17 +80,25 @@ font-family: 'Alegreya Sans SC', sans-serif;*/
     font-family: var(--text-imprenta);
     margin: 15px auto;
 }
+
 .section_login {
     width: 250px;
     margin: auto;
 }
-
+label {
+    margin-top: 10px;
+    /* border: 2px solid red; */
+}
 .text_login {
     color: var(--post-bg-color);
     font-size: 25px;
     font-family: var(--text-imprenta);
-    margin:0 auto;
+    -webkit-text-stroke: .2px var(--post-bg-color);
+    /* margin-top: 10px; */
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    line-height : 45px;
 }
+
 input {
     font-size: 25px;
     font-weight: 300;
@@ -94,12 +106,14 @@ input {
     outline: none;
     letter-spacing: 1px;
 }
+
 .input_login {
     background-color: rgb(228, 201, 136, 25%);
     width: 250px;
     height: 23px;
-    margin:0 auto 10px;
+    margin: 0;
 }
+
 .error {
     font-family: var(--text-imprenta);
     font-size: 1rem;
@@ -107,17 +121,19 @@ input {
     margin: 0;
     letter-spacing: 1px;
 }
+
 .btnFeed {
     border: 2px solid var(--title-color);
     width: max-content;
     padding: 10px;
 }
 
-.authGoogle{
+.authGoogle {
     font-size: 1.3rem;
     text-align: center;
-    color:var(--amarillo-beige-arena);
+    color: var(--amarillo-beige-arena);
 }
+
 .authGoogle:hover {
     font-size: 1.3rem;
     text-align: center;

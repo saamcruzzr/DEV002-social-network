@@ -9,18 +9,19 @@ export const Register = () => {
     <section class='section_login'>
       <form action='' method='post' name='register' id='register'>
         <label for='name' class='text_login'>Nombre Completo</label>
-        <input type='text' class='input_login' id='name'>
+        <input type='text' class='input_login' id='name' required>
 
         <label for='email' class='text_login'>Correo Electrónico</label>
         <input type='email' class='input_login' id='email'>
         <p class='error' id='errorEmail'></p>
 
         <label for='password' class='text_login'>Contraseña</label>
-        <input type='password' class='input_login' id='password'>
+        <input type='password' class='input_login' id='password' required>
+        <p class='error' id='errorPassword'></p> 
           
         <label for='confirm_password' class='text_login'>Confirmar Contraseña</label>
         <input type='password' class='input_login' id='confirm_password'>
-        <p class='error' id='errorPassword'></p>  
+        <p class='error' id='errorConfirmPassword'></p>  
       </form>
     </section>
     `;
@@ -45,50 +46,51 @@ export const Register = () => {
     const password = document.getElementById('password').value;
     const confirmPassword = document.getElementById('confirm_password').value;
 
-    if (name !== '') {
-      console.log('continue con su registro');
-      if (email) {
-        console.log('continue...');
-        const expReg = /^(([^<>()\[\]\\.,;:\s@”]+(\.[^<>()\[\]\\.,;:\s@”]+)*)|(“.+”))@((\[[0–9]{1,3}\.[0–9]{1,3}\.[0–9]{1,3}\.[0–9]{1,3}])|(([a-zA-Z\-0–9]+\.)+[a-zA-Z]{2,}))$/;
-        expReg.test(email);
-        if(confirmPassword === password) {
-          console.log('felicidades...');
-        } else {
-          console.log('por favor revisa tu contraseña');
-        }
-      } else {
-        console.log('por favor pon un correo valido');
-      }
+    if (confirmPassword === password) {
+      registerUser(email, password)
+        .then((userCredential) => {
+        // Signed in
+          const user = userCredential.user;
+          addUser({
+            authUid: user.uid,
+            name,
+            email,
+          }).then(() => {
+            onNavigate('/feed');
+          });
+        // ...
+        })
+        .catch((error) => {
+          // const errorCode = error.code;
+          // const errorMessage = error.message;
+          // console.log(errorCode, errorMessage);
+          if (error.code === 'auth/invalid-email') { // no teclea email
+            const errorEmail = document.getElementById('errorEmail');
+            errorEmail.textContent = 'Es necesario poner email';
+          }
+          if (error.code === 'auth/missing-email') { // no hay email
+            const errorEmail = document.getElementById('errorEmail');
+            errorEmail.textContent = 'Es necesario poner email';
+          }
+          if (error.code === 'auth/internal-error') { // no tiene @ "affd.fafa.fa"
+            const errorEmail = document.getElementById('errorEmail');
+            errorEmail.textContent = 'Es necesario poner email válido';
+          }
+          if (error.code === 'auth/email-already-in-use') { // ya está en uso el correo
+            const errorEmail = document.getElementById('errorEmail');
+            errorEmail.textContent = 'Este email ya está en uso';
+          }
+          if (error.code === 'auth/weak-password') { // menos de 6 caracteres
+            const errorPassword = document.getElementById('errorPassword');
+            errorPassword.textContent = 'La contraseña debe contener más de 6 caracteres';
+          }
+        });
     } else {
-      console.log('Pon tu nombre por favor');
+      const errorConfirmPassword = document.getElementById('errorConfirmPassword');
+      errorConfirmPassword.textContent = 'No coincide contraseña';
+      // errorPassword.innerHTML = 'Tas bien? Las contraseñas no coinciden';
+      // console.log("contraseña invalido");
     }
-
-  //   if (confirmPassword === password) {
-  //     registerUser(email, password)
-  //       .then((userCredential) => {
-  //       // Signed in
-  //         const user = userCredential.user;
-  //         addUser({
-  //           authUid: user.uid,
-  //           name,
-  //           email,
-  //         }).then(() => {
-  //           onNavigate('/feed');
-  //         });
-  //       // ...
-  //       });
-  //     // .catch((error) => {
-  //     // const errorCode = error.code;
-  //     // const errorMessage = error.message;
-  //     // console.log(errorCode, errorMessage);
-  //     // ..
-  //     // });
-  //   } else {
-  //     const errorPassword = document.getElementById('errorPassword');
-  //     errorPassword.textContent = 'No coincide contraseña';
-  //     // errorPassword.innerHTML = 'Tas bien? Las contraseñas no coinciden';
-  //     // console.log("contraseña invalido");
-  //   }
   });
 
   RegisterDiv.appendChild(buttonsDiv);
