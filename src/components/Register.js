@@ -9,7 +9,8 @@ export const Register = () => {
     <section class='section_login'>
       <form action='' method='post' name='register' id='register'>
         <label for='name' class='text_login'>Nombre Completo</label>
-        <input type='text' class='input_login' id='name' required>
+        <input type='text' class='input_login' id='name'>
+        <p class='error' id='errorName'></p>
 
         <label for='email' class='text_login'>Correo Electrónico</label>
         <input type='email' class='input_login' id='email'>
@@ -46,7 +47,7 @@ export const Register = () => {
     const password = document.getElementById('password').value;
     const confirmPassword = document.getElementById('confirm_password').value;
 
-    if (confirmPassword === password) {
+    if (confirmPassword === password && name !== '') {
       registerUser(email, password)
         .then((userCredential) => {
         // Signed in
@@ -85,11 +86,14 @@ export const Register = () => {
             errorPassword.textContent = 'La contraseña debe contener más de 6 caracteres';
           }
         });
-    } else {
+    } else if (confirmPassword !== password) {
       const errorConfirmPassword = document.getElementById('errorConfirmPassword');
       errorConfirmPassword.textContent = 'No coincide contraseña';
       // errorPassword.innerHTML = 'Tas bien? Las contraseñas no coinciden';
       // console.log("contraseña invalido");
+    } else if (name === '') {
+      const errorName = document.getElementById('errorName');
+      errorName.textContent = 'Es necesario escribir un nombre';
     }
   });
 
