@@ -59,38 +59,34 @@ export const Register = () => {
           }).then(() => {
             onNavigate('/feed');
           });
-        // ...
         })
         .catch((error) => {
-          // const errorCode = error.code;
-          // const errorMessage = error.message;
-          // console.log(errorCode, errorMessage);
+          const errorEmail = document.getElementById('errorEmail');
+          const errorPassword = document.getElementById('errorPassword');
           if (error.code === 'auth/invalid-email') { // no teclea email
-            const errorEmail = document.getElementById('errorEmail');
+            // const errorEmail = document.getElementById('errorEmail');
             errorEmail.textContent = 'Es necesario poner email';
           }
           if (error.code === 'auth/missing-email') { // no hay email
-            const errorEmail = document.getElementById('errorEmail');
+            // const errorEmail = document.getElementById('errorEmail');
             errorEmail.textContent = 'Es necesario poner email';
           }
           if (error.code === 'auth/internal-error') { // no tiene @ "affd.fafa.fa"
-            const errorEmail = document.getElementById('errorEmail');
+            // const errorEmail = document.getElementById('errorEmail');
             errorEmail.textContent = 'Es necesario poner email válido';
           }
           if (error.code === 'auth/email-already-in-use') { // ya está en uso el correo
-            const errorEmail = document.getElementById('errorEmail');
+            // const errorEmail = document.getElementById('errorEmail');
             errorEmail.textContent = 'Este email ya está en uso';
           }
           if (error.code === 'auth/weak-password') { // menos de 6 caracteres
-            const errorPassword = document.getElementById('errorPassword');
+            // const errorPassword = document.getElementById('errorPassword');
             errorPassword.textContent = 'La contraseña debe contener más de 6 caracteres';
           }
         });
     } else if (confirmPassword !== password) {
       const errorConfirmPassword = document.getElementById('errorConfirmPassword');
       errorConfirmPassword.textContent = 'No coincide contraseña';
-      // errorPassword.innerHTML = 'Tas bien? Las contraseñas no coinciden';
-      // console.log("contraseña invalido");
     } else if (name === '') {
       const errorName = document.getElementById('errorName');
       errorName.textContent = 'Es necesario escribir un nombre';

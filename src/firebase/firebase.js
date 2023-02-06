@@ -17,23 +17,26 @@ const auth = getAuth();
 const provider = new GoogleAuthProvider();
 
 // Registro con email y password
-export function registerUser(email, password) {
+function registerUser(email, password) {
   return createUserWithEmailAndPassword(auth, email, password);
 }
 
 // Agregar usuarixs registradxs a la base de datos
-export function addUser(user) {
+function addUser(user) {
   return addDoc(collection(db, 'Users'), user);
 }
 
 // Registro con google
-export function registerGoogle() {
+function registerGoogle() {
   return signInWithPopup(auth, provider);
 }
 
-export function loginUser(email, password) {
+function loginUser(email, password) {
   return signInWithEmailAndPassword(auth, email, password);
 }
+
+// eslint-disable-next-line max-len
+export { initializeApp, createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, getFirestore, addDoc, collection, auth, registerUser, addUser, registerGoogle, loginUser };
 
 // DOCUMENTACIÓN:
 // AUTENTICACIÓN https://firebase.google.com/docs/auth/web/start?hl=es-419#add-initialize-sdk
