@@ -1,8 +1,29 @@
 // importamos la funcion que vamos a testear
-import { myFunction } from '../src/lib/index';
+import { auth, createUserWithEmailAndPassword, registerUser } from '../src/firebase/firebase.js';
 
-describe('myFunction', () => {
-  it('debería ser una función', () => {
-    expect(typeof myFunction).toBe('function');
+jest.mock('../src/firebase/firebase.js', () => ({
+  return: {
+    auth: jest.fn(() => ({
+      return: { auth: 'TEST' },
+    })),
+    createUserWithEmailAndPassword: jest.fn((auth, email, password) => {
+      if (!email || !password) {
+        throw new Error('ERROR');
+      }
+      Promise.resolve({ user: 'admin' });
+    }),
+  },
+  // registerUser: () => Promise.reject({ user: 'carlos' }),
+}));
+
+describe('Test for the register function', () => {
+  const emailTest = 'admin@test.com';
+  const passTest = 'admin123';
+
+  it('Should call createWithEmailAndPassword', () => {
+    registerUser(emailTest, passTest);
+    expect(createUserWithEmailAndPassword).toHaveBeenCalled();
   });
 });
+
+// const getDateInFormatABC = () => "la fecha de hoy es la siguente" + Date.now()

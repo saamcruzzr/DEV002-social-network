@@ -18,8 +18,14 @@ const provider = new GoogleAuthProvider();
 
 // Registro con email y password
 export function registerUser(email, password) {
-  return createUserWithEmailAndPassword(auth, email, password);
+  return new Promise((resolve,reject) => {
+    createUserWithEmailAndPassword(auth, email, password).then(data => resolve(data.name)).catch(error => reject(error.msg))
+  });
 }
+
+// export function registerUser(email, password) {
+//   return createUserWithEmailAndPassword(auth, email, password);
+// }
 
 // Agregar usuarixs registradxs a la base de datos
 export function addUser(user) {
@@ -41,3 +47,7 @@ export function loginUser(email, password) {
 // Firebase> Documentación de Firebase> JavaScript API reference> Referencia> USER interface
 // https://firebase.google.com/docs/reference/js/auth.user?hl=es-419
 // PARA CERRAR SESIÓN https://firebase.google.com/docs/reference/js/auth.md?hl=es-419#signout
+
+export {
+  initializeApp, createUserWithEmailAndPassword, signInWithEmailAndPassword, auth,
+};
