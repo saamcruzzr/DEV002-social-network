@@ -1,5 +1,5 @@
 import { onNavigate } from '../main.js';
-import { loginUser, registerGoogle, addUser } from '../firebase/firebase.js';
+import { loginUser, addUser, registerGoogle } from '../firebase/firebase.js';
 
 export const Login = () => {
   const LoginDiv = document.createElement('div');
@@ -36,7 +36,7 @@ export const Login = () => {
   btnLog.addEventListener('click', () => {
     const email = document.getElementById('email_login').value;
     const password = document.getElementById('password_login').value;
-    if (password) {
+    if (email && password) {
       loginUser(email, password)
         .then((userCredential) => {
         // Signed in
@@ -56,9 +56,19 @@ export const Login = () => {
           if (error.code === 'auth/wrong-password') {
             errorPasswordLogin.textContent = 'Contraseña Incorrecta';
           }
+          // if (error.code === 'auth/invalid-email') { // no teclea email
+          //   // const errorEmail = document.getElementById('errorEmail');
+          //   errorEmailLogin.textContent = 'Es necesario poner email';
+          // }
+          // if (error.code === 'auth/missing-email') { // no hay email
+          //   // const errorEmail = document.getElementById('errorEmail');
+          //   errorEmailLogin.textContent = 'Es necesario poner email';
+          // }
           // const errorCode = error.code;
           // const errorMessage = error.message;
         });
+    } else if (!email) {
+      errorEmailLogin.textContent = 'Debe poner un correo';
     } else if (!password) {
       errorPasswordLogin.textContent = 'Debe poner una contraseña';
     }
@@ -67,10 +77,12 @@ export const Login = () => {
   LoginDiv.appendChild(buttonsDivLog);
 
   googleLogin.addEventListener('click', () => {
+    console.log('logueate con google');
     registerGoogle()
       .then((result) => {
         // console.log('registrada con google', result);
         const user = result.user;
+
         addUser({
           authUid: user.uid,
           name: user.displayName,
