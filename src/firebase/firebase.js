@@ -49,12 +49,6 @@ export { initializeApp, createUserWithEmailAndPassword, signInWithEmailAndPasswo
 // https://firebase.google.com/docs/reference/js/auth.user?hl=es-419
 // PARA CERRAR SESIÓN https://firebase.google.com/docs/reference/js/auth.md?hl=es-419#signout
 
-export {
-  initializeApp, createUserWithEmailAndPassword, signInWithEmailAndPassword, auth,
-};
-
-
-
 // import { getAuth, signInWithRedirect } from "firebase/auth";
 
 // const auth = getAuth();

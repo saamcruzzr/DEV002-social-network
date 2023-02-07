@@ -1,5 +1,5 @@
 import { onNavigate } from '../main.js';
-import { loginUser } from '../firebase/firebase.js';
+import { loginUser, registerGoogle } from '../firebase/firebase.js';
 
 export const Login = () => {
   const LoginDiv = document.createElement('div');
@@ -64,23 +64,23 @@ export const Login = () => {
     }
   });
 
-  LoginDiv.appendChild(btnLog);
+  LoginDiv.appendChild(buttonsDivLog);
 
   googleLogin.addEventListener('click', () => {
     console.log('logueate con google');
-    // registerGoogle()
-    //   .then((result) => {
-    //     // console.log('registrada con google', result);
-    //     const user = result.user;
+    registerGoogle()
+      .then((result) => {
+        // console.log('registrada con google', result);
+        const user = result.user;
 
-    //     addUser({
-    //       authUid: user.uid,
-    //       name: user.displayName,
-    //       email: user.email,
-    //     }).then(() => {
-    //       onNavigate('/feed');
-    //     });
-    //   });
+        addUser({
+          authUid: user.uid,
+          name: user.displayName,
+          email: user.email,
+        }).then(() => {
+          onNavigate('/feed');
+        });
+      });
   });
 
   return LoginDiv;
