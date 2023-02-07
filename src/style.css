@@ -127,7 +127,11 @@ input {
     width: max-content;
     padding: 10px;
 }
-
+.btnLog {
+    border: 2px solid var(--title-color);
+    width: max-content;
+    padding: 10px;
+}
 .authGoogle {
     font-size: 1.3rem;
     text-align: center;
