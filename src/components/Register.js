@@ -32,7 +32,7 @@ export const Register = () => {
   btnFeed.setAttribute('class', 'button btnFeed');
 
   const googleRegister = document.createElement('p');
-  googleRegister.textContent = 'Continuar con Google';
+  googleRegister.textContent = 'Registrarse con Google';
   googleRegister.setAttribute('class', 'authGoogle');
 
   buttonsDiv.appendChild(btnFeed);
@@ -109,7 +109,6 @@ export const Register = () => {
           onNavigate('/feed');
         });
       });
-  
   });
   return RegisterDiv;
 };

@@ -44,3 +44,10 @@ export { initializeApp, createUserWithEmailAndPassword, signInWithEmailAndPasswo
 // Firebase> Documentación de Firebase> JavaScript API reference> Referencia> USER interface
 // https://firebase.google.com/docs/reference/js/auth.user?hl=es-419
 // PARA CERRAR SESIÓN https://firebase.google.com/docs/reference/js/auth.md?hl=es-419#signout
+
+
+
+// import { getAuth, signInWithRedirect } from "firebase/auth";
+
+// const auth = getAuth();
+// signInWithRedirect(auth, provider);
