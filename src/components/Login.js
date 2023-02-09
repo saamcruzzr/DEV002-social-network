@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/no-cycle
 import { onNavigate } from '../main.js';
 import { loginUser, addUser, registerGoogle } from '../firebase/firebase.js';
 
@@ -36,6 +37,8 @@ export const Login = () => {
   btnLog.addEventListener('click', () => {
     const email = document.getElementById('email_login').value;
     const password = document.getElementById('password_login').value;
+    const errorEmailLogin = document.getElementById('errorEmailLogin');
+    const errorPasswordLogin = document.getElementById('errorPasswordLogin');
     if (email && password) {
       loginUser(email, password)
         .then((userCredential) => {
@@ -48,8 +51,8 @@ export const Login = () => {
         })
         .then(() => onNavigate('/feed'))
         .catch((error) => {
-          const errorEmailLogin = document.getElementById('errorEmailLogin');
-          const errorPasswordLogin = document.getElementById('errorPasswordLogin');
+          // const errorEmailLogin = document.getElementById('errorEmailLogin');
+          // const errorPasswordLogin = document.getElementById('errorPasswordLogin');
           if (error.code === 'auth/user-not-found') {
             errorEmailLogin.textContent = 'Usuarie no registrado';
           }
