@@ -1,5 +1,10 @@
+// eslint-disable-next-line import/no-cycle
 import { onNavigate } from '../main.js';
-import { registerUser, addUser, registerGoogle } from '../firebase/firebase.js';
+import {
+  addUser,
+  registerGoogle,
+} from '../firebase/firebase.js';
+import { registerUser } from '../firebase/functions.js';
 
 export const Register = () => {
   const RegisterDiv = document.createElement('div');
