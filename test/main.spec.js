@@ -1,20 +1,18 @@
-import { auth, createUserWithEmailAndPassword, registerUser } from '../src/firebase/firebase.js';
+/* eslint-disable import/no-unresolved */
+import { registerUser } from '../src/firebase/functions.js';
+import { auth, createUserWithEmailAndPassword } from '../src/firebase/firebase.js';
 
 // TESTEO FUNCION ASINCRONA
 
-jest.mock('../src/firebase/firebase.js', () => {
-  return {
-    auth: jest.fn(() => {
-      return { auth: 'TEST' }
-    }),
-    createUserWithEmailAndPassword: jest.fn((auth, email, pass) => {
-      if (!email || !pass) {
-        throw new Error('ERROR');
-      }
-      Promise.resolve({ user: 'admin' });
-    }),
-  };
-});
+jest.mock('../src/firebase/firebase.js', () => ({
+  auth: jest.fn(() => ({ auth: 'TEST' })),
+  createUserWithEmailAndPassword: jest.fn((authen, email, pass) => {
+    if (!email || !pass) {
+      throw new Error('ERROR');
+    }
+    Promise.resolve({ user: 'admin' });
+  }),
+}));
 
 describe('Test para la función de registerUser', () => {
   const email = 'admin@test.com';
