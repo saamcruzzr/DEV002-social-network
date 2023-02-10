@@ -1,6 +1,7 @@
 // eslint-disable-next-line import/no-cycle
 import { onNavigate } from '../main.js';
-import { loginUser, addUser, registerGoogle } from '../firebase/firebase.js';
+import { addUser, registerGoogle } from '../firebase/firebase.js';
+import { loginUser } from '../firebase/functions.js';
 
 export const Login = () => {
   const LoginDiv = document.createElement('div');
@@ -39,6 +40,7 @@ export const Login = () => {
     const password = document.getElementById('password_login').value;
     const errorEmailLogin = document.getElementById('errorEmailLogin');
     const errorPasswordLogin = document.getElementById('errorPasswordLogin');
+
     if (email && password) {
       loginUser(email, password)
         .then((userCredential) => {
@@ -80,19 +82,21 @@ export const Login = () => {
   LoginDiv.appendChild(buttonsDivLog);
 
   googleLogin.addEventListener('click', () => {
-    console.log('logueate con google');
     registerGoogle()
       .then((result) => {
+        console.log(result);
         // console.log('registrada con google', result);
-        const user = result.user;
+        // const credential = GoogleAuthProvider.credentialFromResult(result);
+        // const token = credential.accessToken;
+        // const user = result.user;
 
-        addUser({
-          authUid: user.uid,
-          name: user.displayName,
-          email: user.email,
-        }).then(() => {
-          onNavigate('/feed');
-        });
+        // addUser({
+        //   authUid: user.uid,
+        //   name: user.displayName,
+        //   email: user.email,
+        // }).then(() => {
+        onNavigate('/feed');
+        // });
       });
   });
 

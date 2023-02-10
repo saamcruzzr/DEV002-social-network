@@ -12,7 +12,7 @@ export const Register = () => {
     <h3 class='title_login'>Formulario</h3>
 
     <section class='section_login'>
-      <form action='' method='post' name='register' id='register'>
+      <form novalidate action='' method='post' name='register' id='register'>
         <label for='name' class='text_login'>Nombre Completo</label>
         <input type='text' class='input_login' id='name'>
         <p class='error' id='errorName'></p>

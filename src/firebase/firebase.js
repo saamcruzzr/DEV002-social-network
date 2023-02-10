@@ -30,6 +30,10 @@ const provider = new GoogleAuthProvider();
 //   return createUserWithEmailAndPassword(auth, email, password);
 // }
 
+// export function registerUser(email, password) {
+//   return createUserWithEmailAndPassword(auth, email, password);
+// }
+
 // Agregar usuarixs registradxs a la base de datos
 function addUser(user) {
   return addDoc(collection(db, 'Users'), user);
@@ -40,9 +44,9 @@ function registerGoogle() {
   return signInWithPopup(auth, provider);
 }
 
-function loginUser(email, password) {
-  return signInWithEmailAndPassword(auth, email, password);
-}
+// function loginUser(email, password) {
+//   return signInWithEmailAndPassword(auth, email, password);
+// }
 
 // eslint-disable-next-line max-len
 export {
@@ -57,7 +61,6 @@ export {
   auth,
   addUser,
   registerGoogle,
-  loginUser,
 };
 
 // DOCUMENTACIÓN:
