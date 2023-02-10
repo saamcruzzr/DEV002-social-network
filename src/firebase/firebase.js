@@ -44,9 +44,9 @@ function registerGoogle() {
   return signInWithPopup(auth, provider);
 }
 
-function loginUser(email, password) {
-  return signInWithEmailAndPassword(auth, email, password);
-}
+// function loginUser(email, password) {
+//   return signInWithEmailAndPassword(auth, email, password);
+// }
 
 // eslint-disable-next-line max-len
 export {
@@ -61,7 +61,6 @@ export {
   auth,
   addUser,
   registerGoogle,
-  loginUser,
 };
 
 // DOCUMENTACIÓN:
