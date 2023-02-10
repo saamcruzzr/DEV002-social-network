@@ -30,19 +30,15 @@ const provider = new GoogleAuthProvider();
 //   return createUserWithEmailAndPassword(auth, email, password);
 // }
 
-// export function registerUser(email, password) {
-//   return createUserWithEmailAndPassword(auth, email, password);
+// // Agregar usuarixs registradxs a la base de datos
+// function addUser(user) {
+//   return addDoc(collection(db, 'Users'), user);
 // }
 
-// Agregar usuarixs registradxs a la base de datos
-function addUser(user) {
-  return addDoc(collection(db, 'Users'), user);
-}
-
-// Registro con google
-function registerGoogle() {
-  return signInWithPopup(auth, provider);
-}
+// // Registro con google
+// function registerGoogle() {
+//   return signInWithPopup(auth, provider);
+// }
 
 // function loginUser(email, password) {
 //   return signInWithEmailAndPassword(auth, email, password);
@@ -59,8 +55,11 @@ export {
   addDoc,
   collection,
   auth,
-  addUser,
-  registerGoogle,
+  db,
+  provider,
+  // addUser,
+  // registerGoogle,
+  // loginUser,
 };
 
 // DOCUMENTACIÓN:
