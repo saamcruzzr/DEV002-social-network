@@ -1,7 +1,6 @@
 // eslint-disable-next-line import/no-cycle
 import { onNavigate } from '../main.js';
-import { addUser, registerGoogle } from '../firebase/firebase.js';
-import { loginUser } from '../firebase/functions.js';
+import { loginUser, registerGoogle } from '../firebase/functions.js';
 
 export const Login = () => {
   const LoginDiv = document.createElement('div');

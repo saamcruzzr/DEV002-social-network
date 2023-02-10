@@ -1,6 +1,15 @@
 /* eslint-disable import/no-unresolved */
-import { loginUser, registerUser } from '../src/firebase/functions.js';
-import { auth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from '../src/firebase/firebase.js';
+import {
+  registerUser,
+  addUser,
+  registerGoogle,
+  loginUser,
+} from '../src/firebase/functions.js';
+import {
+  auth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from '../src/firebase/firebase.js';
 
 // TESTEO FUNCION ASINCRONA
 
@@ -23,6 +32,18 @@ describe('Test para la función de registerUser', () => {
   it('debería llamar a la función createUserWithEmailAndPassword', async () => {
     await registerUser(email, pass);
     expect(createUserWithEmailAndPassword).toHaveBeenCalledWith(auth, email, pass);
+  });
+});
+
+describe('Test para la función de addUser', () => {
+  it('addUser debería ser una función', () => {
+    expect(typeof addUser).toBe('function');
+  });
+});
+
+describe('Test para la función de registerGoogle', () => {
+  it('registerGoogle debería ser una función', () => {
+    expect(typeof registerGoogle).toBe('function');
   });
 });
 
