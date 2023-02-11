@@ -1,6 +1,4 @@
 // eslint-disable-next-line import/no-unresolved
-// import { createUserWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/9.16.0/firebase-auth.js';
-// import {  } from '../src/firebase/firebase.js';
 import {
   auth,
   createUserWithEmailAndPassword,
@@ -16,6 +14,7 @@ import {
 export function registerUser(email, password) {
   return createUserWithEmailAndPassword(auth, email, password);
 }
+
 // Agregar usuarixs registradxs a la base de datos
 export function addUser(user) {
   return addDoc(collection(db, 'Users'), user);

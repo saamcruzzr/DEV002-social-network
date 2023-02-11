@@ -25,25 +25,6 @@ const auth = getAuth();
 // Autenticacion con google
 const provider = new GoogleAuthProvider();
 
-// // Registro con email y password
-// function registerUser(email, password) {
-//   return createUserWithEmailAndPassword(auth, email, password);
-// }
-
-// // Agregar usuarixs registradxs a la base de datos
-// function addUser(user) {
-//   return addDoc(collection(db, 'Users'), user);
-// }
-
-// // Registro con google
-// function registerGoogle() {
-//   return signInWithPopup(auth, provider);
-// }
-
-// function loginUser(email, password) {
-//   return signInWithEmailAndPassword(auth, email, password);
-// }
-
 // eslint-disable-next-line max-len
 export {
   initializeApp,
@@ -57,9 +38,6 @@ export {
   auth,
   db,
   provider,
-  // addUser,
-  // registerGoogle,
-  // loginUser,
 };
 
 // DOCUMENTACIÓN:
