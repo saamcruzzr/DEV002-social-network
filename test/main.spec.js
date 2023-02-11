@@ -22,6 +22,7 @@ jest.mock('../src/firebase/firebase.js', () => ({
   addUser: jest.fn(),
 }));
 
+// const name = 'admin';
 const email = 'admin@test.com';
 const pass = 'admin123';
 
@@ -39,6 +40,10 @@ describe('Test para la función de addUser', () => {
   it('addUser debería ser una función', () => {
     expect(typeof addUser).toBe('function');
   });
+  // it('debería llamar a la función addUser', async () => {
+  //   await registerUser(email, pass);
+  //   expect(addUser).toHaveBeenCalledWith(name, email);
+  // });
 });
 
 describe('Test para la función de registerGoogle', () => {
