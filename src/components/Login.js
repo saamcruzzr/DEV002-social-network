@@ -5,6 +5,11 @@ import { loginUser, registerGoogle } from '../firebase/functions.js';
 export const Login = () => {
   const LoginDiv = document.createElement('div');
   const sectionLogin = `
+    <header>
+      <div>
+        <h1 class="title">SabiOld</h1>
+      </div>
+    </header>
     <h3 class='title_login'>Iniciar Sesión</h3>
 
     <section class='section_login'>

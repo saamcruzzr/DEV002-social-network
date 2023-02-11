@@ -73,6 +73,8 @@ font-family: 'Alegreya Sans SC', sans-serif;*/
     border: 2px solid var(--amarillo-beige-arena);
 }
 
+/* LOGIN */
+
 .title_login {
     text-align: center;
     color: var(--text-color);
@@ -124,7 +126,7 @@ input {
 
 .btnFeed {
     border: 2px solid var(--title-color);
-    width: max-content;
+    width: max-content; /**/
     padding: 10px;
 }
 .btnLog {
@@ -142,4 +144,62 @@ input {
     font-size: 1.3rem;
     text-align: center;
     color: rgba(255, 255, 255);
+}
+
+/* MURO */
+.section_feed {
+    border: 1px solid  blue;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.section_profile {
+    border: 1px solid greenyellow;
+    width: 80%;
+    
+    /* margin: 0; */
+}
+#profile {
+    border: 1px solid  red;
+    /* width: 80%; */
+    display: flex;
+    flex-direction: column;
+}
+.textarea_feed {
+    outline: none;   
+    border: 2px solid var(--amarillo-beige-arena);
+    border-radius: 4px;
+    margin: auto 0;
+    height: 100px;
+    /* width: 50%; */
+}
+.buttons_feed{
+    display: flex;
+    /* padding: 10px; */
+}
+.btnPost {
+    width: max-content;
+}
+
+/* HEADER FEED */
+.headerFeed{
+    display: flex;
+    flex-direction: row;
+}
+.title_feed {
+    font-size: 50px;
+    text-align: center;
+    color: var(--title-color);
+    font-weight: 700;
+    margin: 30px auto 0;
+    width: 75%;
+    border: 1px solid  red;
+}
+.btnSalir{
+    width: 25%;
+    border: 1px solid  red;
+}
+#salida{
+    width: 40px;
 }

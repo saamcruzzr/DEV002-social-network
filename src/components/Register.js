@@ -5,6 +5,11 @@ import { registerUser, addUser, registerGoogle } from '../firebase/functions.js'
 export const Register = () => {
   const RegisterDiv = document.createElement('div');
   const sectionRegister = `
+    <header>
+      <div>
+        <h1 class="title">SabiOld</h1>
+      </div>
+    </header>
     <h3 class='title_login'>Formulario</h3>
 
     <section class='section_login'>
