@@ -36,14 +36,29 @@ font-family: 'Alegreya Sans SC', sans-serif;*/
     /*border: 2px solid red;*/
 }
 
+.section_home {
+    display: flex;
+}
+.title_home {
+    
+    align-items: center;
+    border: 1px solid greenyellow;
+}
 .title {
+    border: 1px solid red;
     font-size: 90px;
     text-align: center;
     color: var(--title-color);
     font-weight: 700;
     margin: 30px auto 0;
 }
-
+.img_home {
+    border: 1px solid orange;
+    /* width: min-content; */
+}
+.img_home img {
+    width: 100%;
+}
 .text_initial {
     text-align: center;
     font-size: 25px;
@@ -210,3 +225,7 @@ input {
 }
 
 
+
+
+
+/* MEDIA QUERY */
