@@ -1,0 +1,213 @@
+/*PARA QUE NO ME LO BORRE EN FEED BRANCH*/
+/* Fuentes Alegreya Sans y Alegreya Sans SC
+font-family: 'Alegreya Sans', sans-serif;
+font-family: 'Alegreya Sans SC', sans-serif;*/
+@import url('https://fonts.googleapis.com/css2?family=Alegreya+Sans:ital,wght@0,100;0,300;0,400;0,500;0,700;0,800;0,900;1,100;1,300;1,400;1,500;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Alegreya+Sans+SC:ital,wght@0,100;0,300;0,400;0,500;0,700;0,800;0,900;1,100;1,300;1,400;1,500;1,700;1,800;1,900&display=swap');
+
+/* Código de colores
+    #84D2C5 Verde/Azul -------------
+    #E4C988 Amarillo/Beige/Arena ----------------
+    #C27664 Naranja -----------------
+    #B05A7A Rosa/Rojo --------------------
+    #2E4A45 Verde Oscuro -----------------
+    #242424 Gris -------------
+    #FFF Blanco -----------
+*/
+
+:root {
+    --main-bg-color: #2E4A45;
+    --title-color: #84D2C5;
+    --button-bg-color: #242424;
+    --text-color: #FFF;
+    --post-bg-color: #e4729c;
+    /*nombre caracteristico??*/
+    --amarillo-beige-arena: #E4C988;
+    --naranja: #C27664;
+    --text-corrida: 'Alegreya Sans', sans-serif;
+    --text-imprenta: 'Alegreya Sans SC', sans-serif;
+}
+
+* {
+    /* font-family: 'Alegreya Sans', sans-serif; */
+    font-family: var(--text-corrida);
+    background-color: #2E4A45;
+    color: #fff;
+    font-weight: 500;
+    /*border: 2px solid red;*/
+}
+
+.title {
+    font-size: 90px;
+    text-align: center;
+    color: var(--title-color);
+    font-weight: 700;
+    margin: 30px auto 0;
+}
+
+.text_initial {
+    text-align: center;
+    font-size: 25px;
+    color: var(--amarillo-beige-arena);
+    font-family: var(--text-imprenta);
+}
+
+.button {
+    display: block;
+    background-color: var(--button-bg-color);
+    font-family: var(--text-imprenta);
+    font-size: 25px;
+    width: 250px;
+    height: fit-content;
+    margin: 25px auto;
+    box-shadow: 6px 6px 8px rgba(0, 0, 0, 0.5);
+    border-radius: 5px;
+    padding: 5px;
+}
+.btnLogin {
+    border: 2px solid var(--title-color);
+}
+.btnRegister {
+    border: 2px solid var(--amarillo-beige-arena);
+}
+
+/* LOGIN */
+.title_login {
+    text-align: center;
+    color: var(--text-color);
+    font-size: 30px;
+    font-family: var(--text-imprenta);
+    margin: 15px auto;
+}
+
+.section_login {
+    width: 250px;
+    margin: auto;
+}
+label {
+    margin-top: 10px;
+    /* border: 2px solid red; */
+}
+.text_login {
+    color: var(--post-bg-color);
+    font-size: 25px;
+    font-family: var(--text-imprenta);
+    -webkit-text-stroke: .2px var(--post-bg-color);
+    /* margin-top: 10px; */
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    line-height : 45px;
+}
+
+input {
+    font-size: 25px;
+    font-weight: 300;
+    font-family: var(--text-corrida);
+    outline: none;
+    letter-spacing: 1px;
+}
+
+.input_login {
+    background-color: rgb(228, 201, 136, 25%);
+    width: 250px;
+    height: 23px;
+    margin: 0;
+}
+
+.error {
+    font-family: var(--text-imprenta);
+    font-size: 1rem;
+    font-weight: 500;
+    margin: 0;
+    letter-spacing: 1px;
+}
+
+.btnFeed {
+    border: 2px solid var(--title-color);
+    width: max-content; /**/
+    padding: 10px;
+}
+.btnLog {
+    border: 2px solid var(--title-color);
+    width: max-content;
+    padding: 10px;
+}
+.authGoogle {
+    font-size: 1.3rem;
+    text-align: center;
+    color: var(--amarillo-beige-arena);
+}
+
+.authGoogle:hover {
+    font-size: 1.3rem;
+    text-align: center;
+    color: rgba(255, 255, 255);
+}
+
+/* MURO */
+.section_feed {
+    /* border: 1px solid  blue; */
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Header feed */
+.headerFeed{
+    display: flex;
+    flex-direction: row;
+}
+.title_feed {
+    font-size: 50px;
+    text-align: center;
+    color: var(--title-color);
+    font-weight: 700;
+    margin: 30px auto 0;
+    width: 75%;
+    /* border: 1px solid  red; */
+}
+.textOut {
+    /* border: 1px solid blue; */
+    text-align: center;
+    margin-bottom: 0;
+}
+.btnOut {
+    width: 25%;
+    /* border: 1px solid  red; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#imgOut {
+    width: 40px;
+}
+
+/* Perfil de Usuarie */
+.section_profile, .section_posts {
+    border: 1px solid greenyellow;
+    width: 80%;
+}
+#profile, #post {
+    /* border: 1px solid  red; */
+    display: flex;
+    flex-direction: column;
+}
+.textarea_profile, .textarea_post {
+    outline: none;   
+    border: 2px solid var(--amarillo-beige-arena);
+    border-radius: 4px;
+    margin: auto 0;
+    height: 100px;
+}
+.buttons_profile {
+    display: flex;
+}
+.btnPost {
+    width: max-content;
+}
+
+.imgLike {
+    width: 40px;
+}
+
+
