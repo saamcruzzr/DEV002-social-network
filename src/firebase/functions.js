@@ -29,3 +29,6 @@ export function registerGoogle() {
 export function loginUser(email, password) {
   return signInWithEmailAndPassword(auth, email, password);
 }
+
+// Publicar
+// export function savePost(post)
