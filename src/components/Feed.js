@@ -1,6 +1,8 @@
 // eslint-disable-next-line import/no-cycle
 // import { onNavigate } from '../main.js';
 
+import { savePost } from '../firebase/functions.js';
+
 export const Feed = () => {
   const FeedDiv = document.createElement('div');
   const sectionFeed = `
@@ -52,6 +54,9 @@ window.addEventListener('DOMContentLoaded', () => {
   postForm.addEventListener('submit', (e) => {
     e.preventDefault();
     const txtPost = postForm.textProfile;
-    console.log(txtPost.value);
+    // console.log(txtPost.value);
+    savePost(txtPost.value);
+
+    document.getElementsByClassName('textarea_profile')[0].value = 'Aquí el texto a publicar';
   });
 });
