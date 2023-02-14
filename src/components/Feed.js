@@ -49,6 +49,7 @@ export const Feed = () => {
   return FeedDiv;
 };
 // A ver si funciona .-.
+// otro coment para que se suba a github xD
 window.addEventListener('DOMContentLoaded', () => {
   const postForm = document.getElementById('profile');
   postForm.addEventListener('submit', (e) => {
