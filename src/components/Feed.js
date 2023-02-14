@@ -47,7 +47,7 @@ export const Feed = () => {
   // FeedDiv.appendChild(btnHome);
   return FeedDiv;
 };
-
+// A ver si funciona .-.
 window.addEventListener('DOMContentLoaded', () => {
   const postForm = document.getElementById('profile');
   postForm.addEventListener('submit', (e) => {
