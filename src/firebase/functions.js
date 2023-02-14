@@ -8,6 +8,7 @@ import {
   collection,
   db,
   provider,
+  // getDocs,
 } from './firebase.js';
 
 // Registro con email y password
@@ -30,5 +31,12 @@ export function loginUser(email, password) {
   return signInWithEmailAndPassword(auth, email, password);
 }
 
-// Publicar
-// export function savePost(post)
+// Publicar post
+export function savePost(post) {
+  addDoc(collection(db, 'Posts'), { post });
+}
+
+// Mostrar los posts
+// export function getPost() {
+//   getDocs(collection(db, 'Posts'));
+// }
