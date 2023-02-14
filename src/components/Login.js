@@ -68,14 +68,15 @@ export const Login = () => {
   googleLogin.addEventListener('click', () => {
     registerGoogle()
       .then((result) => {
-        if('email no esta registrado') {
-          console.log('Tu correo no está registrado');
-        }
         console.log(result);
-        console.log(result.user.email);
-        console.log(result.user.displayName);
-        console.log(result.user.auth);
-        console.log(result.user.uid);
+        // if('email no esta registrado') {
+        //   console.log('Tu correo no está registrado');
+        // }
+        // console.log(result);
+        // console.log(result.user.email);
+        // console.log(result.user.displayName);
+        // console.log(result.user.auth);
+        // console.log(result.user.uid);
 
         // console.log(result.email);
 
