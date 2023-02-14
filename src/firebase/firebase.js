@@ -11,7 +11,10 @@ import {
 // eslint-disable-next-line import/no-unresolved
 } from 'https://www.gstatic.com/firebasejs/9.16.0/firebase-auth.js';
 // eslint-disable-next-line import/no-unresolved
-import { getFirestore, addDoc, collection } from 'https://www.gstatic.com/firebasejs/9.16.0/firebase-firestore.js';
+import {
+  getFirestore, addDoc, collection, getDocs,
+// eslint-disable-next-line import/no-unresolved
+} from 'https://www.gstatic.com/firebasejs/9.16.0/firebase-firestore.js';
 import { firebaseConfig } from './fconfig.js';
 // OJO!! CHECAR VERSIONES !!!
 
@@ -34,6 +37,7 @@ export {
   GoogleAuthProvider,
   getFirestore,
   addDoc,
+  getDocs,
   collection,
   auth,
   db,
