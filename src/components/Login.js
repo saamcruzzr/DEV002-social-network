@@ -47,34 +47,14 @@ export const Login = () => {
 
     if (email && password) {
       loginUser(email, password)
-        .then((userCredential) => {
-        // Signed in
-          const user = userCredential.user;
-          if (email.uid === email || password) {
-            console.log(user);
-            console.log('estas logueado');
-          }
-        })
         .then(() => onNavigate('/feed'))
         .catch((error) => {
-          // const errorEmailLogin = document.getElementById('errorEmailLogin');
-          // const errorPasswordLogin = document.getElementById('errorPasswordLogin');
           if (error.code === 'auth/user-not-found') {
             errorEmailLogin.textContent = 'Usuarie no registrado';
           }
           if (error.code === 'auth/wrong-password') {
             errorPasswordLogin.textContent = 'Contraseña Incorrecta';
           }
-          // if (error.code === 'auth/invalid-email') { // no teclea email
-          //   // const errorEmail = document.getElementById('errorEmail');
-          //   errorEmailLogin.textContent = 'Es necesario poner email';
-          // }
-          // if (error.code === 'auth/missing-email') { // no hay email
-          //   // const errorEmail = document.getElementById('errorEmail');
-          //   errorEmailLogin.textContent = 'Es necesario poner email';
-          // }
-          // const errorCode = error.code;
-          // const errorMessage = error.message;
         });
     } else if (!email) {
       errorEmailLogin.textContent = 'Debe poner un correo';
@@ -88,7 +68,18 @@ export const Login = () => {
   googleLogin.addEventListener('click', () => {
     registerGoogle()
       .then((result) => {
+        if('email no esta registrado') {
+          console.log('Tu correo no está registrado');
+        }
         console.log(result);
+        console.log(result.user.email);
+        console.log(result.user.displayName);
+        console.log(result.user.auth);
+        console.log(result.user.uid);
+
+        // console.log(result.email);
+
+
         // console.log('registrada con google', result);
         // const credential = GoogleAuthProvider.credentialFromResult(result);
         // const token = credential.accessToken;
@@ -101,6 +92,12 @@ export const Login = () => {
         // }).then(() => {
         onNavigate('/feed');
         // });
+      })
+      .catch((error) => {
+        if (error.code === 'auth/user-not-found') {
+          // errorEmailLogin.textContent = 'Usuarie no registrado';
+          console.log('correo no registrado');
+        }
       });
   });
 
