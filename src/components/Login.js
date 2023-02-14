@@ -1,3 +1,4 @@
+// PARA QUE NO ME LO BORRE EN FEED BRANCH
 // eslint-disable-next-line import/no-cycle
 import { onNavigate } from '../main.js';
 import { loginUser, registerGoogle } from '../firebase/functions.js';
@@ -68,7 +69,7 @@ export const Login = () => {
   googleLogin.addEventListener('click', () => {
     registerGoogle()
       .then((result) => {
-        if('email no esta registrado') {
+        if ('email no esta registrado') {
           console.log('Tu correo no está registrado');
         }
         console.log(result);
@@ -78,7 +79,6 @@ export const Login = () => {
         console.log(result.user.uid);
 
         // console.log(result.email);
-
 
         // console.log('registrada con google', result);
         // const credential = GoogleAuthProvider.credentialFromResult(result);
