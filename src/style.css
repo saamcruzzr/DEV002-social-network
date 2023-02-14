@@ -63,18 +63,14 @@ font-family: 'Alegreya Sans SC', sans-serif;*/
     border-radius: 5px;
     padding: 5px;
 }
-
 .btnLogin {
     border: 2px solid var(--title-color);
-
 }
-
 .btnRegister {
     border: 2px solid var(--amarillo-beige-arena);
 }
 
 /* LOGIN */
-
 .title_login {
     text-align: center;
     color: var(--text-color);
@@ -148,41 +144,14 @@ input {
 
 /* MURO */
 .section_feed {
-    border: 1px solid  blue;
+    /* border: 1px solid  blue; */
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
-.section_profile {
-    border: 1px solid greenyellow;
-    width: 80%;
-    
-    /* margin: 0; */
-}
-#profile {
-    border: 1px solid  red;
-    /* width: 80%; */
-    display: flex;
-    flex-direction: column;
-}
-.textarea_feed {
-    outline: none;   
-    border: 2px solid var(--amarillo-beige-arena);
-    border-radius: 4px;
-    margin: auto 0;
-    height: 100px;
-    /* width: 50%; */
-}
-.buttons_feed{
-    display: flex;
-    /* padding: 10px; */
-}
-.btnPost {
-    width: max-content;
-}
 
-/* HEADER FEED */
+/* Header feed */
 .headerFeed{
     display: flex;
     flex-direction: row;
@@ -194,12 +163,50 @@ input {
     font-weight: 700;
     margin: 30px auto 0;
     width: 75%;
-    border: 1px solid  red;
+    /* border: 1px solid  red; */
 }
-.btnSalir{
+.textOut {
+    /* border: 1px solid blue; */
+    text-align: center;
+    margin-bottom: 0;
+}
+.btnOut {
     width: 25%;
-    border: 1px solid  red;
+    /* border: 1px solid  red; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
-#salida{
+#imgOut {
     width: 40px;
 }
+
+/* Perfil de Usuarie */
+.section_profile, .section_posts {
+    border: 1px solid greenyellow;
+    width: 80%;
+}
+#profile, #post {
+    /* border: 1px solid  red; */
+    display: flex;
+    flex-direction: column;
+}
+.textarea_profile, .textarea_post {
+    outline: none;   
+    border: 2px solid var(--amarillo-beige-arena);
+    border-radius: 4px;
+    margin: auto 0;
+    height: 100px;
+}
+.buttons_profile {
+    display: flex;
+}
+.btnPost {
+    width: max-content;
+}
+
+.imgLike {
+    width: 40px;
+}
+
+
