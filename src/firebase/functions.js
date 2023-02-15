@@ -33,7 +33,8 @@ export function loginUser(email, password) {
 
 // Guardar post en firestore
 export function savePost(post) {
-  addDoc(collection(db, 'Posts'), { post });
+  addDoc(collection(db, 'Posts'), { post, userUid: 5 });
+// currentUser 
 }
 
 // Mostrar los posts

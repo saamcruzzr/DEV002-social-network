@@ -48,9 +48,11 @@ export const Feed = () => {
   // FeedDiv.appendChild(btnHome);
   return FeedDiv;
 };
-// A ver si funciona .-.
-document.addEventListener('DOMContentLoaded', () => {
+
+export const addPost = () => {
   const postForm = document.getElementById('profile');
+  // console.log('aqui mismito');
+  // if (postForm) {
   postForm.addEventListener('submit', (e) => {
     e.preventDefault();
     const txtPost = postForm.textProfile;
@@ -59,13 +61,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.getElementsByClassName('textarea_profile')[0].value = 'Aquí el texto a publicar';
   });
-});
-
-// async function showPost() {
-//   const querySnapshot = await getPost();
-//   console.log(querySnapshot);
-// }
-
-// showPost().then((result) => {
-//   console.log(result);
-// });
+};
