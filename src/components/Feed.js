@@ -1,5 +1,6 @@
 // eslint-disable-next-line import/no-cycle
 // import { onNavigate } from '../main.js';
+// import { async } from 'regenerator-runtime';
 import { savePost } from '../firebase/functions.js';
 
 export const Feed = () => {
@@ -48,14 +49,23 @@ export const Feed = () => {
   return FeedDiv;
 };
 // A ver si funciona .-.
-window.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', () => {
   const postForm = document.getElementById('profile');
   postForm.addEventListener('submit', (e) => {
     e.preventDefault();
     const txtPost = postForm.textProfile;
-    console.log(txtPost.value);
+    // console.log(txtPost.value);
     savePost(txtPost.value);
 
     document.getElementsByClassName('textarea_profile')[0].value = 'Aquí el texto a publicar';
   });
 });
+
+// async function showPost() {
+//   const querySnapshot = await getPost();
+//   console.log(querySnapshot);
+// }
+
+// showPost().then((result) => {
+//   console.log(result);
+// });
