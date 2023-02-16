@@ -51,8 +51,6 @@ export const Feed = () => {
 
 export const addPost = () => {
   const postForm = document.getElementById('profile');
-  // console.log('aqui mismito');
-  // if (postForm) {
   postForm.addEventListener('submit', (e) => {
     e.preventDefault();
     const txtPost = postForm.textProfile;
