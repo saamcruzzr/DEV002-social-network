@@ -1,3 +1,4 @@
+// PARA QUE NO ME LO BORRE EN FEED BRANCH
 // SERVICIOS CDP https://firebase.google.com/docs/web/learn-more?hl=es-419#libraries-cdn
 // API REFERENCE JS FIREBASE https://firebase.google.com/docs/reference/js?hl=es-419
 // eslint-disable-next-line import/no-unresolved
@@ -25,6 +26,8 @@ const db = getFirestore(app);
 
 // Initialize Firebase Authentication and get a reference to the service
 const auth = getAuth();
+const userPost = auth.currentUser;
+
 // Autenticacion con google
 const provider = new GoogleAuthProvider();
 
@@ -42,6 +45,7 @@ export {
   auth,
   db,
   provider,
+  userPost,
 };
 
 // DOCUMENTACIÓN:

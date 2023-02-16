@@ -1,3 +1,4 @@
+// PARA QUE NO ME LO BORRE EN FEED BRANCH
 // eslint-disable-next-line import/no-cycle
 import { onNavigate } from '../main.js';
 import { registerUser, addUser, registerGoogle } from '../firebase/functions.js';
@@ -59,6 +60,8 @@ export const Register = () => {
         .then((userCredential) => {
         // Signed in
           const user = userCredential.user;
+          console.log(`userEmailRegister:${user}`);
+
           addUser({
             authUid: user.uid,
             name,
@@ -108,6 +111,7 @@ export const Register = () => {
       .then((result) => {
         // console.log('registrada con google', result);
         const user = result.user;
+        console.log(`userGoogleRegister:${user}`);
 
         addUser({
           authUid: user.uid,

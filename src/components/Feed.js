@@ -1,6 +1,8 @@
+// PARA QUE NO ME LO BORRE EN FEED BRANCH
 // eslint-disable-next-line import/no-cycle
 // import { onNavigate } from '../main.js';
 // import { async } from 'regenerator-runtime';
+
 import { savePost } from '../firebase/functions.js';
 
 export const Feed = () => {
@@ -15,17 +17,19 @@ export const Feed = () => {
         </div>
       </div>
     </header>
+    <hr>
     <section class='section_feed'>
       <section class='section_profile'>
         <form action='' method='post' name='profile' id='profile'>
           <label for='name' class='name_profile'>Tú sabes quien soy:</label>
-          <textarea id='textProfile' class='textarea_profile' name='textarea'>Aquí el texto a publicar</textarea>
+          <textarea id='textProfile' class='textarea_profile' name='textarea' placeholder='Aquí el texto a publicar'></textarea>
           <div class='buttons_profile'>
             <button class='button btnPost' id='btnPost'>Publicar</button>
             <button class='button btnPost' id='btnCancelPost'>Cancelar</button>
           </div>
         </form>
       </section>
+      <hr>
       <section class='section_posts' id='posts'>
         <article class='postUsers'>
           <form action='' method='post' name='feed' id='post'>
@@ -57,6 +61,6 @@ export const addPost = () => {
     // console.log(txtPost.value);
     savePost(txtPost.value);
 
-    document.getElementsByClassName('textarea_profile')[0].value = 'Aquí el texto a publicar';
+    document.getElementsByClassName('textarea_profile')[0].value = '';
   });
 };

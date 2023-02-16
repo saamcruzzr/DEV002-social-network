@@ -1,3 +1,4 @@
+// PARA QUE NO ME LO BORRE EN FEED BRANCH
 // eslint-disable-next-line import/no-unresolved
 import {
   auth,
@@ -9,6 +10,7 @@ import {
   db,
   provider,
   getDocs,
+  // userPost,
 } from './firebase.js';
 
 // Registro con email y password
@@ -33,8 +35,9 @@ export function loginUser(email, password) {
 
 // Guardar post en firestore
 export function savePost(post) {
+  // console.log(userPost);
   addDoc(collection(db, 'Posts'), { post, userUid: 5 });
-// currentUser 
+  // console.log(userPost);
 }
 
 // Mostrar los posts
