@@ -34,13 +34,14 @@ export function loginUser(email, password) {
 }
 
 // Observador
-export function observerUser() {
-  onAuthStateChanged(auth, (user) => {
+export function observerUser(callback, txt) {
+  return onAuthStateChanged(auth, (user) => {
     if (user) {
       // User is signed in, see docs for a list of available properties
       // https://firebase.google.com/docs/reference/js/firebase.User
       const uid = user.uid;
       console.log(uid);
+      callback(txt, uid);
       // ...
     }
     //      else {
@@ -51,11 +52,16 @@ export function observerUser() {
 }
 
 // Agregar post a la base de datos
-export function addPost(post) {
-  addDoc(collection(db, 'Posts'), { post, userUid: 5 });
+export function addPost(post, uidUser) {
+  addDoc(collection(db, 'Posts'), { post, userUid: uidUser });
 }
 
 // Mostrar los posts
 export function getPost() {
   getDocs(collection(db, 'Posts'));
 }
+
+// const querySnapshot = await getDocs(collection(db, "users"));
+// querySnapshot.forEach((doc) => {
+//   console.log(`${doc.id} => ${doc.data()}`);
+// });

@@ -20,14 +20,15 @@ import {
 import { firebaseConfig } from './fconfig.js';
 // OJO!! CHECAR VERSIONES !!!
 
-// Initialize Firebase
+// Inicializar Firebase
 const app = initializeApp(firebaseConfig);
-// Accedemos a la base de datos firestore
+
+// Inicializa Cloud Firestore y obtenga una referencia al servicio
 const db = getFirestore(app);
 
 // Initialize Firebase Authentication and get a reference to the service
 const auth = getAuth();
-const userPost = auth.currentUser;
+// const userPost = auth.currentUser;
 
 // Autenticacion con google
 const provider = new GoogleAuthProvider();
@@ -46,7 +47,7 @@ export {
   auth,
   db,
   provider,
-  userPost,
+  // userPost,
   onAuthStateChanged,
 };
 

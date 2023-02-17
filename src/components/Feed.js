@@ -58,12 +58,21 @@ export const savePost = () => {
   const postForm = document.getElementById('profile');
   postForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    const txtPost = postForm.textProfile;
-    addPost(txtPost.value);
-    observerUser();
+    const txtPost = postForm.textProfile.value;
+    console.log(txtPost);
+    const callback = (txt, uid) => {
+      console.log(`se ejecutó el callback ${uid}`);
+      addPost(txt, uid);
+    };
+    observerUser(callback, txtPost);
+    // .then((userPost) => {
+    //   console.log(`este es el final${userPost}`);
+    // });
+
     document.getElementsByClassName('textarea_profile')[0].value = 'Aquí el texto a publicar';
   });
 };
+
 // registerGoogle()
 //       .then((result) => {
 //         // console.log('registrada con google', result);
