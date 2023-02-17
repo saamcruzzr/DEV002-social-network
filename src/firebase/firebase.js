@@ -23,9 +23,10 @@ import { firebaseConfig } from './fconfig.js';
 const app = initializeApp(firebaseConfig);
 // Accedemos a la base de datos firestore
 const db = getFirestore(app);
-
 // Initialize Firebase Authentication and get a reference to the service
 const auth = getAuth();
+//
+// const userUid = auth.currentUser;
 // Autenticacion con google
 const provider = new GoogleAuthProvider();
 
@@ -41,6 +42,7 @@ export {
   getDocs,
   collection,
   auth,
+  // userUid,
   db,
   provider,
 };

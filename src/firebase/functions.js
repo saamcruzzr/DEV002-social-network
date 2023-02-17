@@ -8,6 +8,7 @@ import {
   addDoc,
   collection,
   db,
+  // userUid,
   provider,
   // getDocs,
 } from './firebase.js';
@@ -34,10 +35,12 @@ export function loginUser(email, password) {
 
 // Publicar post
 export function savePost(post) {
-  addDoc(collection(db, 'Posts'), { post });
+  addDoc(collection(db, 'Posts'), { post, userUid: 5 });
+  // console.log("Document written with ID: ", addDoc.id);
 }
 
 // Mostrar los posts
 // export function getPost() {
 //   getDocs(collection(db, 'Posts'));
 // }
+// export { userUid };

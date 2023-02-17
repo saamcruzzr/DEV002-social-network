@@ -3,6 +3,7 @@
 // import { onNavigate } from '../main.js';
 
 import { savePost } from '../firebase/functions.js';
+// , userUid
 
 export const Feed = () => {
   const FeedDiv = document.createElement('div');
@@ -53,14 +54,47 @@ export const Feed = () => {
 };
 // A ver si funciona .-.
 // otro coment para que se suba a github xD
-window.addEventListener('DOMContentLoaded', () => {
+// window.addEventListener('DOMContentLoaded', () => {
+  // const postForm = document.getElementById('profile');
+  // postForm.addEventListener('submit', (e) => {
+  //   e.preventDefault();
+  //   const txtPost = postForm.textProfile;
+  //   console.log(txtPost.value);
+  //   savePost(txtPost.value);
+
+//   document.getElementsByClassName('textarea_profile')[0].value = '';
+// });
+// });
+
+export const addPost = () => {
   const postForm = document.getElementById('profile');
+  // console.log('aqui mismito');
+  // if (postForm) {
   postForm.addEventListener('submit', (e) => {
     e.preventDefault();
     const txtPost = postForm.textProfile;
-    console.log(txtPost.value);
+    // console.log(txtPost.value);
     savePost(txtPost.value);
+    // savePost()
+    //   .then((post) => {
+    //     const userU = result.userUid;
+    //       userUid({
+    //         post: txtPost.value
+    //         authUid: userU.uid,
+    //       })
+    //   });
 
-    document.getElementsByClassName('textarea_profile')[0].value = '';
+    document.getElementsByClassName('textarea_profile')[0].value = 'Aquí el texto a publicar';
   });
-});
+};
+
+// registerGoogle()
+//       .then((result) => {
+//         // console.log('registrada con google', result);
+//         const user = result.user;
+
+//         addUser({
+//           authUid: user.uid,
+//           name: user.displayName,
+//           email: user.email,
+//         })
