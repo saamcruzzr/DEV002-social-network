@@ -2,7 +2,7 @@
 // eslint-disable-next-line import/no-cycle
 import { onNavigate } from '../main.js';
 import { loginUser, registerGoogle } from '../firebase/functions.js';
-import { addPost } from './Feed.js';
+import { savePost } from './Feed.js';
 
 export const Login = () => {
   const LoginDiv = document.createElement('div');
@@ -51,7 +51,7 @@ export const Login = () => {
       loginUser(email, password)
         .then(() => {
           onNavigate('/feed');
-          addPost();
+          savePost();
         })
         .catch((error) => {
           if (error.code === 'auth/user-not-found') {
@@ -96,7 +96,7 @@ export const Login = () => {
         //   email: user.email,
         // }).then(() => {
         onNavigate('/feed');
-        addPost();
+        savePost();
         // });
       })
       .catch((error) => {

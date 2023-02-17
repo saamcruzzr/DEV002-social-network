@@ -3,7 +3,8 @@
 // import { onNavigate } from '../main.js';
 // import { async } from 'regenerator-runtime';
 
-import { savePost } from '../firebase/functions.js';
+import { addPost, observerUser } from '../firebase/functions.js';
+// import { userPost } from '../firebase/firebase.js';
 
 export const Feed = () => {
   const FeedDiv = document.createElement('div');
@@ -53,14 +54,24 @@ export const Feed = () => {
   return FeedDiv;
 };
 
-export const addPost = () => {
+export const savePost = () => {
   const postForm = document.getElementById('profile');
   postForm.addEventListener('submit', (e) => {
     e.preventDefault();
     const txtPost = postForm.textProfile;
-    // console.log(txtPost.value);
-    savePost(txtPost.value);
-
-    document.getElementsByClassName('textarea_profile')[0].value = '';
+    addPost(txtPost.value);
+    observerUser();
+    document.getElementsByClassName('textarea_profile')[0].value = 'Aquí el texto a publicar';
   });
 };
+// registerGoogle()
+//       .then((result) => {
+//         // console.log('registrada con google', result);
+//         const user = result.user;
+//         console.log(`userGoogleRegister:${user}`);
+
+//         addUser({
+//           authUid: user.uid,
+//           name: user.displayName,
+//           email: user.email,
+//         })

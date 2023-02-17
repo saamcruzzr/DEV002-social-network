@@ -9,6 +9,7 @@ import {
   signInWithEmailAndPassword,
   signInWithPopup,
   GoogleAuthProvider,
+  onAuthStateChanged,
 // eslint-disable-next-line import/no-unresolved
 } from 'https://www.gstatic.com/firebasejs/9.16.0/firebase-auth.js';
 // eslint-disable-next-line import/no-unresolved
@@ -46,6 +47,7 @@ export {
   db,
   provider,
   userPost,
+  onAuthStateChanged,
 };
 
 // DOCUMENTACIÓN:

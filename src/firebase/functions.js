@@ -10,7 +10,7 @@ import {
   db,
   provider,
   getDocs,
-  // userPost,
+  onAuthStateChanged,
 } from './firebase.js';
 
 // Registro con email y password
@@ -33,15 +33,29 @@ export function loginUser(email, password) {
   return signInWithEmailAndPassword(auth, email, password);
 }
 
-// Guardar post en firestore
-export function savePost(post) {
-  // console.log(userPost);
+// Observador
+export function observerUser() {
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      // User is signed in, see docs for a list of available properties
+      // https://firebase.google.com/docs/reference/js/firebase.User
+      const uid = user.uid;
+      console.log(uid);
+      // ...
+    }
+    //      else {
+    //   // User is signed out
+    //   // ... los regrese al inicio de sesión!!!
+    // }
+  });
+}
+
+// Agregar post a la base de datos
+export function addPost(post) {
   addDoc(collection(db, 'Posts'), { post, userUid: 5 });
-  // console.log(userPost);
 }
 
 // Mostrar los posts
 export function getPost() {
-  // console.log('lista de posts');
   getDocs(collection(db, 'Posts'));
 }
