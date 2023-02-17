@@ -1,3 +1,4 @@
+/*PARA QUE NO ME LO BORRE EN FEED BRANCH*/
 /* Fuentes Alegreya Sans y Alegreya Sans SC
 font-family: 'Alegreya Sans', sans-serif;
 font-family: 'Alegreya Sans SC', sans-serif;*/
@@ -44,9 +45,16 @@ font-family: 'Alegreya Sans SC', sans-serif;*/
     margin: 30px auto 0;
 }
 
+.img_adul_may {
+    width: 80%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .text_initial {
     text-align: center;
-    font-size: 25px;
+    font-size: 23px;
     color: var(--amarillo-beige-arena);
     font-family: var(--text-imprenta);
 }
@@ -63,16 +71,14 @@ font-family: 'Alegreya Sans SC', sans-serif;*/
     border-radius: 5px;
     padding: 5px;
 }
-
 .btnLogin {
     border: 2px solid var(--title-color);
-
 }
-
 .btnRegister {
     border: 2px solid var(--amarillo-beige-arena);
 }
 
+/* LOGIN */
 .title_login {
     text-align: center;
     color: var(--text-color);
@@ -124,7 +130,7 @@ input {
 
 .btnFeed {
     border: 2px solid var(--title-color);
-    width: max-content;
+    width: max-content; /**/
     padding: 10px;
 }
 .btnLog {
@@ -143,3 +149,125 @@ input {
     text-align: center;
     color: rgba(255, 255, 255);
 }
+
+/* MURO */
+.section_feed {
+    margin: 0%;
+    padding: 0%;
+    /* border: 1px solid  blue; */
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Header feed */
+.headerFeed{
+    display: flex;
+    flex-direction: row;
+}
+.title_feed {
+    font-size: 70px;
+    text-align: center;
+    color: var(--title-color);
+    font-weight: 700;
+    margin: 20px auto 0;
+    width: 75%;
+    /* border: 1px solid  red; */
+}
+.name_profile {
+    color: var(--amarillo-beige-arena);
+    margin-top: 1%;
+}
+.name_user {
+    color: #FFF;
+    margin: 6% 15% 2% 23%;
+}
+hr {
+    width: 100%;
+    height: 1px;
+    background-color: #FFF;
+}
+
+.textOut {
+    /* border: 1px solid blue; */
+    text-align: center;
+    margin-bottom: 0;
+}
+.btnOut {
+    width: 25%;
+    /* border: 1px solid  red; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#imgOut {
+    width: 45px;
+}
+
+/* Perfil de Usuarie */
+.section_profile{
+    width: 80%;
+}
+.section_posts {
+    border: 1px solid var(--title-color);
+    width: 92%;
+}
+#profile {
+    /* border: 1px solid  red; */
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+#post {
+    /* border: 1px solid  red; */
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-self: flex-start;
+}
+#post.section_posts {
+    /* border: 1px solid  red; */
+    margin: 0;
+    width: 120%;
+    display: flex;
+    flex-direction: column;
+}
+.textarea_profile {
+    outline: none;   
+    border: 2px solid var(--amarillo-beige-arena);
+    border-radius: 4px;
+    margin: auto 0;
+    height: 100px;
+}
+.textarea_post {
+    outline: none;   
+    background-color: var(--naranja);
+    border-radius: 4px;
+    margin-top: 3%;
+    margin-left: 7%;
+    margin-bottom: 2%;
+    width: 83.5%;
+    height: 100px;
+}
+.buttons_profile {
+    display: flex;
+}
+#btnPost {
+    margin: 5% 5% 3% 0%;
+    width: max-content;
+    border: 2px solid var(--title-color);
+}
+
+#btnCancelPost {
+    margin: 5% 0% 3% 13%;
+    width: max-content;
+    border: 2px solid var(--naranja);
+}
+
+.imgLike {
+    margin-left: 5%;
+    width: 40px;
+}
+
+

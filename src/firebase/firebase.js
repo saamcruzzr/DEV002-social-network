@@ -1,3 +1,4 @@
+// PARA QUE NO ME LO BORRE EN FEED BRANCH
 // SERVICIOS CDP https://firebase.google.com/docs/web/learn-more?hl=es-419#libraries-cdn
 // API REFERENCE JS FIREBASE https://firebase.google.com/docs/reference/js?hl=es-419
 // eslint-disable-next-line import/no-unresolved
@@ -8,10 +9,14 @@ import {
   signInWithEmailAndPassword,
   signInWithPopup,
   GoogleAuthProvider,
+  onAuthStateChanged,
 // eslint-disable-next-line import/no-unresolved
 } from 'https://www.gstatic.com/firebasejs/9.16.0/firebase-auth.js';
 // eslint-disable-next-line import/no-unresolved
-import { getFirestore, addDoc, collection } from 'https://www.gstatic.com/firebasejs/9.16.0/firebase-firestore.js';
+import {
+  getFirestore, addDoc, collection, getDocs,
+// eslint-disable-next-line import/no-unresolved
+} from 'https://www.gstatic.com/firebasejs/9.16.0/firebase-firestore.js';
 import { firebaseConfig } from './fconfig.js';
 // OJO!! CHECAR VERSIONES !!!
 
@@ -22,27 +27,10 @@ const db = getFirestore(app);
 
 // Initialize Firebase Authentication and get a reference to the service
 const auth = getAuth();
+const userPost = auth.currentUser;
+
 // Autenticacion con google
 const provider = new GoogleAuthProvider();
-
-// // Registro con email y password
-// function registerUser(email, password) {
-//   return createUserWithEmailAndPassword(auth, email, password);
-// }
-
-// // Agregar usuarixs registradxs a la base de datos
-// function addUser(user) {
-//   return addDoc(collection(db, 'Users'), user);
-// }
-
-// // Registro con google
-// function registerGoogle() {
-//   return signInWithPopup(auth, provider);
-// }
-
-// function loginUser(email, password) {
-//   return signInWithEmailAndPassword(auth, email, password);
-// }
 
 // eslint-disable-next-line max-len
 export {
@@ -53,13 +41,13 @@ export {
   GoogleAuthProvider,
   getFirestore,
   addDoc,
+  getDocs,
   collection,
   auth,
   db,
   provider,
-  // addUser,
-  // registerGoogle,
-  // loginUser,
+  userPost,
+  onAuthStateChanged,
 };
 
 // DOCUMENTACIÓN:

@@ -1,10 +1,17 @@
+// PARA QUE NO ME LO BORRE EN FEED BRANCH
 // eslint-disable-next-line import/no-cycle
 import { onNavigate } from '../main.js';
 import { registerUser, addUser, registerGoogle } from '../firebase/functions.js';
+import { savePost } from './Feed.js';
 
 export const Register = () => {
   const RegisterDiv = document.createElement('div');
   const sectionRegister = `
+    <header>
+      <div>
+        <h1 class="title">SabiOld</h1>
+      </div>
+    </header>
     <h3 class='title_login'>Formulario</h3>
 
     <section class='section_login'>
@@ -53,12 +60,15 @@ export const Register = () => {
         .then((userCredential) => {
         // Signed in
           const user = userCredential.user;
+          console.log(`userEmailRegister:${user}`);
+
           addUser({
             authUid: user.uid,
             name,
             email,
           }).then(() => {
             onNavigate('/feed');
+            savePost();
           });
         })
         .catch((error) => {
@@ -101,6 +111,7 @@ export const Register = () => {
       .then((result) => {
         // console.log('registrada con google', result);
         const user = result.user;
+        console.log(`userGoogleRegister:${user}`);
 
         addUser({
           authUid: user.uid,
@@ -108,6 +119,7 @@ export const Register = () => {
           email: user.email,
         }).then(() => {
           onNavigate('/feed');
+          savePost();
         });
       });
   });
