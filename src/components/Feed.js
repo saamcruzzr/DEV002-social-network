@@ -69,7 +69,7 @@ export const savePost = () => {
     //   console.log(`este es el final${userPost}`);
     // });
 
-    document.getElementsByClassName('textarea_profile')[0].value = 'Aquí el texto a publicar';
+    document.getElementsByClassName('textarea_profile')[0].value = '';
   });
 };
 
