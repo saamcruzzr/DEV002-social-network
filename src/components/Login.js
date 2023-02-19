@@ -2,7 +2,7 @@
 // eslint-disable-next-line import/no-cycle
 import { onNavigate } from '../main.js';
 import { loginUser, registerGoogle } from '../firebase/functions.js';
-import { addPost } from './Feed.js';
+import { savePost } from './Feed.js';
 
 export const Login = () => {
   const LoginDiv = document.createElement('div');
@@ -51,7 +51,7 @@ export const Login = () => {
       loginUser(email, password)
         .then(() => {
           onNavigate('/feed');
-          addPost();
+          savePost();
         })
         .catch((error) => {
           if (error.code === 'auth/user-not-found') {
@@ -72,15 +72,16 @@ export const Login = () => {
 
   googleLogin.addEventListener('click', () => {
     registerGoogle()
-      .then((result) => {
-        if ('email no esta registrado') {
-          console.log('Tu correo no está registrado');
-        }
-        console.log(result);
-        console.log(result.user.email);
-        console.log(result.user.displayName);
-        console.log(result.user.auth);
-        console.log(result.user.uid);
+      .then(() => {
+        // console.log(`es una prueba${result}`);
+        // if('email no esta registrado') {
+        //   console.log('Tu correo no está registrado');
+        // }
+        // console.log(result);
+        // console.log(result.user.email);
+        // console.log(result.user.displayName);
+        // console.log(result.user.auth);
+        // console.log(result.user.uid);
 
         // console.log(result.email);
 
@@ -95,13 +96,13 @@ export const Login = () => {
         //   email: user.email,
         // }).then(() => {
         onNavigate('/feed');
-        addPost();
+        savePost();
         // });
       })
       .catch((error) => {
         if (error.code === 'auth/user-not-found') {
           // errorEmailLogin.textContent = 'Usuarie no registrado';
-          console.log('correo no registrado');
+          // console.log('correo no registrado');
         }
       });
   });
