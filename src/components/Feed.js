@@ -1,8 +1,10 @@
 // PARA QUE NO ME LO BORRE EN FEED BRANCH
 // eslint-disable-next-line import/no-cycle
 // import { onNavigate } from '../main.js';
+// import { async } from 'regenerator-runtime';
 
-import { savePost } from '../firebase/functions.js';
+// eslint-disable-next-line import/no-cycle
+import { addPost, getPost, observerUser } from '../firebase/functions.js';
 
 export const Feed = () => {
   const FeedDiv = document.createElement('div');
@@ -32,7 +34,7 @@ export const Feed = () => {
       <section class='section_posts' id='posts'>
         <article class='postUsers'>
           <form action='' method='post' name='feed' id='post'>
-            <label for='name' class='name_user'>nombreOtreUsuarie:</label>
+            <label id='nameUserPost' for='name' class='name_user'>nombre_Otre_Usuarie:</label>
             <textarea id='textPost' class='textarea_post' name='textarea'>Texto publicado</textarea>
             <div class='icon_post'>
               <img class='imgLike' src="./IMG/corazonRosa.png" alt="Corazón pintado de rosa">
@@ -43,24 +45,44 @@ export const Feed = () => {
       </section>
     </section>
   `;
-  // FeedDiv.textContent = 'Muro';
   FeedDiv.innerHTML = sectionFeed;
-  // const btnHome = document.createElement('button');
-  // btnHome.textContent = 'Regresar a Inicio';
-  // btnHome.addEventListener('click', () => onNavigate('/'));
-  // FeedDiv.appendChild(btnHome);
   return FeedDiv;
 };
-// A ver si funciona .-.
-// otro coment para que se suba a github xD
-window.addEventListener('DOMContentLoaded', () => {
+
+export const savePost = () => {
   const postForm = document.getElementById('profile');
   postForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    const txtPost = postForm.textProfile;
-    console.log(txtPost.value);
-    savePost(txtPost.value);
-
-    document.getElementsByClassName('textarea_profile')[0].value = '';
+    const txtPost = postForm.textProfile.value;
+    const callback = (txt, uid, nameU) => {
+      // console.log(`se ejecutó el callback ${uid}`);
+      addPost(txt, uid, nameU);
+    };
+    observerUser(callback, txtPost);
+    // .then((userPost) => {
+    //   console.log(`este es el final${userPost}`);
+    // });
+    document.getElementsByClassName('textarea_profile')[0].value = 'Aquí el texto a publicar';
   });
-});
+};
+
+export const showPost = () => {
+  getPost()
+    .then((postSnapshot) => {
+      const postList = postSnapshot.docs.map((doc) => doc.data());
+      console.log(postList);
+      const nUser = document.getElementById('nameUserPost');
+      const textPost = document.getElementById('textPost');
+      // nUser.textContent = postList[0].nameUser;
+      nUser.innerHTML = postList[0].nameUser;
+      textPost.textContent = postList[0].post;
+    });
+  // .then(() => {
+  //   const nameUser = document.getElementById('nameUser').value;
+  //   const textPost = document.getElementById('textPost').value;
+  //   nameUser.textContent = 'Jess'; // el usuarix del uid;
+  //   textPost.textContent = 'en mi cabeza estas'; // el usuarix del uid;
+  // });
+};
+
+// console.log(Estos son las id del input a puclicar: textPost, nameUser);

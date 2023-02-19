@@ -1,4 +1,3 @@
-// PARA QUE NO ME LO BORRE EN FEED BRANCH
 // SERVICIOS CDP https://firebase.google.com/docs/web/learn-more?hl=es-419#libraries-cdn
 // API REFERENCE JS FIREBASE https://firebase.google.com/docs/reference/js?hl=es-419
 // eslint-disable-next-line import/no-unresolved
@@ -9,6 +8,7 @@ import {
   signInWithEmailAndPassword,
   signInWithPopup,
   GoogleAuthProvider,
+  onAuthStateChanged,
 // eslint-disable-next-line import/no-unresolved
 } from 'https://www.gstatic.com/firebasejs/9.16.0/firebase-auth.js';
 // eslint-disable-next-line import/no-unresolved
@@ -16,16 +16,19 @@ import {
   getFirestore, addDoc, collection, getDocs,
 // eslint-disable-next-line import/no-unresolved
 } from 'https://www.gstatic.com/firebasejs/9.16.0/firebase-firestore.js';
-import { firebaseConfig } from './fconfig.js';
-// OJO!! CHECAR VERSIONES !!!
 
-// Initialize Firebase
+import { firebaseConfig } from './fconfig.js';
+
+// Inicializar Firebase
 const app = initializeApp(firebaseConfig);
-// Accedemos a la base de datos firestore
+
+// Inicializa Cloud Firestore y obtenga una referencia al servicio
 const db = getFirestore(app);
 
 // Initialize Firebase Authentication and get a reference to the service
 const auth = getAuth();
+// const userPost = auth.currentUser;
+
 // Autenticacion con google
 const provider = new GoogleAuthProvider();
 
@@ -43,6 +46,8 @@ export {
   auth,
   db,
   provider,
+  // userPost,
+  onAuthStateChanged,
 };
 
 // DOCUMENTACIÓN:
@@ -51,8 +56,3 @@ export {
 // Firebase> Documentación de Firebase> JavaScript API reference> Referencia> USER interface
 // https://firebase.google.com/docs/reference/js/auth.user?hl=es-419
 // PARA CERRAR SESIÓN https://firebase.google.com/docs/reference/js/auth.md?hl=es-419#signout
-
-// import { getAuth, signInWithRedirect } from "firebase/auth";
-
-// const auth = getAuth();
-// signInWithRedirect(auth, provider);
