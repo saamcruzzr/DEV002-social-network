@@ -65,3 +65,8 @@ export function getPost() {
 // querySnapshot.forEach((doc) => {
 //   console.log(`${doc.id} => ${doc.data()}`);
 // });
+
+// const querySnapshot = await getDocs(collection(db, "Posts"));
+// querySnapshot.forEach((doc) => {
+//   console.log(`${doc.id} => ${doc.data().post}`);
+// });
