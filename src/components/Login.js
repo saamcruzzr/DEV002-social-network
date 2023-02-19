@@ -72,8 +72,8 @@ export const Login = () => {
 
   googleLogin.addEventListener('click', () => {
     registerGoogle()
-      .then((result) => {
-        console.log(`es una prueba${result}`);
+      .then(() => {
+        // console.log(`es una prueba${result}`);
         // if('email no esta registrado') {
         //   console.log('Tu correo no está registrado');
         // }
