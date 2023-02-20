@@ -62,6 +62,5 @@ export function addPost(post, uidUser, nameUser) {
 // Mostrar los posts
 export async function getPost() {
   const postSnapshot = await getDocs(collection(db, 'Posts'));
-  console.log(postSnapshot);
   return postSnapshot;
 }

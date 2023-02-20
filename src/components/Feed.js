@@ -31,18 +31,7 @@ export const Feed = () => {
         </form>
       </section>
       <hr>
-      <section class='section_posts' id='posts'>
-        <article class='postUsers'>
-          <form action='' method='post' name='feed' id='post'>
-            <label id='nameUserPost' for='name' class='name_user'>nombre_Otre_Usuarie:</label>
-            <textarea id='textPost' class='textarea_post' name='textarea'>Texto publicado</textarea>
-            <div class='icon_post'>
-              <img class='imgLike' src="./IMG/corazonRosa.png" alt="Corazón pintado de rosa">
-              <img class='imgLike' src="./IMG/corazon.png" alt="Corazón sin pintar">  
-            </div>
-          </form>
-        </article>
-      </section>
+      <section class='section_posts' id='posts'></section>
     </section>
   `;
   FeedDiv.innerHTML = sectionFeed;
@@ -69,13 +58,30 @@ export const savePost = () => {
 export const showPost = () => {
   getPost()
     .then((postSnapshot) => {
-      const postList = postSnapshot.docs.map((doc) => doc.data());
-      console.log(postList);
-      const nUser = document.getElementById('nameUserPost');
-      const textPost = document.getElementById('textPost');
-      // nUser.textContent = postList[0].nameUser;
-      nUser.innerHTML = postList[0].nameUser;
-      textPost.textContent = postList[0].post;
+      console.log(postSnapshot);
+      postSnapshot.docs.forEach((doc) => {
+        // // console.log(doc.data().nameUser);
+        // const nUser = document.getElementById('nameUserPost');
+        // const textPost = document.getElementById('textPost');
+        // // nUser.textContent = postList[0].nameUser;
+        // nUser.innerHTML += doc.data().nameUser;
+        // textPost.textContent += doc.data().post;
+
+        const articlePost = `
+          <article class='postUsers'>
+            <form action='' method='post' name='feed' id='post'>
+              <label id='nameUserPost' for='name' class='name_user'>${doc.data().nameUser}</label>
+              <textarea id='textPost' class='textarea_post' name='textarea'>${doc.data().post}</textarea>
+              <div class='icon_post'>
+                <img class='imgLike' src="./IMG/corazonRosa.png" alt="Corazón pintado de rosa">
+                <img class='imgLike' src="./IMG/corazon.png" alt="Corazón sin pintar">  
+              </div>
+            </form>
+          </article>
+        `;
+        const sectionPosts = document.getElementById('posts');
+        sectionPosts.innerHTML += articlePost;
+      });
     });
   // .then(() => {
   //   const nameUser = document.getElementById('nameUser').value;
