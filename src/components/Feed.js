@@ -3,8 +3,8 @@
 // import { onNavigate } from '../main.js';
 // import { async } from 'regenerator-runtime';
 
-import { addPost, observerUser } from '../firebase/functions.js';
-// import { userPost } from '../firebase/firebase.js';
+// eslint-disable-next-line import/no-cycle
+import { addPost, getPost, observerUser } from '../firebase/functions.js';
 
 export const Feed = () => {
   const FeedDiv = document.createElement('div');
@@ -31,26 +31,10 @@ export const Feed = () => {
         </form>
       </section>
       <hr>
-      <section class='section_posts' id='posts'>
-        <article class='postUsers'>
-          <form action='' method='post' name='feed' id='post'>
-            <label for='name' class='name_user'>nombreOtreUsuarie:</label>
-            <textarea id='textPost' class='textarea_post' name='textarea'>Texto publicado</textarea>
-            <div class='icon_post'>
-              <img class='imgLike' src="./IMG/corazonRosa.png" alt="Corazón pintado de rosa">
-              <img class='imgLike' src="./IMG/corazon.png" alt="Corazón sin pintar">  
-            </div>
-          </form>
-        </article>
-      </section>
+      <section class='section_posts' id='posts'></section>
     </section>
   `;
-  // FeedDiv.textContent = 'Muro';
   FeedDiv.innerHTML = sectionFeed;
-  // const btnHome = document.createElement('button');
-  // btnHome.textContent = 'Regresar a Inicio';
-  // btnHome.addEventListener('click', () => onNavigate('/'));
-  // FeedDiv.appendChild(btnHome);
   return FeedDiv;
 };
 
@@ -59,28 +43,52 @@ export const savePost = () => {
   postForm.addEventListener('submit', (e) => {
     e.preventDefault();
     const txtPost = postForm.textProfile.value;
-    console.log(txtPost);
-    const callback = (txt, uid) => {
-      console.log(`se ejecutó el callback ${uid}`);
-      addPost(txt, uid);
+    const callback = (txt, uid, nameU) => {
+      // console.log(`se ejecutó el callback ${uid}`);
+      addPost(txt, uid, nameU);
     };
     observerUser(callback, txtPost);
     // .then((userPost) => {
     //   console.log(`este es el final${userPost}`);
     // });
-
     document.getElementsByClassName('textarea_profile')[0].value = 'Aquí el texto a publicar';
   });
 };
 
-// registerGoogle()
-//       .then((result) => {
-//         // console.log('registrada con google', result);
-//         const user = result.user;
-//         console.log(`userGoogleRegister:${user}`);
+export const showPost = () => {
+  getPost()
+    .then((postSnapshot) => {
+      console.log(postSnapshot);
+      postSnapshot.docs.forEach((doc) => {
+        // // console.log(doc.data().nameUser);
+        // const nUser = document.getElementById('nameUserPost');
+        // const textPost = document.getElementById('textPost');
+        // // nUser.textContent = postList[0].nameUser;
+        // nUser.innerHTML += doc.data().nameUser;
+        // textPost.textContent += doc.data().post;
 
-//         addUser({
-//           authUid: user.uid,
-//           name: user.displayName,
-//           email: user.email,
-//         })
+        const articlePost = `
+          <article class='postUsers'>
+            <form action='' method='post' name='feed' id='post'>
+              <label id='nameUserPost' for='name' class='name_user'>${doc.data().nameUser}</label>
+              <textarea id='textPost' class='textarea_post' name='textarea'>${doc.data().post}</textarea>
+              <div class='icon_post'>
+                <img class='imgLike' src="./IMG/corazonRosa.png" alt="Corazón pintado de rosa">
+                <img class='imgLike' src="./IMG/corazon.png" alt="Corazón sin pintar">  
+              </div>
+            </form>
+          </article>
+        `;
+        const sectionPosts = document.getElementById('posts');
+        sectionPosts.innerHTML += articlePost;
+      });
+    });
+  // .then(() => {
+  //   const nameUser = document.getElementById('nameUser').value;
+  //   const textPost = document.getElementById('textPost').value;
+  //   nameUser.textContent = 'Jess'; // el usuarix del uid;
+  //   textPost.textContent = 'en mi cabeza estas'; // el usuarix del uid;
+  // });
+};
+
+// console.log(Estos son las id del input a puclicar: textPost, nameUser);
