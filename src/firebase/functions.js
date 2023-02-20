@@ -1,5 +1,6 @@
 // PARA QUE NO ME LO BORRE EN FEED BRANCH
-// eslint-disable-next-line import/no-unresolved
+// eslint-disable-next-line import/no-unresolved, import/no-cycle
+import { showPost } from '../components/Feed.js';
 import {
   auth,
   createUserWithEmailAndPassword,
@@ -40,8 +41,11 @@ export function observerUser(callback, txt) {
       // User is signed in, see docs for a list of available properties
       // https://firebase.google.com/docs/reference/js/firebase.User
       const uid = user.uid;
-      console.log(uid);
-      callback(txt, uid);
+      const nameU = user.displayName;
+      const dateP = Date.now();
+      // console.log(uid);
+      callback(txt, uid, nameU, dateP);
+      showPost();
       // ...
     }
     //      else {
@@ -52,16 +56,14 @@ export function observerUser(callback, txt) {
 }
 
 // Agregar post a la base de datos
-export function addPost(post, uidUser) {
-  addDoc(collection(db, 'Posts'), { post, userUid: uidUser });
+export function addPost(post, uidUser, nameUser, datePost) {
+  addDoc(collection(db, 'Posts'), {
+    post, userUid: uidUser, nameUser, datePost,
+  });
 }
 
 // Mostrar los posts
-export function getPost() {
-  getDocs(collection(db, 'Posts'));
+export async function getPost() {
+  const postSnapshot = await getDocs(collection(db, 'Posts'));
+  return postSnapshot;
 }
-
-// const querySnapshot = await getDocs(collection(db, "users"));
-// querySnapshot.forEach((doc) => {
-//   console.log(`${doc.id} => ${doc.data()}`);
-// });
