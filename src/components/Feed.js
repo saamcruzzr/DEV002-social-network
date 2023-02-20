@@ -59,6 +59,8 @@ export const showPost = () => {
   getPost()
     .then((postSnapshot) => {
       console.log(postSnapshot);
+      const sectionPosts = document.getElementById('posts');
+      sectionPosts.innerHTML = '';
       postSnapshot.docs.forEach((doc) => {
         // // console.log(doc.data().nameUser);
         // const nUser = document.getElementById('nameUserPost');
@@ -66,7 +68,6 @@ export const showPost = () => {
         // // nUser.textContent = postList[0].nameUser;
         // nUser.innerHTML += doc.data().nameUser;
         // textPost.textContent += doc.data().post;
-
         const articlePost = `
           <article class='postUsers'>
             <form action='' method='post' name='feed' id='post'>
@@ -79,7 +80,6 @@ export const showPost = () => {
             </form>
           </article>
         `;
-        const sectionPosts = document.getElementById('posts');
         sectionPosts.innerHTML += articlePost;
       });
     });
