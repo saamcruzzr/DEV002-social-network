@@ -42,8 +42,9 @@ export function observerUser(callback, txt) {
       // https://firebase.google.com/docs/reference/js/firebase.User
       const uid = user.uid;
       const nameU = user.displayName;
+      const dateP = Date.now();
       // console.log(uid);
-      callback(txt, uid, nameU);
+      callback(txt, uid, nameU, dateP);
       showPost();
       // ...
     }
@@ -55,8 +56,10 @@ export function observerUser(callback, txt) {
 }
 
 // Agregar post a la base de datos
-export function addPost(post, uidUser, nameUser) {
-  addDoc(collection(db, 'Posts'), { post, userUid: uidUser, nameUser });
+export function addPost(post, uidUser, nameUser, datePost) {
+  addDoc(collection(db, 'Posts'), {
+    post, userUid: uidUser, nameUser, datePost,
+  });
 }
 
 // Mostrar los posts

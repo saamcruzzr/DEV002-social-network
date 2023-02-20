@@ -2,7 +2,7 @@
 // eslint-disable-next-line import/no-cycle
 import { onNavigate } from '../main.js';
 import { registerUser, addUser, registerGoogle } from '../firebase/functions.js';
-import { savePost } from './Feed.js';
+import { savePost, showPost } from './Feed.js';
 
 export const Register = () => {
   const RegisterDiv = document.createElement('div');
@@ -60,7 +60,7 @@ export const Register = () => {
         .then((userCredential) => {
         // Signed in
           const user = userCredential.user;
-          console.log(`userEmailRegister:${user}`);
+          // console.log(`userEmailRegister:${user}`);
 
           addUser({
             authUid: user.uid,
@@ -69,6 +69,7 @@ export const Register = () => {
           }).then(() => {
             onNavigate('/feed');
             savePost();
+            showPost();
           });
         })
         .catch((error) => {
@@ -111,7 +112,7 @@ export const Register = () => {
       .then((result) => {
         // console.log('registrada con google', result);
         const user = result.user;
-        console.log(`userGoogleRegister:${user}`);
+        // console.log(`userGoogleRegister:${user}`);
 
         addUser({
           authUid: user.uid,
@@ -120,6 +121,7 @@ export const Register = () => {
         }).then(() => {
           onNavigate('/feed');
           savePost();
+          showPost();
         });
       });
   });

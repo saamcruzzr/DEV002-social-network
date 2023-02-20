@@ -24,6 +24,7 @@ export const Feed = () => {
         <form action='' method='post' name='profile' id='profile'>
           <label for='name' class='name_profile'>Tú sabes quien soy:</label>
           <textarea id='textProfile' class='textarea_profile' name='textarea' placeholder='Aquí el texto a publicar'></textarea>
+          <p class='error' id='errorNoPost'></p>
           <div class='buttons_profile'>
             <button class='button btnPost' id='btnPost'>Publicar</button>
             <button class='button btnPost' id='btnCancelPost'>Cancelar</button>
@@ -43,26 +44,32 @@ export const savePost = () => {
   postForm.addEventListener('submit', (e) => {
     e.preventDefault();
     const txtPost = postForm.textProfile.value;
-    const callback = (txt, uid, nameU) => {
+    const errorPost = document.getElementById('errorNoPost');
+    if (txtPost !== '') {
+      // }
+      const callback = (txt, uid, nameU, dateP) => {
       // console.log(`se ejecutó el callback ${uid}`);
-      addPost(txt, uid, nameU);
-    };
-    observerUser(callback, txtPost);
-    // .then((userPost) => {
-    //   console.log(`este es el final${userPost}`);
-    // });
-    document.getElementsByClassName('textarea_profile')[0].value = 'Aquí el texto a publicar';
+        addPost(txt, uid, nameU, dateP);
+      };
+      observerUser(callback, txtPost);
+      // .then((userPost) => {
+      //   console.log(`este es el final${userPost}`);
+      // });
+      document.getElementsByClassName('textarea_profile')[0].value = '';
+    } else {
+      errorPost.textContent = 'No has agregado texto a tu publicación';
+    }
   });
 };
 
 export const showPost = () => {
   getPost()
     .then((postSnapshot) => {
-      console.log(postSnapshot);
+      // console.log(postSnapshot);
       const sectionPosts = document.getElementById('posts');
       sectionPosts.innerHTML = '';
       postSnapshot.docs.forEach((doc) => {
-        // // console.log(doc.data().nameUser);
+        // console.log(doc.data().nameUser);
         // const nUser = document.getElementById('nameUserPost');
         // const textPost = document.getElementById('textPost');
         // // nUser.textContent = postList[0].nameUser;
@@ -72,23 +79,29 @@ export const showPost = () => {
           <article class='postUsers'>
             <form action='' method='post' name='feed' id='post'>
               <label id='nameUserPost' for='name' class='name_user'>${doc.data().nameUser}</label>
-              <textarea id='textPost' class='textarea_post' name='textarea'>${doc.data().post}</textarea>
+              <h4 id='textPost' class='textarea_post' name='textarea'>${doc.data().post}</h4>
               <div class='icon_post'>
                 <img class='imgLike' src="./IMG/corazonRosa.png" alt="Corazón pintado de rosa">
                 <img class='imgLike' src="./IMG/corazon.png" alt="Corazón sin pintar">  
               </div>
             </form>
+            <hr>
           </article>
         `;
         sectionPosts.innerHTML += articlePost;
       });
     });
-  // .then(() => {
-  //   const nameUser = document.getElementById('nameUser').value;
-  //   const textPost = document.getElementById('textPost').value;
-  //   nameUser.textContent = 'Jess'; // el usuarix del uid;
-  //   textPost.textContent = 'en mi cabeza estas'; // el usuarix del uid;
-  // });
 };
 
 // console.log(Estos son las id del input a puclicar: textPost, nameUser);
+
+// export function showDate() {
+//   // const date = new Date(Date.UTC(2012, 11, 20, 3, 0, 0));
+//   const date = Date.now();
+//   console.log(date);
+
+//   // an application may want to use UTC and make that visible
+//   // const options = { timeZone: 'UTC', timeZoneName: 'short' };
+//   // console.log(date.toLocaleTimeString('sp-CO', options));
+// }
+// showDate();
