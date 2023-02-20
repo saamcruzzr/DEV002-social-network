@@ -11,6 +11,7 @@ import {
   db,
   provider,
   getDocs,
+  // onSnapshot,
   onAuthStateChanged,
 } from './firebase.js';
 
@@ -65,5 +66,6 @@ export function addPost(post, uidUser, nameUser, datePost) {
 // Mostrar los posts
 export async function getPost() {
   const postSnapshot = await getDocs(collection(db, 'Posts'));
+  // const postSnapshot = onSnapshot(collection(db, 'Posts'));
   return postSnapshot;
 }
