@@ -12,6 +12,8 @@ import {
   provider,
   getDocs,
   onAuthStateChanged,
+  doc,
+  deleteDoc,
 } from './firebase.js';
 
 // Registro con email y password
@@ -67,3 +69,12 @@ export async function getPost() {
   const postSnapshot = await getDocs(collection(db, 'Posts'));
   return postSnapshot;
 }
+
+// Eliminar documentos
+export function deletePost() {
+  deleteDoc(doc(db, 'Post', 'JBV6PJCjkWhCXGvGelZC'));
+  const eliminado = console.log('este documento fue eliminado: JBV6PJCjkWhCXGvGelZC');
+  return eliminado;
+}
+
+// await deleteDoc(doc(db, "cities", "DC"));

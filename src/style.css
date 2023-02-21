@@ -264,10 +264,37 @@ hr {
     width: max-content;
     border: 2px solid var(--naranja);
 }
+.icon_post {
+    border: 1px solid greenyellow;
+}
 
 .imgLike {
+    border: 1px solid red;
     margin-left: 5%;
     width: 40px;
 }
 
 
+/*ELIMINAR POST*/
+.postUsers {
+    position: relative;
+}
+.container_remove {
+    border: 1px solid yellow;
+    position: absolute;
+    bottom: 15px;
+    right: 40px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    /* padding: 5px; */
+}
+/* .textRemove {
+    border:1px solid red;
+    width: min-content;
+} */
+.imgRemove {
+    border:1px solid blue;
+    width: 35px;
+    height: 35px;
+}

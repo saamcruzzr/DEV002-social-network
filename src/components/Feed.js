@@ -65,17 +65,14 @@ export const savePost = () => {
 export const showPost = () => {
   getPost()
     .then((postSnapshot) => {
-      // console.log(postSnapshot);
       const sectionPosts = document.getElementById('posts');
       sectionPosts.innerHTML = '';
       postSnapshot.docs.forEach((doc) => {
-        // console.log(doc.data().nameUser);
-        // const nUser = document.getElementById('nameUserPost');
-        // const textPost = document.getElementById('textPost');
-        // // nUser.textContent = postList[0].nameUser;
-        // nUser.innerHTML += doc.data().nameUser;
-        // textPost.textContent += doc.data().post;
-
+        console.log(doc);
+        console.log(doc.data().userUid);
+        // console.log(doc.data().currentUser);
+        // console.log(doc.key().segmentos[6]);
+        // console.log(doc.auth.currentUser.uid);
         const articlePost = `
           <article class='postUsers'>
             <form action='' method='post' name='feed' id='post'>
@@ -84,6 +81,10 @@ export const showPost = () => {
               <div class='icon_post'>
                 <img class='imgLike' src="./IMG/corazonRosa.png" alt="Corazón pintado de rosa">
                 <img class='imgLike' src="./IMG/corazon.png" alt="Corazón sin pintar">  
+              </div>
+              <div class='container_remove'>
+                <!--<p class='textRemove'>Eliminar Publicación</p>-->
+                <!--<img class='imgRemove' src="./IMG/eliminar.png" alt="Eliminar publicación">-->
               </div>
             </form>
             <hr>
@@ -94,15 +95,12 @@ export const showPost = () => {
     });
 };
 
-// console.log(Estos son las id del input a puclicar: textPost, nameUser);
-
-// export function showDate() {
-//   // const date = new Date(Date.UTC(2012, 11, 20, 3, 0, 0));
-//   const date = Date.now();
-//   console.log(date);
-
-//   // an application may want to use UTC and make that visible
-//   // const options = { timeZone: 'UTC', timeZoneName: 'short' };
-//   // console.log(date.toLocaleTimeString('sp-CO', options));
-// }
-// showDate();
+const addRemove = () => {
+  if (userUid === currentUser) {
+    const containerRemove = document.getElementById('container_remove');
+    const imgRemove = `
+      <img class='imgRemove' src="./IMG/eliminar.png" alt="Eliminar publicación">
+      `;
+    containerRemove.appendChild = imgRemove;
+  }
+};
