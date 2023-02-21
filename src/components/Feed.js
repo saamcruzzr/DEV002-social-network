@@ -2,9 +2,11 @@
 // eslint-disable-next-line import/no-cycle
 // import { onNavigate } from '../main.js';
 // import { async } from 'regenerator-runtime';
-
+import { auth } from '../firebase/firebase.js';
 // eslint-disable-next-line import/no-cycle
-import { addPost, getPost, observerUser } from '../firebase/functions.js';
+import {
+  addPost, getPost, observerUser,
+} from '../firebase/functions.js';
 
 export const Feed = () => {
   const FeedDiv = document.createElement('div');
@@ -24,6 +26,7 @@ export const Feed = () => {
         <form action='' method='post' name='profile' id='profile'>
           <label for='name' class='name_profile'>Tú sabes quien soy:</label>
           <textarea id='textProfile' class='textarea_profile' name='textarea' placeholder='Aquí el texto a publicar'></textarea>
+          <p class='error' id='errorNoPost'></p>
           <div class='buttons_profile'>
             <button class='button btnPost' id='btnPost'>Publicar</button>
             <button class='button btnPost' id='btnCancelPost'>Cancelar</button>
@@ -31,18 +34,7 @@ export const Feed = () => {
         </form>
       </section>
       <hr>
-      <section class='section_posts' id='posts'>
-        <article class='postUsers'>
-          <form action='' method='post' name='feed' id='post'>
-            <label id='nameUserPost' for='name' class='name_user'>nombre_Otre_Usuarie:</label>
-            <textarea id='textPost' class='textarea_post' name='textarea'>Texto publicado</textarea>
-            <div class='icon_post'>
-              <img class='imgLike' src="./IMG/corazonRosa.png" alt="Corazón pintado de rosa">
-              <img class='imgLike' src="./IMG/corazon.png" alt="Corazón sin pintar">  
-            </div>
-          </form>
-        </article>
-      </section>
+      <section class='section_posts' id='posts'></section>
     </section>
   `;
   FeedDiv.innerHTML = sectionFeed;
@@ -56,35 +48,81 @@ export const savePost = () => {
   postForm.addEventListener('submit', (e) => {
     e.preventDefault();
     const txtPost = postForm.textProfile.value;
-    const callback = (txt, uid, nameU) => {
+    const errorPost = document.getElementById('errorNoPost');
+    if (txtPost !== '') {
+      // }
+      const callback = (txt, uid, nameU, dateP) => {
       // console.log(`se ejecutó el callback ${uid}`);
-      addPost(txt, uid, nameU);
-    };
-    observerUser(callback, txtPost);
-    // .then((userPost) => {
-    //   console.log(`este es el final${userPost}`);
-    // });
-    document.getElementsByClassName('textarea_profile')[0].value = 'Aquí el texto a publicar';
+        addPost(txt, uid, nameU, dateP);
+      };
+      observerUser(callback, txtPost);
+      // .then((userPost) => {
+      //   console.log(`este es el final${userPost}`);
+      // });
+      document.getElementsByClassName('textarea_profile')[0].value = '';
+    } else {
+      errorPost.textContent = 'No has agregado texto a tu publicación';
+    }
   });
 };
 
 export const showPost = () => {
   getPost()
     .then((postSnapshot) => {
-      const postList = postSnapshot.docs.map((doc) => doc.data());
-      console.log(postList);
-      const nUser = document.getElementById('nameUserPost');
-      const textPost = document.getElementById('textPost');
-      // nUser.textContent = postList[0].nameUser;
-      nUser.innerHTML = postList[0].nameUser;
-      textPost.textContent = postList[0].post;
+      const sectionPosts = document.getElementById('posts');
+      sectionPosts.innerHTML = '';
+      const userLoginFirebase = auth.currentUser.uid;
+      postSnapshot.docs.forEach((doc) => {
+        const userPost = doc.data().userUid;
+        if (userLoginFirebase === userPost) {
+          const articlePost = `
+          <article class='postUsers'>
+            <form action='' method='post' name='feed' id='post'>
+              <label id='nameUserPost' for='name' class='name_user'>${doc.data().nameUser}</label>
+              <h4 id='textPost' class='textarea_post' name='textarea'>${doc.data().post}</h4>
+              <div class='icon_post'>
+                <img class='imgLike' src="./IMG/corazonRosa.png" alt="Corazón pintado de rosa">
+                <img class='imgLike' src="./IMG/corazon.png" alt="Corazón sin pintar">
+              </div>
+              <div class='container_remove'>
+                <!--<p class='textRemove'>Eliminar Publicación</p>-->
+                <img class='imgRemove' src="./IMG/eliminar.png" alt="Eliminar publicación">
+              </div>
+            </form>
+            <hr>
+          </article>
+        `;
+          sectionPosts.innerHTML += articlePost;
+        } else {
+          const articlePost = `
+          <article class='postUsers'>
+            <form action='' method='post' name='feed' id='post'>
+              <label id='nameUserPost' for='name' class='name_user'>${doc.data().nameUser}</label>
+              <h4 id='textPost' class='textarea_post' name='textarea'>${doc.data().post}</h4>
+              <div class='icon_post'>
+                <img class='imgLike' src="./IMG/corazonRosa.png" alt="Corazón pintado de rosa">
+                <img class='imgLike' src="./IMG/corazon.png" alt="Corazón sin pintar">
+              </div>
+              <div class='container_remove'>
+                <!--<p class='textRemove'>Eliminar Publicación</p>-->
+                <!--<img class='imgRemove' src="./IMG/eliminar.png" alt="Eliminar publicación">-->
+              </div>
+            </form>
+            <hr>
+          </article>
+        `;
+          sectionPosts.innerHTML += articlePost;
+        }
+      });
     });
-  // .then(() => {
-  //   const nameUser = document.getElementById('nameUser').value;
-  //   const textPost = document.getElementById('textPost').value;
-  //   nameUser.textContent = 'Jess'; // el usuarix del uid;
-  //   textPost.textContent = 'en mi cabeza estas'; // el usuarix del uid;
-  // });
 };
 
-// console.log(Estos son las id del input a puclicar: textPost, nameUser);
+// const addRemove = () => {
+//   if (userUid === currentUser) {
+//     const containerRemove = document.getElementById('container_remove');
+//     const imgRemove = `
+//       <img class='imgRemove' src="./IMG/eliminar.png" alt="Eliminar publicación">
+//       `;
+//     containerRemove.appendChild = imgRemove;
+//   }
+// };

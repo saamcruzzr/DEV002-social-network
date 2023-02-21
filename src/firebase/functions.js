@@ -13,6 +13,8 @@ import {
   provider,
   getDocs,
   onAuthStateChanged,
+  doc,
+  deleteDoc,
 } from './firebase.js';
 
 // Registro con email y password
@@ -43,8 +45,9 @@ export function observerUser(callback, txt) {
       // https://firebase.google.com/docs/reference/js/firebase.User
       const uid = user.uid;
       const nameU = user.displayName;
+      const dateP = Date.now();
       // console.log(uid);
-      callback(txt, uid, nameU);
+      callback(txt, uid, nameU, dateP);
       showPost();
       // ...
     }
@@ -56,13 +59,28 @@ export function observerUser(callback, txt) {
 }
 
 // Agregar post a la base de datos
-export function addPost(post, uidUser, nameUser) {
-  addDoc(collection(db, 'Posts'), { post, userUid: uidUser, nameUser });
+export function addPost(post, uidUser, nameUser, datePost) {
+  addDoc(collection(db, 'Posts'), {
+    post, userUid: uidUser, nameUser, datePost,
+  });
 }
 
 // Mostrar los posts
-export async function getPost() {
-  const postSnapshot = await getDocs(collection(db, 'Posts'));
-  console.log(postSnapshot);
+export function getPost() {
+  const postSnapshot = getDocs(collection(db, 'Posts'));
   return postSnapshot;
 }
+
+// Eliminar documentos
+export function deletePost() {
+  deleteDoc(doc(db, 'Post', 'JBV6PJCjkWhCXGvGelZC'));
+  const eliminado = console.log('este documento fue eliminado: JBV6PJCjkWhCXGvGelZC');
+  return eliminado;
+}
+
+// await deleteDoc(doc(db, "cities", "DC"));
+
+// import { getAuth } from "firebase/auth";
+
+// const auth = getAuth();
+// const user = auth.currentUser;
