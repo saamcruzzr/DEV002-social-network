@@ -2,9 +2,11 @@
 // eslint-disable-next-line import/no-cycle
 // import { onNavigate } from '../main.js';
 // import { async } from 'regenerator-runtime';
-
+import { auth } from '../firebase/firebase.js';
 // eslint-disable-next-line import/no-cycle
-import { addPost, getPost, observerUser } from '../firebase/functions.js';
+import {
+  addPost, getPost, observerUser,
+} from '../firebase/functions.js';
 
 export const Feed = () => {
   const FeedDiv = document.createElement('div');
@@ -41,6 +43,8 @@ export const Feed = () => {
 
 export const savePost = () => {
   const postForm = document.getElementById('profile');
+  // console.log('aqui mismito');
+  // if (postForm) {
   postForm.addEventListener('submit', (e) => {
     e.preventDefault();
     const txtPost = postForm.textProfile.value;
@@ -65,44 +69,60 @@ export const savePost = () => {
 export const showPost = () => {
   getPost()
     .then((postSnapshot) => {
-      // console.log(postSnapshot);
       const sectionPosts = document.getElementById('posts');
       sectionPosts.innerHTML = '';
+      const userLoginFirebase = auth.currentUser.uid;
       postSnapshot.docs.forEach((doc) => {
-        // console.log(doc.data().nameUser);
-        // const nUser = document.getElementById('nameUserPost');
-        // const textPost = document.getElementById('textPost');
-        // // nUser.textContent = postList[0].nameUser;
-        // nUser.innerHTML += doc.data().nameUser;
-        // textPost.textContent += doc.data().post;
-
-        const articlePost = `
+        const userPost = doc.data().userUid;
+        if (userLoginFirebase === userPost) {
+          const articlePost = `
           <article class='postUsers'>
             <form action='' method='post' name='feed' id='post'>
               <label id='nameUserPost' for='name' class='name_user'>${doc.data().nameUser}</label>
               <h4 id='textPost' class='textarea_post' name='textarea'>${doc.data().post}</h4>
               <div class='icon_post'>
                 <img class='imgLike' src="./IMG/corazonRosa.png" alt="Corazón pintado de rosa">
-                <img class='imgLike' src="./IMG/corazon.png" alt="Corazón sin pintar">  
+                <img class='imgLike' src="./IMG/corazon.png" alt="Corazón sin pintar">
+              </div>
+              <div class='container_remove'>
+                <!--<p class='textRemove'>Eliminar Publicación</p>-->
+                <img class='imgRemove' src="./IMG/eliminar.png" alt="Eliminar publicación">
               </div>
             </form>
             <hr>
           </article>
         `;
-        sectionPosts.innerHTML += articlePost;
+          sectionPosts.innerHTML += articlePost;
+        } else {
+          const articlePost = `
+          <article class='postUsers'>
+            <form action='' method='post' name='feed' id='post'>
+              <label id='nameUserPost' for='name' class='name_user'>${doc.data().nameUser}</label>
+              <h4 id='textPost' class='textarea_post' name='textarea'>${doc.data().post}</h4>
+              <div class='icon_post'>
+                <img class='imgLike' src="./IMG/corazonRosa.png" alt="Corazón pintado de rosa">
+                <img class='imgLike' src="./IMG/corazon.png" alt="Corazón sin pintar">
+              </div>
+              <div class='container_remove'>
+                <!--<p class='textRemove'>Eliminar Publicación</p>-->
+                <!--<img class='imgRemove' src="./IMG/eliminar.png" alt="Eliminar publicación">-->
+              </div>
+            </form>
+            <hr>
+          </article>
+        `;
+          sectionPosts.innerHTML += articlePost;
+        }
       });
     });
 };
 
-// console.log(Estos son las id del input a puclicar: textPost, nameUser);
-
-// export function showDate() {
-//   // const date = new Date(Date.UTC(2012, 11, 20, 3, 0, 0));
-//   const date = Date.now();
-//   console.log(date);
-
-//   // an application may want to use UTC and make that visible
-//   // const options = { timeZone: 'UTC', timeZoneName: 'short' };
-//   // console.log(date.toLocaleTimeString('sp-CO', options));
-// }
-// showDate();
+// const addRemove = () => {
+//   if (userUid === currentUser) {
+//     const containerRemove = document.getElementById('container_remove');
+//     const imgRemove = `
+//       <img class='imgRemove' src="./IMG/eliminar.png" alt="Eliminar publicación">
+//       `;
+//     containerRemove.appendChild = imgRemove;
+//   }
+// };

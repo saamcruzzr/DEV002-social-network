@@ -13,7 +13,7 @@ import {
 } from 'https://www.gstatic.com/firebasejs/9.16.0/firebase-auth.js';
 // eslint-disable-next-line import/no-unresolved
 import {
-  getFirestore, addDoc, collection, getDocs,
+  getFirestore, addDoc, collection, getDocs, deleteDoc, doc,
 // eslint-disable-next-line import/no-unresolved
 } from 'https://www.gstatic.com/firebasejs/9.16.0/firebase-firestore.js';
 
@@ -24,7 +24,6 @@ const app = initializeApp(firebaseConfig);
 
 // Inicializa Cloud Firestore y obtenga una referencia al servicio
 const db = getFirestore(app);
-
 // Initialize Firebase Authentication and get a reference to the service
 const auth = getAuth();
 // const userPost = auth.currentUser;
@@ -44,10 +43,13 @@ export {
   getDocs,
   collection,
   auth,
+  // userUid,
   db,
   provider,
   // userPost,
   onAuthStateChanged,
+  doc,
+  deleteDoc,
 };
 
 // DOCUMENTACIÓN:

@@ -9,9 +9,12 @@ import {
   addDoc,
   collection,
   db,
+  // userUid,
   provider,
   getDocs,
   onAuthStateChanged,
+  doc,
+  deleteDoc,
 } from './firebase.js';
 
 // Registro con email y password
@@ -63,7 +66,21 @@ export function addPost(post, uidUser, nameUser, datePost) {
 }
 
 // Mostrar los posts
-export async function getPost() {
-  const postSnapshot = await getDocs(collection(db, 'Posts'));
+export function getPost() {
+  const postSnapshot = getDocs(collection(db, 'Posts'));
   return postSnapshot;
 }
+
+// Eliminar documentos
+export function deletePost() {
+  deleteDoc(doc(db, 'Post', 'JBV6PJCjkWhCXGvGelZC'));
+  const eliminado = console.log('este documento fue eliminado: JBV6PJCjkWhCXGvGelZC');
+  return eliminado;
+}
+
+// await deleteDoc(doc(db, "cities", "DC"));
+
+// import { getAuth } from "firebase/auth";
+
+// const auth = getAuth();
+// const user = auth.currentUser;
