@@ -1,5 +1,7 @@
 // PARA QUE NO ME LO BORRE EN FEED BRANCH
 // eslint-disable-next-line import/no-unresolved, import/no-cycle
+// import { async } from 'regenerator-runtime';
+// eslint-disable-next-line import/no-cycle
 import { showPost } from '../components/Feed.js';
 import {
   auth,
@@ -10,8 +12,11 @@ import {
   collection,
   db,
   provider,
+  userLog,
   getDocs,
   onAuthStateChanged,
+  doc,
+  updateDoc,
 } from './firebase.js';
 
 // Registro con email y password
@@ -67,3 +72,21 @@ export async function getPost() {
   const postSnapshot = await getDocs(collection(db, 'Posts'));
   return postSnapshot;
 }
+
+export async function editPost(userIn, changePost) {
+  const postDocRef = doc(db, 'Posts', 'post');
+  await updateDoc(postDocRef, { post: '' });
+  return postDocRef;
+}
+// const frankDocRef = doc(db, "users", "frank");
+// await setDoc(frankDocRef, {
+//     name: "Frank",
+//     favorites: { food: "Pizza", color: "Blue", subject: "recess" },
+//     age: 12
+// });
+
+// // To update age and favorite color:
+// await updateDoc(frankDocRef, {
+//     "age": 13,
+//     "favorites.color": "Red"
+// });

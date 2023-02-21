@@ -13,7 +13,7 @@ import {
 } from 'https://www.gstatic.com/firebasejs/9.16.0/firebase-auth.js';
 // eslint-disable-next-line import/no-unresolved
 import {
-  getFirestore, addDoc, collection, getDocs,
+  getFirestore, addDoc, collection, getDocs, onSnapshot, doc, updateDoc,
 // eslint-disable-next-line import/no-unresolved
 } from 'https://www.gstatic.com/firebasejs/9.16.0/firebase-firestore.js';
 
@@ -29,6 +29,8 @@ const db = getFirestore(app);
 const auth = getAuth();
 // const userPost = auth.currentUser;
 
+const userLog = auth.currentUser;
+
 // Autenticacion con google
 const provider = new GoogleAuthProvider();
 
@@ -42,12 +44,15 @@ export {
   getFirestore,
   addDoc,
   getDocs,
+  onSnapshot,
   collection,
   auth,
   db,
   provider,
-  // userPost,
+  userLog,
   onAuthStateChanged,
+  doc,
+  updateDoc,
 };
 
 // DOCUMENTACIÓN:

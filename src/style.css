@@ -266,8 +266,23 @@ hr {
 }
 
 .imgLike {
-    margin-left: 5%;
+    position: relative;
+    margin-left: 4%;
     width: 40px;
+    border: none;
 }
-
-
+.imgEdit {
+    width: 50%;
+    height: 50%;
+    position: relative;
+    right: -4%;
+}
+#edit_button {
+    width: 20%;
+    height: 20%;
+    position: relative;
+    right: -80%;
+    top: 5%;
+    border: none;
+    z-index: auto;
+}

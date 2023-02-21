@@ -62,6 +62,29 @@ export const savePost = () => {
   });
 };
 
+// export const editPost = () => {
+//   const editForm = document.getElementById('edit_button');
+//   editForm.addEventListener('click', (e) => {
+//     e.preventDefault();
+//     const txtPost = postForm.textProfile.value;
+//     const errorPost = document.getElementById('errorNoPost');
+//     if (txtPost !== '') {
+//       // }
+//       const callback = (txt, uid, nameU, dateP) => {
+//       // console.log(`se ejecutó el callback ${uid}`);
+//         addPost(txt, uid, nameU, dateP);
+//       };
+//       observerUser(callback, txtPost);
+//       // .then((userPost) => {
+//       //   console.log(`este es el final${userPost}`);
+//       // });
+//       document.getElementsByClassName('textarea_profile')[0].value = '';
+//     } else {
+//       errorPost.textContent = 'No has agregado texto a tu publicación';
+//     }
+//   });
+// };
+
 export const showPost = () => {
   getPost()
     .then((postSnapshot) => {
@@ -80,6 +103,9 @@ export const showPost = () => {
           <article class='postUsers'>
             <form action='' method='post' name='feed' id='post'>
               <label id='nameUserPost' for='name' class='name_user'>${doc.data().nameUser}</label>
+              <button type='button' id='edit_button'>
+                <img class='imgEdit' src="./IMG/boligrafo.png" alt="Lápiz de edición">
+              <button/>
               <h4 id='textPost' class='textarea_post' name='textarea'>${doc.data().post}</h4>
               <div class='icon_post'>
                 <img class='imgLike' src="./IMG/corazonRosa.png" alt="Corazón pintado de rosa">
