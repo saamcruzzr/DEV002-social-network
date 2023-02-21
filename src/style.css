@@ -130,7 +130,7 @@ input {
 
 .btnFeed {
     border: 2px solid var(--title-color);
-    width: max-content; /**/
+    width: max-content;
     padding: 10px;
 }
 .btnLog {

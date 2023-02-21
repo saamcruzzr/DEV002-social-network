@@ -95,12 +95,12 @@ export const showPost = () => {
     });
 };
 
-const addRemove = () => {
-  if (userUid === currentUser) {
-    const containerRemove = document.getElementById('container_remove');
-    const imgRemove = `
-      <img class='imgRemove' src="./IMG/eliminar.png" alt="Eliminar publicación">
-      `;
-    containerRemove.appendChild = imgRemove;
-  }
-};
+// const addRemove = () => {
+//   if (userUid === currentUser) {
+//     const containerRemove = document.getElementById('container_remove');
+//     const imgRemove = `
+//       <img class='imgRemove' src="./IMG/eliminar.png" alt="Eliminar publicación">
+//       `;
+//     containerRemove.appendChild = imgRemove;
+//   }
+// };
