@@ -65,8 +65,8 @@ export function addPost(post, uidUser, nameUser, datePost) {
 }
 
 // Mostrar los posts
-export async function getPost() {
-  const postSnapshot = await getDocs(collection(db, 'Posts'));
+export function getPost() {
+  const postSnapshot = getDocs(collection(db, 'Posts'));
   return postSnapshot;
 }
 
@@ -78,3 +78,8 @@ export function deletePost() {
 }
 
 // await deleteDoc(doc(db, "cities", "DC"));
+
+// import { getAuth } from "firebase/auth";
+
+// const auth = getAuth();
+// const user = auth.currentUser;

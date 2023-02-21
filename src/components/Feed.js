@@ -2,9 +2,11 @@
 // eslint-disable-next-line import/no-cycle
 // import { onNavigate } from '../main.js';
 // import { async } from 'regenerator-runtime';
-
+import { auth } from '../firebase/firebase.js';
 // eslint-disable-next-line import/no-cycle
-import { addPost, getPost, observerUser } from '../firebase/functions.js';
+import {
+  addPost, getPost, observerUser,
+} from '../firebase/functions.js';
 
 export const Feed = () => {
   const FeedDiv = document.createElement('div');
@@ -67,20 +69,37 @@ export const showPost = () => {
     .then((postSnapshot) => {
       const sectionPosts = document.getElementById('posts');
       sectionPosts.innerHTML = '';
+      const userLoginFirebase = auth.currentUser.uid;
       postSnapshot.docs.forEach((doc) => {
-        console.log(doc);
-        console.log(doc.data().userUid);
-        // console.log(doc.data().currentUser);
-        // console.log(doc.key().segmentos[6]);
-        // console.log(doc.auth.currentUser.uid);
-        const articlePost = `
+        const userPost = doc.data().userUid;
+        if (userLoginFirebase === userPost) {
+          const articlePost = `
           <article class='postUsers'>
             <form action='' method='post' name='feed' id='post'>
               <label id='nameUserPost' for='name' class='name_user'>${doc.data().nameUser}</label>
               <h4 id='textPost' class='textarea_post' name='textarea'>${doc.data().post}</h4>
               <div class='icon_post'>
                 <img class='imgLike' src="./IMG/corazonRosa.png" alt="Corazón pintado de rosa">
-                <img class='imgLike' src="./IMG/corazon.png" alt="Corazón sin pintar">  
+                <img class='imgLike' src="./IMG/corazon.png" alt="Corazón sin pintar">
+              </div>
+              <div class='container_remove'>
+                <!--<p class='textRemove'>Eliminar Publicación</p>-->
+                <img class='imgRemove' src="./IMG/eliminar.png" alt="Eliminar publicación">
+              </div>
+            </form>
+            <hr>
+          </article>
+        `;
+          sectionPosts.innerHTML += articlePost;
+        } else {
+          const articlePost = `
+          <article class='postUsers'>
+            <form action='' method='post' name='feed' id='post'>
+              <label id='nameUserPost' for='name' class='name_user'>${doc.data().nameUser}</label>
+              <h4 id='textPost' class='textarea_post' name='textarea'>${doc.data().post}</h4>
+              <div class='icon_post'>
+                <img class='imgLike' src="./IMG/corazonRosa.png" alt="Corazón pintado de rosa">
+                <img class='imgLike' src="./IMG/corazon.png" alt="Corazón sin pintar">
               </div>
               <div class='container_remove'>
                 <!--<p class='textRemove'>Eliminar Publicación</p>-->
@@ -90,7 +109,8 @@ export const showPost = () => {
             <hr>
           </article>
         `;
-        sectionPosts.innerHTML += articlePost;
+          sectionPosts.innerHTML += articlePost;
+        }
       });
     });
 };
