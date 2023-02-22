@@ -274,6 +274,17 @@ hr {
     width: 40px;
 }
 
+/* NOMBRE Y EDITAR EN MISMA LINEA */
+/* .name-y-edit {
+    display: flex;
+    flex-direction: row;
+}
+.name_user {
+    width: 85%;
+}
+#edit_button{
+    width: 15%;
+} */
 
 /*ELIMINAR POST*/
 .postUsers {
@@ -297,4 +308,22 @@ hr {
     border:1px solid blue;
     width: 35px;
     height: 35px;
+}
+
+/* BOTÓN DE EDITAR */
+
+.imgEdit {
+    width: 50%;
+    height: 50%;
+    position: relative;
+    right: -4%;
+}
+#edit_button {
+    width: 20%;
+    height: 20%;
+    position: relative;
+    right: -80%;
+    top: 5%;
+    border: none;
+    z-index: auto;
 }
