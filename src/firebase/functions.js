@@ -72,9 +72,9 @@ export function getPost() {
 
 // Eliminar documentos
 export function deletePost() {
-  deleteDoc(doc(db, 'Post', 'JBV6PJCjkWhCXGvGelZC'));
-  const eliminado = console.log('este documento fue eliminado: JBV6PJCjkWhCXGvGelZC');
-  return eliminado;
+  return deleteDoc(doc(db, 'Post', 'JBV6PJCjkWhCXGvGelZC'));
+  // const eliminado = console.log('este documento fue eliminado: JBV6PJCjkWhCXGvGelZC');
+  // return eliminado;
 }
 
 // await deleteDoc(doc(db, "cities", "DC"));

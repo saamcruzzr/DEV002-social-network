@@ -5,7 +5,7 @@
 import { auth } from '../firebase/firebase.js';
 // eslint-disable-next-line import/no-cycle
 import {
-  addPost, getPost, observerUser,
+  addPost, getPost, observerUser, deletePost,
 } from '../firebase/functions.js';
 
 export const Feed = () => {
@@ -77,6 +77,9 @@ export const showPost = () => {
           <article class='postUsers'>
             <form action='' method='post' name='feed' id='post'>
               <label id='nameUserPost' for='name' class='name_user'>${doc.data().nameUser}</label>
+              <button type='button' id='edit_button'>
+                <img class='imgEdit' src='./IMG/boligrafo.png' alt='Lápiz de edición'>
+              </button>
               <h4 id='textPost' class='textarea_post' name='textarea'>${doc.data().post}</h4>
               <div class='icon_post'>
                 <img class='imgLike' src="./IMG/corazonRosa.png" alt="Corazón pintado de rosa">
@@ -112,6 +115,13 @@ export const showPost = () => {
           sectionPosts.innerHTML += articlePost;
         }
       });
+    });
+};
+
+export const removePost = () => {
+  deletePost()
+    .then(() => {
+
     });
 };
 
