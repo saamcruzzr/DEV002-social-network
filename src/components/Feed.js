@@ -74,6 +74,7 @@ export const showPost = () => {
       const userLoginFirebase = auth.currentUser.uid;
       postSnapshot.docs.forEach((doc) => {
         const userPost = doc.data().userUid;
+        console.log(doc.id);
         if (userLoginFirebase === userPost) {
           const articlePost = `
           <article class='postUsers'>
