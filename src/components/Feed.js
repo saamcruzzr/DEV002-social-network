@@ -8,7 +8,6 @@ import {
 // eslint-disable-next-line import/no-cycle
 import {
   addPost, getPost, observerUser, edPost, deletePost, darLike, quitarLike,
-  //  quitarLike,
 } from '../firebase/functions.js';
 
 export const Feed = () => {
@@ -70,7 +69,7 @@ export const showPost = () => {
       sectionPosts.innerHTML = '';
       const userLoginFirebase = auth.currentUser.uid;
       // console.log(auth);
-      postSnapshot.docs.forEach((doc) => {
+      postSnapshot.docs.forEach(() => {
         const userPost = doc.data().userUid;
         if (userLoginFirebase === userPost) {
           const articlePost = `
@@ -137,7 +136,6 @@ export const showPost = () => {
 
       // EDIT
 
-
       // Paso a paso
 
       // Contar con el boton que se necesita para editar (Lapicito)
@@ -168,9 +166,7 @@ export const showPost = () => {
       // Que se muestre en el feed el post editado
       // });
 
-
       // LIKE
-
 
       // si le dan click al div, y el array likes estaba vacío
       // se cambia a corazón pintado
