@@ -43,22 +43,15 @@ export const Feed = () => {
 
 export const savePost = () => {
   const postForm = document.getElementById('profile');
-  // console.log('aqui mismito');
-  // if (postForm) {
   postForm.addEventListener('submit', (e) => {
     e.preventDefault();
     const txtPost = postForm.textProfile.value;
     const errorPost = document.getElementById('errorNoPost');
     if (txtPost !== '') {
-      // }
       const callback = (txt, uid, nameU, dateP) => {
-      // console.log(`se ejecutó el callback ${uid}`);
         addPost(txt, uid, nameU, dateP);
       };
       observerUser(callback, txtPost);
-      // .then((userPost) => {
-      //   console.log(`este es el final${userPost}`);
-      // });
       document.getElementsByClassName('textarea_profile')[0].value = '';
     } else {
       errorPost.textContent = 'No has agregado texto a tu publicación';
@@ -76,7 +69,6 @@ export const showPost = () => {
       // console.log(auth);
       postSnapshot.docs.forEach((doc) => {
         const userPost = doc.data().userUid;
-        console.log(doc.data().post);
         if (userLoginFirebase === userPost) {
           const articlePost = `
             <article class='postUsers'>
@@ -102,11 +94,6 @@ export const showPost = () => {
             </article>
           `;
           sectionPosts.innerHTML += articlePost;
-        //   const btnRemove = sectionPosts.querySelector(`#${doc.id}`);
-        //   btnRemove.addEventListener('click', () => {
-        //     console.log('acaaaaa')
-        // })
-        //   console.log(btnRemove);
         } else {
           const articlePost = `
           <article class='postUsers'>
@@ -127,33 +114,26 @@ export const showPost = () => {
         `;
           sectionPosts.innerHTML += articlePost;
         }
-        // removePost(doc.id);
       });
-      
+
       // DELETE
-      
+
       const btnRemove = sectionPosts.querySelectorAll('.btn_remove');
       btnRemove.forEach((btn) => {
         btn.addEventListener('click', () => {
-          // const confirm = window.confirm('¿Realmente deseas borrar este post?');
-          // if (confirm === true) {
-          console.log(btn.id);
-          deletePost(btn.id)
-            .then(() => { showPost(); });
-          // } else {
-          // console.log('no se cancela nada');
-          // }
-          // console.log(confirm);
-          // window.open(console.log('borrado'), console.log('cancelar borrado'));
+          const confirm = window.confirm('¿Realmente deseas borrar este post?');
+          if (confirm === true) {
           // console.log(btn.id);
-          // deletePost(btn.id)
-          // .then(() => { showPost(); });
+            deletePost(btn.id)
+              .then(() => { showPost(); });
+          } else {
+            console.log('no se cancela nada');
+          }
         });
       });
-      // console.log(btnRemove);
-      
+
       // EDIT
-      
+
       // Paso a paso
 
       // Contar con el boton que se necesita para editar (Lapicito)
@@ -183,9 +163,9 @@ export const showPost = () => {
 
       // Que se muestre en el feed el post editado
       // });
-      
+
       // LIKE
-      
+
       // si le dan click al div, y el array likes estaba vacío
       // se cambia a corazón pintado
       // y se agrega elem uid al array
@@ -193,18 +173,18 @@ export const showPost = () => {
       likePost.forEach((btnLike) => {
         btnLike.addEventListener('click', () => {
           const userUidLike = auth.currentUser.uid;
-          const x = doc.data().userUid;
+          // const x = doc.data().userUid;
           // const x = db.doc;
           console.log(userUidLike);
-          console.log(`AQUI ${x}`);
+          // console.log(`AQUI ${x}`);
           console.log(btnLike.id);
           // if () {
           //   // si en totalLikes existe userUidLike se ejecuta quitarLike
 
-            // quitarLike(userUidLike, btnLike.id);
+          // quitarLike(userUidLike, btnLike.id);
           // } else {
           //   // si en totalLikes NO existe userUidLike se ejecuta darLike
-            darLike(userUidLike, btnLike.id);
+          darLike(userUidLike, btnLike.id);
           // }
         });
       });
@@ -214,32 +194,9 @@ export const showPost = () => {
 
       // sino le dan click, se queda el corazón vacío y no hace nada más....
       // (no se si va afuera en un if englobando al addEL o ya no se pone)
-
     });
 };
 
-// export const removePost = (idPost) => {
-//   deletePost(idPost);
-// };
-
-// export const removePost = (idPost) => {
-//   deletePost(idPost)
-//     .then((deleteDocs) => {
-//       const btnRemove = document.getElementById(idPost);
-//       btnRemove.addEventListener('click', () => {
-//         deleteDocs.docs.forEach((doc)=>{
-//           const idPost = doc.id;
-
-//         });
-//       });
-//     });
-// };
-
-// export const removePost = () => {
-// const btnRemove = document.querySelectorAll('.btn_remove');
-// btnRemove.addEventListener('click', console.log('hola estoy probando'));
-
-// ------
 // FER
 
 // // Paso a paso
