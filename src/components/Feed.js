@@ -66,6 +66,23 @@ export const savePost = () => {
   });
 };
 
+// Paso a paso
+
+// Contar con el boton que se necesita para editar (Lapicito)
+// const editForm = document.getElementById('edit_button');
+// Lograr que se active al ser clickeado, mediante un addEventListener
+// editForm.addEventListener('click', () => {
+// Que al ser clickeado el boton muestre una ventana con las opciones de aceptar y cancelar
+// const chanPost = window.confirm('¿Deseas editar esta publicacion?');
+// Que al dar click en aceptar muestre el post elegido para ser editado en un
+// formato que permita la manipulación de este
+
+// Que en esta misma instacia permita guardar la edición mediante un botón
+
+// Que se muestre en el feed el post editado
+
+// });
+
 export const showPost = () => {
   getPost()
     .then((postSnapshot) => {
@@ -74,11 +91,15 @@ export const showPost = () => {
       const userLoginFirebase = auth.currentUser.uid;
       postSnapshot.docs.forEach((doc) => {
         const userPost = doc.data().userUid;
+        console.log(doc.id);
         if (userLoginFirebase === userPost) {
           const articlePost = `
           <article class='postUsers'>
             <form action='' method='post' name='feed' id='post'>
               <label id='nameUserPost' for='name' class='name_user'>${doc.data().nameUser}</label>
+              <button type='button' id='edit_button'>
+                <img class='imgEdit' src="./IMG/boligrafo.png" alt="Lápiz de edición">
+              </button>
               <h4 id='textPost' class='textarea_post' name='textarea'>${doc.data().post}</h4>
               <div class='icon_post'>
                 <img class='imgLike' src="./IMG/corazonRosa.png" alt="Corazón pintado de rosa">
@@ -102,10 +123,6 @@ export const showPost = () => {
               <div class='icon_post'>
                 <img class='imgLike' src="./IMG/corazonRosa.png" alt="Corazón pintado de rosa">
                 <img class='imgLike' src="./IMG/corazon.png" alt="Corazón sin pintar">
-              </div>
-              <div class='container_remove'>
-                <!--<p class='textRemove'>Eliminar Publicación</p>-->
-                <!--<img class='imgRemove' src="./IMG/eliminar.png" alt="Eliminar publicación">-->
               </div>
             </form>
             <hr>

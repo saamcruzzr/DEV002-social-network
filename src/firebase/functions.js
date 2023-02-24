@@ -1,5 +1,7 @@
+/* eslint-disable import/no-cycle */
 // PARA QUE NO ME LO BORRE EN FEED BRANCH
-// eslint-disable-next-line import/no-unresolved, import/no-cycle
+// import { async } from 'regenerator-runtime';
+// import { async } from 'regenerator-runtime';
 import { showPost } from '../components/Feed.js';
 import {
   auth,
@@ -11,10 +13,11 @@ import {
   db,
   // userUid,
   provider,
+  // userLog,
   getDocs,
   onAuthStateChanged,
   doc,
-  deleteDoc,
+  updateDoc,
 } from './firebase.js';
 
 // Registro con email y password
@@ -71,16 +74,13 @@ export function getPost() {
   return postSnapshot;
 }
 
-// Eliminar documentos
-export function deletePost() {
-  deleteDoc(doc(db, 'Post', 'JBV6PJCjkWhCXGvGelZC'));
-  const eliminado = console.log('este documento fue eliminado: JBV6PJCjkWhCXGvGelZC');
-  return eliminado;
+export async function edPost(postId) {
+  const changePost = doc(db, 'Posts', 'post');
+  await updateDoc(changePost, { postId, post: '' });
+  return changePost;
 }
 
-// await deleteDoc(doc(db, "cities", "DC"));
-
-// import { getAuth } from "firebase/auth";
-
-// const auth = getAuth();
-// const user = auth.currentUser;
+// // Set the "capital" field of the city 'DC'
+// await updateDoc(washingtonRef, {
+//   capital: true
+// });

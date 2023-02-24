@@ -1,4 +1,4 @@
-/*PARA QUE NO ME LO BORRE EN FEED BRANCH*/
+/* /PARA QUE NO ME LO BORRE EN FEED BRANCH/ */
 /* Fuentes Alegreya Sans y Alegreya Sans SC
 font-family: 'Alegreya Sans', sans-serif;
 font-family: 'Alegreya Sans SC', sans-serif;*/
@@ -21,7 +21,7 @@ font-family: 'Alegreya Sans SC', sans-serif;*/
     --button-bg-color: #242424;
     --text-color: #FFF;
     --post-bg-color: #e4729c;
-    /*nombre caracteristico??*/
+    /* /nombre caracteristico??/ */
     --amarillo-beige-arena: #E4C988;
     --naranja: #C27664;
     --text-corrida: 'Alegreya Sans', sans-serif;
@@ -34,7 +34,7 @@ font-family: 'Alegreya Sans SC', sans-serif;*/
     background-color: #2E4A45;
     color: #fff;
     font-weight: 500;
-    /*border: 2px solid red;*/
+    /* border: 2px solid red; */
 }
 
 .title {
@@ -275,7 +275,7 @@ hr {
 }
 
 
-/*ELIMINAR POST*/
+/* /ELIMINAR POST/ */
 .postUsers {
     position: relative;
 }
@@ -297,4 +297,19 @@ hr {
     border:1px solid blue;
     width: 35px;
     height: 35px;
+}
+.imgEdit {
+    width: 50%;
+    height: 50%;
+    position: relative;
+    right: -4%;
+}
+#edit_button {
+    width: 20%;
+    height: 20%;
+    position: relative;
+    right: -80%;
+    top: 5%;
+    border: none;
+    z-index: auto;
 }
