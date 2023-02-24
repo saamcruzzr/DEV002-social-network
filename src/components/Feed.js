@@ -2,7 +2,7 @@
 // eslint-disable-next-line import/no-cycle
 // import { onNavigate } from '../main.js';
 // import { async } from 'regenerator-runtime';
-import { auth, doc } from '../firebase/firebase.js';
+import { auth } from '../firebase/firebase.js';
 // eslint-disable-next-line import/no-cycle
 import {
   addPost, getPost, observerUser, deletePost, darLike, quitarLike,
@@ -140,7 +140,6 @@ export const showPost = () => {
       // si le dan click al div, y el array likes estaba vacío
       // se cambia a corazón pintado
       // y se agrega elem uid al array
-
       const likePost = sectionPosts.querySelectorAll('.likear');
       likePost.forEach((btnLike) => {
         btnLike.addEventListener('click', () => {
@@ -153,10 +152,10 @@ export const showPost = () => {
           // if () {
           //   // si en totalLikes existe userUidLike se ejecuta quitarLike
 
-          //   quitarLike(userUidLike, btnLike.id);
+            // quitarLike(userUidLike, btnLike.id);
           // } else {
           //   // si en totalLikes NO existe userUidLike se ejecuta darLike
-          //   darLike(userUidLike, btnLike.id);
+            darLike(userUidLike, btnLike.id);
           // }
         });
       });
