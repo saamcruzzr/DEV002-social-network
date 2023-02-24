@@ -62,7 +62,6 @@ export {
   onAuthStateChanged,
   doc,
   deleteDoc,
-  onSnapshot,
   updateDoc,
   arrayUnion,
   arrayRemove,

@@ -5,7 +5,7 @@
 import { auth } from '../firebase/firebase.js';
 // eslint-disable-next-line import/no-cycle
 import {
-  addPost, getPost, observerUser, edPost, deletePost, darLike, quitarLike,
+  addPost, getPost, observerUser, edPost, deletePost, darLike,
 } from '../firebase/functions.js';
 
 export const Feed = () => {
@@ -129,9 +129,9 @@ export const showPost = () => {
         }
         // removePost(doc.id);
       });
-      
+
       // DELETE
-      
+
       const btnRemove = sectionPosts.querySelectorAll('.btn_remove');
       btnRemove.forEach((btn) => {
         btn.addEventListener('click', () => {
@@ -151,9 +151,9 @@ export const showPost = () => {
         });
       });
       // console.log(btnRemove);
-      
+
       // EDIT
-      
+
       // Paso a paso
 
       // Contar con el boton que se necesita para editar (Lapicito)
@@ -183,9 +183,9 @@ export const showPost = () => {
 
       // Que se muestre en el feed el post editado
       // });
-      
+
       // LIKE
-      
+
       // si le dan click al div, y el array likes estaba vacío
       // se cambia a corazón pintado
       // y se agrega elem uid al array
@@ -193,18 +193,18 @@ export const showPost = () => {
       likePost.forEach((btnLike) => {
         btnLike.addEventListener('click', () => {
           const userUidLike = auth.currentUser.uid;
-          const x = doc.data().userUid;
+          // const x = doc.data().userUid;
           // const x = db.doc;
-          console.log(userUidLike);
-          console.log(`AQUI ${x}`);
-          console.log(btnLike.id);
+          // console.log(userUidLike);
+          // console.log(`AQUI ${x}`);
+          // console.log(btnLike.id);
           // if () {
           //   // si en totalLikes existe userUidLike se ejecuta quitarLike
 
-            // quitarLike(userUidLike, btnLike.id);
+          // quitarLike(userUidLike, btnLike.id);
           // } else {
           //   // si en totalLikes NO existe userUidLike se ejecuta darLike
-            darLike(userUidLike, btnLike.id);
+          darLike(userUidLike, btnLike.id);
           // }
         });
       });
@@ -214,7 +214,6 @@ export const showPost = () => {
 
       // sino le dan click, se queda el corazón vacío y no hace nada más....
       // (no se si va afuera en un if englobando al addEL o ya no se pone)
-
     });
 };
 

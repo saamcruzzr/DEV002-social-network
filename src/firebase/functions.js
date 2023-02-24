@@ -86,7 +86,7 @@ export function deletePost(idPost) {
   return deleteDocs;
 }
 
-//EDIT
+// EDIT
 export async function edPost(postId, postEd) {
   const changePost = doc(db, 'Posts', postId);
   await updateDoc(changePost, { postId, post: postEd });
