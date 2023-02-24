@@ -9,12 +9,16 @@ import {
   addDoc,
   collection,
   db,
+  // userUid,
   provider,
   getDocs,
   onAuthStateChanged,
   doc,
   deleteDoc,
   onSnapshot,
+  updateDoc,
+  arrayRemove,
+  arrayUnion,
 } from './firebase.js';
 
 // Registro con email y password
@@ -61,7 +65,7 @@ export function observerUser(callback, txt) {
 // Agregar post a la base de datos
 export function addPost(post, uidUser, nameUser, datePost) {
   addDoc(collection(db, 'Posts'), {
-    post, userUid: uidUser, nameUser, datePost,
+    post, userUid: uidUser, nameUser, datePost, totalLikes: [],
   });
 }
 
@@ -80,8 +84,42 @@ export function deletePost(idPost) {
 }
 
 // Actualiza documentos a cada rato
+
 export function updateCollection() {
   onSnapshot(doc(db, 'Posts'), (docu) => {
     console.log('Current data: ', docu.data());
   });
 }
+
+// LIKES
+export function darLike(userUidLike, idPost) {
+  const likes = doc(db, 'Posts', idPost);
+  // const userUidLike = auth.currentUser.uid;
+  updateDoc(likes, {
+    totalLikes: arrayUnion(userUidLike),
+    // totalLikes: arrayUnion(auth.currentUser.uid),
+  });
+}
+
+export function quitarLike(userUidDislike, idPost) {
+  const dislikes = doc(db, 'Posts', idPost);
+  // const userUidDislike = auth.currentUser.uid;
+  updateDoc(dislikes, {
+    totalLikes: arrayRemove(userUidDislike),
+  });
+}
+
+// DOCUMENTACIÓN
+// import { doc, updateDoc, arrayUnion, arrayRemove } from "firebase/firestore";
+
+// const washingtonRef = doc(db, "cities", "DC");
+
+// // Atomically add a new region to the "regions" array field.
+// await updateDoc(washingtonRef, {
+//     regions: arrayUnion("greater_virginia")
+// });
+
+// // Atomically remove a region from the "regions" array field.
+// await updateDoc(washingtonRef, {
+//     regions: arrayRemove("east_coast")
+// });

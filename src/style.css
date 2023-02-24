@@ -265,14 +265,17 @@ hr {
     width: max-content;
     border: 2px solid var(--naranja);
 }
-.icon_post {
+.likear {
     border: 1px solid greenyellow;
 }
-
-.imgLike {
+.likear:hover {
+    background-color: #e4729c;
+}
+.imgLikeRosa, .imgLikeVacio {
     border: 1px solid red;
     margin-left: 5%;
     width: 40px;
+    background: none;
 }
 
 .imgEdit {
@@ -313,4 +316,22 @@ hr {
     border:1px solid blue;
     width: 35px;
     height: 35px;
+}
+
+/* BOTÓN DE EDITAR */
+
+.imgEdit {
+    width: 50%;
+    height: 50%;
+    position: relative;
+    right: -4%;
+}
+#edit_button {
+    width: 20%;
+    height: 20%;
+    position: relative;
+    right: -80%;
+    top: 5%;
+    border: none;
+    z-index: auto;
 }

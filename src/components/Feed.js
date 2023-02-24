@@ -5,7 +5,7 @@
 import { auth } from '../firebase/firebase.js';
 // eslint-disable-next-line import/no-cycle
 import {
-  addPost, getPost, observerUser, deletePost,
+  addPost, getPost, observerUser, deletePost, darLike, quitarLike,
 } from '../firebase/functions.js';
 
 export const Feed = () => {
@@ -43,6 +43,8 @@ export const Feed = () => {
 
 export const savePost = () => {
   const postForm = document.getElementById('profile');
+  // console.log('aqui mismito');
+  // if (postForm) {
   postForm.addEventListener('submit', (e) => {
     e.preventDefault();
     const txtPost = postForm.textProfile.value;
@@ -84,9 +86,9 @@ export const showPost = () => {
                   <img class='imgEdit' src='./IMG/boligrafo.png' alt='Lápiz de edición'>
                 </button>
                 <h4 id='textPost' class='textarea_post' name='textarea'>${doc.data().post}</h4>
-                <div class='icon_post'>
-                  <img class='imgLike' src="./IMG/corazonRosa.png" alt="Corazón pintado de rosa">
-                  <img class='imgLike' src="./IMG/corazon.png" alt="Corazón sin pintar">
+                <div class='likear' id=${doc.id}>
+                  <img class='imgLikeRosa' src="./IMG/corazonRosa.png" alt="Corazón pintado de rosa">
+                  <img class ='imgLikeVacio' src="./IMG/corazon.png" alt="Corazón sin pintar"></img>
                 </div>
                 <div class='container_remove'>
                   <!--<p class='textRemove'>Eliminar Publicación</p>-->
@@ -111,9 +113,9 @@ export const showPost = () => {
             <div name='feed' id='post'>
               <label id='nameUserPost' for='name' class='name_user'>${doc.data().nameUser}</label>
               <h4 id='textPost' class='textarea_post' name='textarea'>${doc.data().post}</h4>
-              <div class='icon_post'>
-                <img class='imgLike' src="./IMG/corazonRosa.png" alt="Corazón pintado de rosa">
-                <img class='imgLike' src="./IMG/corazon.png" alt="Corazón sin pintar">
+              <div class='likear' id=${doc.id}>
+                <img class='imgLikeRosa' src="./IMG/corazonRosa.png" alt="Corazón pintado de rosa">
+                <img class ='imgLikeVacio' src="./IMG/corazon.png" alt="Corazón sin pintar"></img>
               </div>
             </div>
             <hr>
@@ -123,6 +125,7 @@ export const showPost = () => {
         }
         // removePost(doc.id);
       });
+      // DELETE
       const btnRemove = sectionPosts.querySelectorAll('.btn_remove');
       btnRemove.forEach((btn) => {
         btn.addEventListener('click', () => {
@@ -142,6 +145,36 @@ export const showPost = () => {
         });
       });
       // console.log(btnRemove);
+      // EDIT
+      // LIKE
+      // si le dan click al div, y el array likes estaba vacío
+      // se cambia a corazón pintado
+      // y se agrega elem uid al array
+      const likePost = sectionPosts.querySelectorAll('.likear');
+      likePost.forEach((btnLike) => {
+        btnLike.addEventListener('click', () => {
+          const userUidLike = auth.currentUser.uid;
+          const x = doc.data().userUid;
+          // const x = db.doc;
+          console.log(userUidLike);
+          console.log(`AQUI ${x}`);
+          console.log(btnLike.id);
+          // if () {
+          //   // si en totalLikes existe userUidLike se ejecuta quitarLike
+
+            // quitarLike(userUidLike, btnLike.id);
+          // } else {
+          //   // si en totalLikes NO existe userUidLike se ejecuta darLike
+            darLike(userUidLike, btnLike.id);
+          // }
+        });
+      });
+
+      // si le dan click al div, y el array likes contiene elem uid
+      // se cambia a corazón vacío y se quita elem al array
+
+      // sino le dan click, se queda el corazón vacío y no hace nada más....
+      // (no se si va afuera en un if englobando al addEL o ya no se pone)
     });
 };
 
