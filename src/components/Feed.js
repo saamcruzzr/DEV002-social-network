@@ -5,7 +5,7 @@
 import { auth } from '../firebase/firebase.js';
 // eslint-disable-next-line import/no-cycle
 import {
-  addPost, getPost, observerUser, deletePost,
+  addPost, getPost, observerUser,
 } from '../firebase/functions.js';
 
 export const Feed = () => {
@@ -67,70 +67,83 @@ export const savePost = () => {
 export const showPost = () => {
   getPost()
     .then((postSnapshot) => {
+      // console.log(postSnapshot);
       const sectionPosts = document.getElementById('posts');
       sectionPosts.innerHTML = '';
       const userLoginFirebase = auth.currentUser.uid;
+      // console.log(auth);
       postSnapshot.docs.forEach((doc) => {
         const userPost = doc.data().userUid;
+        // console.log(doc.id);
         if (userLoginFirebase === userPost) {
           const articlePost = `
-          <article class='postUsers'>
-            <form action='' method='post' name='feed' id='post'>
-              <label id='nameUserPost' for='name' class='name_user'>${doc.data().nameUser}</label>
-              <button type='button' id='edit_button'>
-                <img class='imgEdit' src='./IMG/boligrafo.png' alt='Lápiz de edición'>
-              </button>
-              <h4 id='textPost' class='textarea_post' name='textarea'>${doc.data().post}</h4>
-              <div class='icon_post'>
-                <img class='imgLike' src="./IMG/corazonRosa.png" alt="Corazón pintado de rosa">
-                <img class='imgLike' src="./IMG/corazon.png" alt="Corazón sin pintar">
+            <article class='postUsers'>
+              <div name='feed' id='post'>
+                <label id='nameUserPost' for='name' class='name_user'>${doc.data().nameUser}</label>
+                <button type='button' id='edit_button'>
+                  <img class='imgEdit' src='./IMG/boligrafo.png' alt='Lápiz de edición'>
+                </button>
+                <h4 id='textPost' class='textarea_post' name='textarea'>${doc.data().post}</h4>
+                <div class='icon_post'>
+                  <img class='imgLike' src="./IMG/corazonRosa.png" alt="Corazón pintado de rosa">
+                  <img class='imgLike' src="./IMG/corazon.png" alt="Corazón sin pintar">
+                </div>
+                <div class='container_remove'>
+                  <!--<p class='textRemove'>Eliminar Publicación</p>-->
+                  <button class='btn_remove' id=${doc.id}>
+                    <img class='imgRemove' src="./IMG/eliminar.png" alt="Eliminar publicación">
+                  </button>
+                </div>
               </div>
-              <div class='container_remove'>
-                <!--<p class='textRemove'>Eliminar Publicación</p>-->
-                <img class='imgRemove' src="./IMG/eliminar.png" alt="Eliminar publicación">
-              </div>
-            </form>
-            <hr>
-          </article>
-        `;
+              
+              <hr>
+            </article>
+          `;
           sectionPosts.innerHTML += articlePost;
+        //   const btnRemove = sectionPosts.querySelector(`#${doc.id}`);
+        //   btnRemove.addEventListener('click', () => {
+        //     console.log('acaaaaa')
+        // })
+        //   console.log(btnRemove);
         } else {
           const articlePost = `
           <article class='postUsers'>
-            <form action='' method='post' name='feed' id='post'>
+            <div name='feed' id='post'>
               <label id='nameUserPost' for='name' class='name_user'>${doc.data().nameUser}</label>
               <h4 id='textPost' class='textarea_post' name='textarea'>${doc.data().post}</h4>
               <div class='icon_post'>
                 <img class='imgLike' src="./IMG/corazonRosa.png" alt="Corazón pintado de rosa">
                 <img class='imgLike' src="./IMG/corazon.png" alt="Corazón sin pintar">
               </div>
-              <div class='container_remove'>
-                <!--<p class='textRemove'>Eliminar Publicación</p>-->
-                <!--<img class='imgRemove' src="./IMG/eliminar.png" alt="Eliminar publicación">-->
-              </div>
-            </form>
+            </div>
             <hr>
           </article>
         `;
           sectionPosts.innerHTML += articlePost;
         }
+        // removePost(doc.id);
       });
+      const btnRemove = sectionPosts.querySelectorAll('.btn_remove');
+      btnRemove.forEach((btn) => {
+        btn.addEventListener('click', () => { console.log(btn.id); });
+      });
+      // console.log(btnRemove);
     });
 };
 
-export const removePost = () => {
-  deletePost()
-    .then(() => {
+// export const removePost = (idPost) => {
+//   deletePost(idPost)
+//     .then((deleteDocs) => {
+//       const btnRemove = document.getElementById(idPost);
+//       btnRemove.addEventListener('click', () => {
+//         deleteDocs.docs.forEach((doc)=>{
+//           const idPost = doc.id;
 
-    });
-};
-
-// const addRemove = () => {
-//   if (userUid === currentUser) {
-//     const containerRemove = document.getElementById('container_remove');
-//     const imgRemove = `
-//       <img class='imgRemove' src="./IMG/eliminar.png" alt="Eliminar publicación">
-//       `;
-//     containerRemove.appendChild = imgRemove;
-//   }
+//         });
+//       });
+//     });
 // };
+
+// export const removePost = () => {
+// const btnRemove = document.querySelectorAll('.btn_remove');
+// btnRemove.addEventListener('click', console.log('hola estoy probando'));

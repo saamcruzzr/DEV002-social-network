@@ -71,15 +71,7 @@ export function getPost() {
 }
 
 // Eliminar documentos
-export function deletePost() {
-  return deleteDoc(doc(db, 'Post', 'JBV6PJCjkWhCXGvGelZC'));
-  // const eliminado = console.log('este documento fue eliminado: JBV6PJCjkWhCXGvGelZC');
-  // return eliminado;
+export function deletePost(idPost) {
+  const deleteDocs = deleteDoc(doc(db, 'Posts', idPost));
+  return deleteDocs;
 }
-
-// await deleteDoc(doc(db, "cities", "DC"));
-
-// import { getAuth } from "firebase/auth";
-
-// const auth = getAuth();
-// const user = auth.currentUser;

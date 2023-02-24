@@ -234,6 +234,7 @@ hr {
     flex-direction: column;
 }
 .textarea_profile {
+    font-size: 20px;
     outline: none;   
     border: 2px solid var(--amarillo-beige-arena);
     border-radius: 4px;
