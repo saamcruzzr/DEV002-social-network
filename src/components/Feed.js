@@ -125,6 +125,7 @@ export const showPost = () => {
         }
         // removePost(doc.id);
       });
+      // DELETE
       const btnRemove = sectionPosts.querySelectorAll('.btn_remove');
       btnRemove.forEach((btn) => {
         btn.addEventListener('click', () => {
@@ -134,6 +135,8 @@ export const showPost = () => {
         });
       });
       // console.log(btnRemove);
+      // EDIT
+      // LIKE
     });
 };
 
