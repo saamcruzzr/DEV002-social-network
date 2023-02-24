@@ -90,7 +90,7 @@ export const showPost = () => {
                 </div>
                 <div class='container_remove'>
                   <!--<p class='textRemove'>Eliminar Publicación</p>-->
-                  <button class='btn_remove' id=${doc.id}>
+                  <button class='btn_remove' id=${'de'}${doc.id}>
                     <img class='imgRemove' src="./IMG/eliminar.png" alt="Eliminar publicación">
                   </button>
                 </div>
@@ -126,9 +126,19 @@ export const showPost = () => {
       const btnRemove = sectionPosts.querySelectorAll('.btn_remove');
       btnRemove.forEach((btn) => {
         btn.addEventListener('click', () => {
+          // const confirm = window.confirm('¿Realmente deseas borrar este post?');
+          // if (confirm === true) {
           console.log(btn.id);
           deletePost(btn.id)
             .then(() => { showPost(); });
+          // } else {
+          // console.log('no se cancela nada');
+          // }
+          // console.log(confirm);
+          // window.open(console.log('borrado'), console.log('cancelar borrado'));
+          // console.log(btn.id);
+          // deletePost(btn.id)
+          // .then(() => { showPost(); });
         });
       });
       // console.log(btnRemove);
