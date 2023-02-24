@@ -234,6 +234,7 @@ hr {
     flex-direction: column;
 }
 .textarea_profile {
+    font-size: 20px;
     outline: none;   
     border: 2px solid var(--amarillo-beige-arena);
     border-radius: 4px;
@@ -274,6 +275,21 @@ hr {
     width: 40px;
 }
 
+.imgEdit {
+    width: 50%;
+    height: 50%;
+    position: relative;
+    right: -4%;
+}
+#edit_button {
+    width: 20%;
+    height: 20%;
+    position: relative;
+    right: -80%;
+    top: 5%;
+    border: none;
+    z-index: auto;
+}
 
 /*ELIMINAR POST*/
 .postUsers {

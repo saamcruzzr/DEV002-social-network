@@ -53,6 +53,9 @@ export const Login = () => {
           onNavigate('/feed');
           savePost();
           showPost();
+          // .then((idPost) => {
+          //   removePost(idPost);
+          // });
         })
         .catch((error) => {
           if (error.code === 'auth/user-not-found') {
