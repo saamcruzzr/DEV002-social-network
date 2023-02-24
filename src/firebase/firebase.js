@@ -37,6 +37,8 @@ const db = getFirestore(app);
 const auth = getAuth();
 // const userPost = auth.currentUser;
 
+const userLog = auth.currentUser;
+
 // Autenticacion con google
 const provider = new GoogleAuthProvider();
 
@@ -50,12 +52,13 @@ export {
   getFirestore,
   addDoc,
   getDocs,
+  onSnapshot,
   collection,
   auth,
   // userUid,
   db,
   provider,
-  // userPost,
+  userLog,
   onAuthStateChanged,
   doc,
   deleteDoc,
