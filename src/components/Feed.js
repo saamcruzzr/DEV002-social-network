@@ -137,6 +137,12 @@ export const showPost = () => {
       // console.log(btnRemove);
       // EDIT
       // LIKE
+      const likePost = document.getElementsByClassName('icon_post');
+      likePost.forEach((btnLike) => {
+        btnLike.addEventListener('click', () => {
+          console.log('hello');
+        });
+      });
     });
 };
 
