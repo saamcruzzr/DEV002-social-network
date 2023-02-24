@@ -161,12 +161,13 @@ export const showPost = () => {
       const btnEdit = sectionPosts.querySelectorAll('.btn_edit');
       btnEdit.forEach((btnE) => {
         btnE.addEventListener('click', (e) => {
+          const editPost = prompt('inserte nuevo texto');
           console.log(e);
           console.log(e.target.parentElement.parentElement.id);
           console.log(btnE.id);
           const idPost = e.target.parentElement.parentElement.id;
-          // let editPost = doc.data().post;
-          edPost(idPost);
+          edPost(idPost, editPost);
+          showPost();
         });
       });
 
