@@ -17,6 +17,8 @@ import {
   getDocs,
   onAuthStateChanged,
   doc,
+  deleteDoc,
+  // onSnapshot,
   updateDoc,
 } from './firebase.js';
 
@@ -74,13 +76,21 @@ export function getPost() {
   return postSnapshot;
 }
 
-export async function edPost(postId) {
-  const changePost = doc(db, 'Posts', 'post');
-  await updateDoc(changePost, { postId, post: '' });
+// Eliminar documentos
+export function deletePost(idPost) {
+  const deleteDocs = deleteDoc(doc(db, 'Posts', idPost));
+  return deleteDocs;
+}
+
+export async function edPost(postId, postEd) {
+  const changePost = doc(db, 'Posts', postId);
+  await updateDoc(changePost, { postId, post: postEd });
   return changePost;
 }
 
-// // Set the "capital" field of the city 'DC'
-// await updateDoc(washingtonRef, {
-//   capital: true
-// });
+// await deleteDoc(doc(db, "cities", "DC"));
+
+// import { getAuth } from "firebase/auth";
+
+// const auth = getAuth();
+// const user = auth.currentUser;

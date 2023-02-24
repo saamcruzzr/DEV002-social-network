@@ -5,7 +5,7 @@
 import { auth } from '../firebase/firebase.js';
 // eslint-disable-next-line import/no-cycle
 import {
-  addPost, getPost, observerUser,
+  addPost, getPost, observerUser, edPost,
 } from '../firebase/functions.js';
 
 export const Feed = () => {
@@ -66,40 +66,70 @@ export const savePost = () => {
   });
 };
 
-// Paso a paso
+// // Paso a paso
 
-// Contar con el boton que se necesita para editar (Lapicito)
+// // Contar con el boton que se necesita para editar (Lapicito)
 // const editForm = document.getElementById('edit_button');
-// Lograr que se active al ser clickeado, mediante un addEventListener
-// editForm.addEventListener('click', () => {
-// Que al ser clickeado el boton muestre una ventana con las opciones de aceptar y cancelar
-// const chanPost = window.confirm('¿Deseas editar esta publicacion?');
-// Que al dar click en aceptar muestre el post elegido para ser editado en un
-// formato que permita la manipulación de este
+// // Lograr que se active al ser clickeado, mediante un addEventListener
+// editForm.addEventListener('click', (e) => {
+//   e.preventDefault();
+//   console.log(e);
+// // Que al ser clickeado el boton muestre una ventana con las opciones de aceptar y cancelar
+//   // const chanPost = window.confirm('¿Deseas editar esta publicacion?');
+//   // Que al dar click en aceptar muestre el post elegido para ser editado en un
+//   // formato que permita la manipulación de este
 
-// Que en esta misma instacia permita guardar la edición mediante un botón
+//   // Que en esta misma instacia permita guardar la edición mediante un botón
 
-// Que se muestre en el feed el post editado
-
+//   // Que se muestre en el feed el post editado
 // });
 
 export const showPost = () => {
   getPost()
     .then((postSnapshot) => {
+      // console.log(postSnapshot);
       const sectionPosts = document.getElementById('posts');
       sectionPosts.innerHTML = '';
       const userLoginFirebase = auth.currentUser.uid;
+      // console.log(auth);
       postSnapshot.docs.forEach((doc) => {
         const userPost = doc.data().userUid;
-        console.log(doc.id);
+        console.log(doc.data().post);
         if (userLoginFirebase === userPost) {
           const articlePost = `
+            <article class='postUsers'>
+              <div name='feed' id=${doc.id}>
+                <label id='nameUserPost' for='name' class='name_user'>${doc.data().nameUser}</label>
+                <button type='button' class='btn_edit'>
+                  <img class='imgEdit' src='./IMG/boligrafo.png' alt='Lápiz de edición'>
+                </button>
+                <h4 id='textPost' class='textarea_post' name='textarea'>${doc.data().post}</h4>
+                <div class='icon_post'>
+                  <img class='imgLike' src="./IMG/corazonRosa.png" alt="Corazón pintado de rosa">
+                  <img class='imgLike' src="./IMG/corazon.png" alt="Corazón sin pintar">
+                </div>
+                <div class='container_remove'>
+                  <!--<p class='textRemove'>Eliminar Publicación</p>-->
+                  <button class='btn_remove'>
+                    <img class='imgRemove' src="./IMG/eliminar.png" alt="Eliminar publicación">
+                  </button>
+                </div>
+              </div>
+              
+              <hr>
+            </article>
+          `;
+          sectionPosts.innerHTML += articlePost;
+        //   const btnRemove = sectionPosts.querySelector(`#${doc.id}`);
+        //   btnRemove.addEventListener('click', () => {
+        //     console.log('acaaaaa')
+        // })
+        //   console.log(btnRemove);
+        } else {
+          const articlePost = `
           <article class='postUsers'>
-            <form action='' method='post' name='feed' id='post'>
+            <div name='feed' id='post'>
               <label id='nameUserPost' for='name' class='name_user'>${doc.data().nameUser}</label>
-              <button type='button' id='edit_button'>
-                <img class='imgEdit' src="./IMG/boligrafo.png" alt="Lápiz de edición">
-              </button>
               <h4 id='textPost' class='textarea_post' name='textarea'>${doc.data().post}</h4>
               <div class='icon_post'>
                 <img class='imgLike' src="./IMG/corazonRosa.png" alt="Corazón pintado de rosa">
@@ -107,39 +137,66 @@ export const showPost = () => {
               </div>
               <div class='container_remove'>
                 <!--<p class='textRemove'>Eliminar Publicación</p>-->
-                <img class='imgRemove' src="./IMG/eliminar.png" alt="Eliminar publicación">
+                <!--<img class='imgRemove' src="./IMG/eliminar.png" alt="Eliminar publicación">-->
               </div>
-            </form>
-            <hr>
-          </article>
-        `;
-          sectionPosts.innerHTML += articlePost;
-        } else {
-          const articlePost = `
-          <article class='postUsers'>
-            <form action='' method='post' name='feed' id='post'>
-              <label id='nameUserPost' for='name' class='name_user'>${doc.data().nameUser}</label>
-              <h4 id='textPost' class='textarea_post' name='textarea'>${doc.data().post}</h4>
-              <div class='icon_post'>
-                <img class='imgLike' src="./IMG/corazonRosa.png" alt="Corazón pintado de rosa">
-                <img class='imgLike' src="./IMG/corazon.png" alt="Corazón sin pintar">
-              </div>
-            </form>
+            </div>
             <hr>
           </article>
         `;
           sectionPosts.innerHTML += articlePost;
         }
+        // removePost(doc.id);
       });
+      const btnRemove = sectionPosts.querySelectorAll('.btn_remove');
+      btnRemove.forEach((btn) => {
+        btn.addEventListener('click', () => { console.log(btn.id); });
+      });
+      // console.log(btnRemove);
+      // Paso a paso
+
+      // Contar con el boton que se necesita para editar (Lapicito)
+      // Lograr que se active al ser clickeado, mediante un addEventListener
+      const btnEdit = sectionPosts.querySelectorAll('.btn_edit');
+      btnEdit.forEach((btnE) => {
+        btnE.addEventListener('click', (e) => {
+          console.log(e);
+          console.log(e.target.parentElement.parentElement.id);
+          console.log(btnE.id);
+          const idPost = e.target.parentElement.parentElement.id;
+          // let editPost = doc.data().post;
+          edPost(idPost);
+        });
+      });
+
+      // textarea 'textProfile'
+
+      // e.preventDefault();
+      // console.log(e);
+      // Que al ser clickeado el boton muestre una ventana con las opciones de aceptar y cancelar
+      // const chanPost = window.confirm('¿Deseas editar esta publicacion?');
+      // Que al dar click en aceptar muestre el post elegido para ser editado en un
+      // formato que permita la manipulación de este
+
+      // Que en esta misma instacia permita guardar la edición mediante un botón
+
+      // Que se muestre en el feed el post editado
+      // });
     });
 };
 
-// const addRemove = () => {
-//   if (userUid === currentUser) {
-//     const containerRemove = document.getElementById('container_remove');
-//     const imgRemove = `
-//       <img class='imgRemove' src="./IMG/eliminar.png" alt="Eliminar publicación">
-//       `;
-//     containerRemove.appendChild = imgRemove;
-//   }
+// export const removePost = (idPost) => {
+//   deletePost(idPost)
+//     .then((deleteDocs) => {
+//       const btnRemove = document.getElementById(idPost);
+//       btnRemove.addEventListener('click', () => {
+//         deleteDocs.docs.forEach((doc)=>{
+//           const idPost = doc.id;
+
+//         });
+//       });
+//     });
 // };
+
+// export const removePost = () => {
+// const btnRemove = document.querySelectorAll('.btn_remove');
+// btnRemove.addEventListener('click', console.log('hola estoy probando'));
