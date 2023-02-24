@@ -13,7 +13,7 @@ import {
 } from 'https://www.gstatic.com/firebasejs/9.16.0/firebase-auth.js';
 // eslint-disable-next-line import/no-unresolved
 import {
-  getFirestore, addDoc, collection, getDocs, deleteDoc, doc,
+  getFirestore, addDoc, collection, getDocs, deleteDoc, doc, onSnapshot,
 // eslint-disable-next-line import/no-unresolved
 } from 'https://www.gstatic.com/firebasejs/9.16.0/firebase-firestore.js';
 
@@ -50,6 +50,7 @@ export {
   onAuthStateChanged,
   doc,
   deleteDoc,
+  onSnapshot,
 };
 
 // DOCUMENTACIÓN:

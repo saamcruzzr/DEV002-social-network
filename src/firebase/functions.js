@@ -76,3 +76,14 @@ export function deletePost(idPost) {
   const deleteDocs = deleteDoc(doc(db, 'Posts', idPost));
   return deleteDocs;
 }
+
+// Actualiza documentos a cada rato
+// export function actualizaMuro() {
+//   const actualiza = onSnapshot(doc(db, 'Posts'), (doc) => {
+//     console.log('Current data: ', doc.data());
+//   });
+// }
+
+// const unsub = onSnapshot(doc(db, "cities", "SF"), (doc) => {
+//     console.log("Current data: ", doc.data());
+// });
