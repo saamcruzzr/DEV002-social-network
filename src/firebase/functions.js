@@ -15,6 +15,7 @@ import {
   onAuthStateChanged,
   doc,
   deleteDoc,
+  onSnapshot,
   updateDoc,
   arrayRemove,
   arrayUnion,
@@ -76,20 +77,19 @@ export function getPost() {
 
 // Eliminar documentos
 export function deletePost(idPost) {
-  const deleteDocs = deleteDoc(doc(db, 'Posts', idPost));
+  // console.log(idPost.slice(2));
+  const idPostSlice = idPost.slice(2);
+  const deleteDocs = deleteDoc(doc(db, 'Posts', idPostSlice));
   return deleteDocs;
 }
 
 // Actualiza documentos a cada rato
-// export function actualizaMuro() {
-//   const actualiza = onSnapshot(doc(db, 'Posts'), (doc) => {
-//     console.log('Current data: ', doc.data());
-//   });
-// }
 
-// const unsub = onSnapshot(doc(db, "cities", "SF"), (doc) => {
-//     console.log("Current data: ", doc.data());
-// });
+export function updateCollection() {
+  onSnapshot(doc(db, 'Posts'), (docu) => {
+    console.log('Current data: ', docu.data());
+  });
+}
 
 // LIKES
 export function darLike(userUidLike, idPost) {
