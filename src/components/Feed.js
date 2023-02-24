@@ -5,7 +5,7 @@
 import { auth } from '../firebase/firebase.js';
 // eslint-disable-next-line import/no-cycle
 import {
-  addPost, getPost, observerUser,
+  addPost, getPost, observerUser, deletePost,
 } from '../firebase/functions.js';
 
 export const Feed = () => {
@@ -125,11 +125,19 @@ export const showPost = () => {
       });
       const btnRemove = sectionPosts.querySelectorAll('.btn_remove');
       btnRemove.forEach((btn) => {
-        btn.addEventListener('click', () => { console.log(btn.id); });
+        btn.addEventListener('click', () => {
+          console.log(btn.id);
+          deletePost(btn.id)
+            .then(() => { showPost(); });
+        });
       });
       // console.log(btnRemove);
     });
 };
+
+// export const removePost = (idPost) => {
+//   deletePost(idPost);
+// };
 
 // export const removePost = (idPost) => {
 //   deletePost(idPost)
