@@ -5,7 +5,7 @@
 import { auth } from '../firebase/firebase.js';
 // eslint-disable-next-line import/no-cycle
 import {
-  addPost, getPost, observerUser, deletePost, darLike, quitarLike,
+  addPost, getPost, observerUser, edPost, deletePost, darLike, quitarLike,
 } from '../firebase/functions.js';
 
 export const Feed = () => {
@@ -76,13 +76,13 @@ export const showPost = () => {
       // console.log(auth);
       postSnapshot.docs.forEach((doc) => {
         const userPost = doc.data().userUid;
-        // console.log(doc.id);
+        console.log(doc.data().post);
         if (userLoginFirebase === userPost) {
           const articlePost = `
             <article class='postUsers'>
-              <div name='feed' id='post'>
+              <div name='feed' id=${doc.id}>
                 <label id='nameUserPost' for='name' class='name_user'>${doc.data().nameUser}</label>
-                <button type='button' id='edit_button'>
+                <button type='button' class='btn_edit'>
                   <img class='imgEdit' src='./IMG/boligrafo.png' alt='Lápiz de edición'>
                 </button>
                 <h4 id='textPost' class='textarea_post' name='textarea'>${doc.data().post}</h4>
@@ -117,6 +117,10 @@ export const showPost = () => {
                 <img class='imgLikeRosa' src="./IMG/corazonRosa.png" alt="Corazón pintado de rosa">
                 <img class ='imgLikeVacio' src="./IMG/corazon.png" alt="Corazón sin pintar"></img>
               </div>
+              <div class='container_remove'>
+                <!--<p class='textRemove'>Eliminar Publicación</p>-->
+                <!--<img class='imgRemove' src="./IMG/eliminar.png" alt="Eliminar publicación">-->
+              </div>
             </div>
             <hr>
           </article>
@@ -125,7 +129,9 @@ export const showPost = () => {
         }
         // removePost(doc.id);
       });
+      
       // DELETE
+      
       const btnRemove = sectionPosts.querySelectorAll('.btn_remove');
       btnRemove.forEach((btn) => {
         btn.addEventListener('click', () => {
@@ -145,8 +151,41 @@ export const showPost = () => {
         });
       });
       // console.log(btnRemove);
+      
       // EDIT
+      
+      // Paso a paso
+
+      // Contar con el boton que se necesita para editar (Lapicito)
+      // Lograr que se active al ser clickeado, mediante un addEventListener
+      const btnEdit = sectionPosts.querySelectorAll('.btn_edit');
+      btnEdit.forEach((btnE) => {
+        btnE.addEventListener('click', (e) => {
+          console.log(e);
+          console.log(e.target.parentElement.parentElement.id);
+          console.log(btnE.id);
+          const idPost = e.target.parentElement.parentElement.id;
+          // let editPost = doc.data().post;
+          edPost(idPost);
+        });
+      });
+
+      // textarea 'textProfile'
+
+      // e.preventDefault();
+      // console.log(e);
+      // Que al ser clickeado el boton muestre una ventana con las opciones de aceptar y cancelar
+      // const chanPost = window.confirm('¿Deseas editar esta publicacion?');
+      // Que al dar click en aceptar muestre el post elegido para ser editado en un
+      // formato que permita la manipulación de este
+
+      // Que en esta misma instacia permita guardar la edición mediante un botón
+
+      // Que se muestre en el feed el post editado
+      // });
+      
       // LIKE
+      
       // si le dan click al div, y el array likes estaba vacío
       // se cambia a corazón pintado
       // y se agrega elem uid al array
@@ -175,6 +214,7 @@ export const showPost = () => {
 
       // sino le dan click, se queda el corazón vacío y no hace nada más....
       // (no se si va afuera en un if englobando al addEL o ya no se pone)
+
     });
 };
 
@@ -198,3 +238,24 @@ export const showPost = () => {
 // export const removePost = () => {
 // const btnRemove = document.querySelectorAll('.btn_remove');
 // btnRemove.addEventListener('click', console.log('hola estoy probando'));
+
+// ------
+// FER
+
+// // Paso a paso
+
+// // Contar con el boton que se necesita para editar (Lapicito)
+// const editForm = document.getElementById('edit_button');
+// // Lograr que se active al ser clickeado, mediante un addEventListener
+// editForm.addEventListener('click', (e) => {
+//   e.preventDefault();
+//   console.log(e);
+// // Que al ser clickeado el boton muestre una ventana con las opciones de aceptar y cancelar
+//   // const chanPost = window.confirm('¿Deseas editar esta publicacion?');
+//   // Que al dar click en aceptar muestre el post elegido para ser editado en un
+//   // formato que permita la manipulación de este
+
+//   // Que en esta misma instacia permita guardar la edición mediante un botón
+
+//   // Que se muestre en el feed el post editado
+// });

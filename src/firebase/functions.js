@@ -1,5 +1,7 @@
+/* eslint-disable import/no-cycle */
 // PARA QUE NO ME LO BORRE EN FEED BRANCH
-// eslint-disable-next-line import/no-unresolved, import/no-cycle
+// import { async } from 'regenerator-runtime';
+// import { async } from 'regenerator-runtime';
 import { showPost } from '../components/Feed.js';
 import {
   auth,
@@ -11,6 +13,7 @@ import {
   db,
   // userUid,
   provider,
+  // userLog,
   getDocs,
   onAuthStateChanged,
   doc,
@@ -75,7 +78,7 @@ export function getPost() {
   return postSnapshot;
 }
 
-// Eliminar documentos
+// ELIMINAR documentos
 export function deletePost(idPost) {
   // console.log(idPost.slice(2));
   const idPostSlice = idPost.slice(2);
@@ -83,7 +86,21 @@ export function deletePost(idPost) {
   return deleteDocs;
 }
 
-// Actualiza documentos a cada rato
+//EDIT
+export async function edPost(postId, postEd) {
+  const changePost = doc(db, 'Posts', postId);
+  await updateDoc(changePost, { postId, post: postEd });
+  return changePost;
+}
+
+// await deleteDoc(doc(db, "cities", "DC"));
+
+// import { getAuth } from "firebase/auth";
+
+// const auth = getAuth();
+// const user = auth.currentUser;
+
+// ACTUALIZA documentos a cada rato
 
 export function updateCollection() {
   onSnapshot(doc(db, 'Posts'), (docu) => {
@@ -109,7 +126,7 @@ export function quitarLike(userUidDislike, idPost) {
   });
 }
 
-// DOCUMENTACIÓN
+// DOCUMENTACIÓN LIKES
 // import { doc, updateDoc, arrayUnion, arrayRemove } from "firebase/firestore";
 
 // const washingtonRef = doc(db, "cities", "DC");
