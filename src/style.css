@@ -265,14 +265,17 @@ hr {
     width: max-content;
     border: 2px solid var(--naranja);
 }
-.icon_post {
+.likear {
     border: 1px solid greenyellow;
 }
-
-.imgLike {
+.likear:hover {
+    background-color: #e4729c;
+}
+.imgLikeRosa, .imgLikeVacio {
     border: 1px solid red;
     margin-left: 5%;
     width: 40px;
+    background: none;
 }
 
 .imgEdit {
