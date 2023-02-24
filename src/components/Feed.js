@@ -2,10 +2,13 @@
 // eslint-disable-next-line import/no-cycle
 // import { onNavigate } from '../main.js';
 // import { async } from 'regenerator-runtime';
-import { auth } from '../firebase/firebase.js';
+import {
+  auth, doc, getDoc, db,
+} from '../firebase/firebase.js';
 // eslint-disable-next-line import/no-cycle
 import {
   addPost, getPost, observerUser, edPost, deletePost, darLike, quitarLike,
+  //  quitarLike,
 } from '../firebase/functions.js';
 
 export const Feed = () => {
@@ -131,6 +134,10 @@ export const showPost = () => {
           }
         });
       });
+<<<<<<< HEAD
+=======
+      // console.log(btnRemove);
+>>>>>>> a1385fe56c89a8945dc66f5c3d8969ce4c173b0e
 
       // EDIT
 
@@ -171,10 +178,11 @@ export const showPost = () => {
       // y se agrega elem uid al array
       const likePost = sectionPosts.querySelectorAll('.likear');
       likePost.forEach((btnLike) => {
-        btnLike.addEventListener('click', () => {
+        btnLike.addEventListener('click', async () => {
           const userUidLike = auth.currentUser.uid;
           // const x = doc.data().userUid;
           // const x = db.doc;
+<<<<<<< HEAD
           console.log(userUidLike);
           // console.log(`AQUI ${x}`);
           console.log(btnLike.id);
@@ -185,7 +193,32 @@ export const showPost = () => {
           // } else {
           //   // si en totalLikes NO existe userUidLike se ejecuta darLike
           darLike(userUidLike, btnLike.id);
+=======
+          // console.log(userUidLike);
+          // console.log(`AQUI ${x}`);
+          // console.log(btnLike.id);
+          // if () {
+          // si en totalLikes existe userUidLike se ejecuta quitarLike
+          // quitarLike(userUidLike, btnLike.id);
+          // } else {
+          // si en totalLikes NO existe userUidLike se ejecuta darLike
+          // darLike(userUidLike, btnLike.id);
+>>>>>>> a1385fe56c89a8945dc66f5c3d8969ce4c173b0e
           // }
+          const docRef = doc(db, 'Posts', btnLike.id);
+          const docSnap = await getDoc(docRef);
+
+          if (docSnap.exists()) {
+            console.log('Document data:', docSnap.data().totalLikes);
+            if (docSnap.data().totalLikes.includes(userUidLike)) {
+              quitarLike(userUidLike, btnLike.id);
+            } else {
+              darLike(userUidLike, btnLike.id);
+            }
+          } else {
+            // doc.data() will be undefined in this case
+            console.log('No such document!');
+          }
         });
       });
 

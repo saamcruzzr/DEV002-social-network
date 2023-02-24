@@ -86,7 +86,7 @@ export function deletePost(idPost) {
   return deleteDocs;
 }
 
-// EDIT
+//  EDIT
 export async function edPost(postId, postEd) {
   const changePost = doc(db, 'Posts', postId);
   await updateDoc(changePost, { postId, post: postEd });
@@ -103,8 +103,8 @@ export async function edPost(postId, postEd) {
 // ACTUALIZA documentos a cada rato
 
 export function updateCollection() {
-  onSnapshot(collection(db, 'Posts'), () => {
-    console.log('Current data: ', doc.data());
+  onSnapshot(collection(db, 'Posts'), (docu) => {
+    console.log('Current data: ', docu, Date.now());
   });
 }
 
