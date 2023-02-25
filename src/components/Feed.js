@@ -69,7 +69,7 @@ export const showPost = () => {
       sectionPosts.innerHTML = '';
       const userLoginFirebase = auth.currentUser.uid;
       // console.log(auth);
-      postSnapshot.docs.forEach(() => {
+      postSnapshot.docs.forEach((doc) => {
         const userPost = doc.data().userUid;
         if (userLoginFirebase === userPost) {
           const articlePost = `
