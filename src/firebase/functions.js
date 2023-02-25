@@ -79,6 +79,7 @@ export function getPost() {
 }
 
 // ELIMINAR documentos
+
 export function deletePost(idPost) {
   // console.log(idPost.slice(2));
   const idPostSlice = idPost.slice(2);
@@ -92,13 +93,6 @@ export async function edPost(postId, postEd) {
   await updateDoc(changePost, { postId, post: postEd });
   return changePost;
 }
-
-// await deleteDoc(doc(db, "cities", "DC"));
-
-// import { getAuth } from "firebase/auth";
-
-// const auth = getAuth();
-// const user = auth.currentUser;
 
 // ACTUALIZA documentos a cada rato
 

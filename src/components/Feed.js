@@ -3,10 +3,7 @@
 // import { onNavigate } from '../main.js';
 // import { async } from 'regenerator-runtime';
 import {
-  auth,
-  doc,
-  getDoc,
-  db,
+  auth, doc, getDoc, db,
 } from '../firebase/firebase.js';
 // eslint-disable-next-line import/no-cycle
 import {
@@ -141,22 +138,16 @@ export const showPost = () => {
       const btnRemove = sectionPosts.querySelectorAll('.btn_remove');
       btnRemove.forEach((btn) => {
         btn.addEventListener('click', () => {
-          // const confirm = window.confirm('¿Realmente deseas borrar este post?');
-          // if (confirm === true) {
-          console.log(btn.id);
-          deletePost(btn.id)
-            .then(() => { showPost(); });
-          // } else {
-          // console.log('no se cancela nada');
-          // }
-          // console.log(confirm);
-          // window.open(console.log('borrado'), console.log('cancelar borrado'));
+          const confirm = window.confirm('¿Realmente deseas borrar este post?');
+          if (confirm === true) {
           // console.log(btn.id);
-          // deletePost(btn.id)
-          // .then(() => { showPost(); });
+            deletePost(btn.id)
+              .then(() => { showPost(); });
+          } else {
+            console.log('no se borra nada');
+          }
         });
       });
-      // console.log(btnRemove);
 
       // EDIT
 
