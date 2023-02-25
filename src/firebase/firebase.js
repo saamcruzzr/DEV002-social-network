@@ -24,7 +24,6 @@ import {
   updateDoc,
   arrayUnion,
   arrayRemove,
-  getDoc,
 // eslint-disable-next-line import/no-unresolved
 } from 'https://www.gstatic.com/firebasejs/9.16.0/firebase-firestore.js';
 
@@ -68,7 +67,6 @@ export {
   updateDoc,
   arrayUnion,
   arrayRemove,
-  getDoc,
 };
 
 // DOCUMENTACIÓN:
