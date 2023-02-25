@@ -222,7 +222,7 @@ export const showPost = () => {
                   console.log(numero);
                   numero.innerHTML = docSnap.data().totalLikes.length;
                 });
-                // .then((result) => console.log(result));
+              // .then((result) => console.log(result));
             } else {
               darLike(userUidLike, btnLike.id)
                 // .then(() => console.log('Document data:', docSnap.data().totalLikes.length));
