@@ -109,34 +109,21 @@ export function updateCollection() {
 }
 
 // LIKES
-export function darLike(userUidLike, idPost) {
+export async function darLike(userUidLike, idPost) {
   const likes = doc(db, 'Posts', idPost);
   // const userUidLike = auth.currentUser.uid;
-  updateDoc(likes, {
+  await updateDoc(likes, {
     totalLikes: arrayUnion(userUidLike),
     // totalLikes: arrayUnion(auth.currentUser.uid),
   });
+  return likes;
 }
 
-export function quitarLike(userUidDislike, idPost) {
+export async function quitarLike(userUidDislike, idPost) {
   const dislikes = doc(db, 'Posts', idPost);
   // const userUidDislike = auth.currentUser.uid;
-  updateDoc(dislikes, {
+  await updateDoc(dislikes, {
     totalLikes: arrayRemove(userUidDislike),
   });
+  return dislikes;
 }
-
-// DOCUMENTACIÓN LIKES
-// import { doc, updateDoc, arrayUnion, arrayRemove } from "firebase/firestore";
-
-// const washingtonRef = doc(db, "cities", "DC");
-
-// // Atomically add a new region to the "regions" array field.
-// await updateDoc(washingtonRef, {
-//     regions: arrayUnion("greater_virginia")
-// });
-
-// // Atomically remove a region from the "regions" array field.
-// await updateDoc(washingtonRef, {
-//     regions: arrayRemove("east_coast")
-// });
