@@ -13,7 +13,17 @@ import {
 } from 'https://www.gstatic.com/firebasejs/9.16.0/firebase-auth.js';
 // eslint-disable-next-line import/no-unresolved
 import {
-  getFirestore, addDoc, collection, getDocs,
+  getFirestore,
+  addDoc,
+  collection,
+  getDocs,
+  getDoc,
+  deleteDoc,
+  doc,
+  onSnapshot,
+  updateDoc,
+  arrayUnion,
+  arrayRemove,
 // eslint-disable-next-line import/no-unresolved
 } from 'https://www.gstatic.com/firebasejs/9.16.0/firebase-firestore.js';
 
@@ -24,10 +34,11 @@ const app = initializeApp(firebaseConfig);
 
 // Inicializa Cloud Firestore y obtenga una referencia al servicio
 const db = getFirestore(app);
-
 // Initialize Firebase Authentication and get a reference to the service
 const auth = getAuth();
 // const userPost = auth.currentUser;
+
+const userLog = auth.currentUser;
 
 // Autenticacion con google
 const provider = new GoogleAuthProvider();
@@ -42,12 +53,20 @@ export {
   getFirestore,
   addDoc,
   getDocs,
+  getDoc,
+  onSnapshot,
   collection,
   auth,
+  // userUid,
   db,
   provider,
-  // userPost,
+  userLog,
   onAuthStateChanged,
+  doc,
+  deleteDoc,
+  updateDoc,
+  arrayUnion,
+  arrayRemove,
 };
 
 // DOCUMENTACIÓN:

@@ -1,7 +1,12 @@
 // PARA QUE NO ME LO BORRE EN FEED BRANCH
 // eslint-disable-next-line import/no-cycle
 import { onNavigate } from '../main.js';
-import { registerUser, addUser, registerGoogle } from '../firebase/functions.js';
+import {
+  registerUser,
+  addUser,
+  registerGoogle,
+  updateCollection,
+} from '../firebase/functions.js';
 import { savePost, showPost } from './Feed.js';
 
 export const Register = () => {
@@ -70,6 +75,7 @@ export const Register = () => {
             onNavigate('/feed');
             savePost();
             showPost();
+            updateCollection();
           });
         })
         .catch((error) => {
@@ -122,6 +128,7 @@ export const Register = () => {
           onNavigate('/feed');
           savePost();
           showPost();
+          updateCollection();
         });
       });
   });

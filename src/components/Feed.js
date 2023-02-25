@@ -2,9 +2,13 @@
 // eslint-disable-next-line import/no-cycle
 // import { onNavigate } from '../main.js';
 // import { async } from 'regenerator-runtime';
-
+import {
+  auth, doc, getDoc, db,
+} from '../firebase/firebase.js';
 // eslint-disable-next-line import/no-cycle
-import { addPost, getPost, observerUser } from '../firebase/functions.js';
+import {
+  addPost, getPost, observerUser, edPost, deletePost, darLike, quitarLike,
+} from '../firebase/functions.js';
 
 export const Feed = () => {
   const FeedDiv = document.createElement('div');
@@ -41,6 +45,8 @@ export const Feed = () => {
 
 export const savePost = () => {
   const postForm = document.getElementById('profile');
+  // console.log('aqui mismito');
+  // if (postForm) {
   postForm.addEventListener('submit', (e) => {
     e.preventDefault();
     const txtPost = postForm.textProfile.value;
@@ -68,41 +74,206 @@ export const showPost = () => {
       // console.log(postSnapshot);
       const sectionPosts = document.getElementById('posts');
       sectionPosts.innerHTML = '';
+      const userLoginFirebase = auth.currentUser.uid;
+      // console.log(auth);
       postSnapshot.docs.forEach((doc) => {
-        // console.log(doc.data().nameUser);
-        // const nUser = document.getElementById('nameUserPost');
-        // const textPost = document.getElementById('textPost');
-        // // nUser.textContent = postList[0].nameUser;
-        // nUser.innerHTML += doc.data().nameUser;
-        // textPost.textContent += doc.data().post;
-
-        const articlePost = `
+        const userPost = doc.data().userUid;
+        // console.log(doc.data().post);
+        if (userLoginFirebase === userPost) {
+          const articlePost = `
+            <article class='postUsers'>
+              <div name='feed' id=${doc.id}>
+                <label id='nameUserPost' for='name' class='name_user'>${doc.data().nameUser}</label>
+                <button type='button' class='btn_edit'>
+                  <img class='imgEdit' src='./IMG/boligrafo.png' alt='Lápiz de edición'>
+                </button>
+                <h4 id='textPost' class='textarea_post' name='textarea'>${doc.data().post}</h4>
+                <div class='likear' id=${doc.id}>
+                  <img class='imgLikeRosa' src="./IMG/corazonRosa.png" alt="Corazón pintado de rosa">
+                  <img class ='imgLikeVacio' src="./IMG/corazon.png" alt="Corazón sin pintar"></img>
+                  <span id=${'c'}${doc.id}>0</span>
+                </div>
+                <div class='container_remove'>
+                  <!--<p class='textRemove'>Eliminar Publicación</p>-->
+                  <button class='btn_remove' id=${'de'}${doc.id}>
+                    <img class='imgRemove' src="./IMG/eliminar.png" alt="Eliminar publicación">
+                  </button>
+                </div>
+              </div>
+              
+              <hr>
+            </article>
+          `;
+          sectionPosts.innerHTML += articlePost;
+        //   const btnRemove = sectionPosts.querySelector(`#${doc.id}`);
+        //   btnRemove.addEventListener('click', () => {
+        //     console.log('acaaaaa')
+        // })
+        //   console.log(btnRemove);
+        } else {
+          const articlePost = `
           <article class='postUsers'>
-            <form action='' method='post' name='feed' id='post'>
+            <div name='feed' id='post'>
               <label id='nameUserPost' for='name' class='name_user'>${doc.data().nameUser}</label>
               <h4 id='textPost' class='textarea_post' name='textarea'>${doc.data().post}</h4>
-              <div class='icon_post'>
-                <img class='imgLike' src="./IMG/corazonRosa.png" alt="Corazón pintado de rosa">
-                <img class='imgLike' src="./IMG/corazon.png" alt="Corazón sin pintar">  
+              <div class='likear' id=${doc.id}>
+                <img class='imgLikeRosa' src="./IMG/corazonRosa.png" alt="Corazón pintado de rosa">
+                <img class ='imgLikeVacio' src="./IMG/corazon.png" alt="Corazón sin pintar"></img>
               </div>
-            </form>
+              <div class='container_remove'>
+                <!--<p class='textRemove'>Eliminar Publicación</p>-->
+                <!--<img class='imgRemove' src="./IMG/eliminar.png" alt="Eliminar publicación">-->
+              </div>
+            </div>
             <hr>
           </article>
         `;
-        sectionPosts.innerHTML += articlePost;
+          sectionPosts.innerHTML += articlePost;
+        }
+        // removePost(doc.id);
       });
+
+      // DELETE
+
+      const btnRemove = sectionPosts.querySelectorAll('.btn_remove');
+      btnRemove.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const confirm = window.confirm('¿Realmente deseas borrar este post?');
+          if (confirm === true) {
+          // console.log(btn.id);
+            deletePost(btn.id)
+              .then(() => { showPost(); });
+          } else {
+            console.log('no se borra nada');
+          }
+        });
+      });
+
+      // EDIT
+
+      // Paso a paso
+
+      // Contar con el boton que se necesita para editar (Lapicito)
+      // Lograr que se active al ser clickeado, mediante un addEventListener
+      const btnEdit = sectionPosts.querySelectorAll('.btn_edit');
+      btnEdit.forEach((btnE) => {
+        btnE.addEventListener('click', (e) => {
+          const editPost = prompt('inserte nuevo texto');
+          console.log(e);
+          console.log(e.target.parentElement.parentElement.id);
+          console.log(btnE.id);
+          const idPost = e.target.parentElement.parentElement.id;
+          edPost(idPost, editPost);
+          showPost();
+        });
+      });
+
+      // textarea 'textProfile'
+
+      // e.preventDefault();
+      // console.log(e);
+      // Que al ser clickeado el boton muestre una ventana con las opciones de aceptar y cancelar
+      // const chanPost = window.confirm('¿Deseas editar esta publicacion?');
+      // Que al dar click en aceptar muestre el post elegido para ser editado en un
+      // formato que permita la manipulación de este
+
+      // Que en esta misma instacia permita guardar la edición mediante un botón
+
+      // Que se muestre en el feed el post editado
+      // });
+
+      // LIKE
+
+      // si le dan click al div, y el array likes estaba vacío
+      // se cambia a corazón pintado
+      // y se agrega elem uid al array
+      const likePost = sectionPosts.querySelectorAll('.likear');
+      likePost.forEach((btnLike) => {
+        btnLike.addEventListener('click', async () => {
+          const userUidLike = auth.currentUser.uid;
+          // si en totalLikes existe userUidLike se ejecuta quitarLike
+          // quitarLike(userUidLike, btnLike.id);
+          // si en totalLikes NO existe userUidLike se ejecuta darLike
+          // darLike(userUidLike, btnLike.id);
+          const docRef = doc(db, 'Posts', btnLike.id);
+          const docSnap = await getDoc(docRef);
+
+          if (docSnap.exists()) {
+            // console.log('Document data:', docSnap.data().totalLikes);
+            if (docSnap.data().totalLikes.includes(userUidLike)) {
+              quitarLike(userUidLike, btnLike.id)
+                .then(() => {
+                  console.log('Document data:', docSnap.data().totalLikes.length);
+                  const numero = document.getElementById(`${'c'}${btnLike.id}`);
+                  console.log(numero);
+                  numero.innerHTML = docSnap.data().totalLikes.length;
+                });
+              // .then((result) => console.log(result));
+            } else {
+              darLike(userUidLike, btnLike.id)
+                // .then(() => console.log('Document data:', docSnap.data().totalLikes.length));
+                // .then((result) => console.log(result));
+                .then(() => {
+                  console.log('Document data:', docSnap.data().totalLikes.length);
+                  const numero = document.getElementById(`${'c'}${btnLike.id}`);
+                  console.log(numero);
+                  numero.innerHTML = docSnap.data().totalLikes.length;
+                });
+            }
+            // console.log('Document data:', docSnap.data().totalLikes);
+          } else {
+            // doc.data() will be undefined in this case
+            console.log('No such document!');
+          }
+        });
+      });
+
+      // si le dan click al div, y el array likes contiene elem uid
+      // se cambia a corazón vacío y se quita elem al array
+
+      // sino le dan click, se queda el corazón vacío y no hace nada más....
+      // (no se si va afuera en un if englobando al addEL o ya no se pone)
     });
 };
 
-// console.log(Estos son las id del input a puclicar: textPost, nameUser);
+// export const removePost = (idPost) => {
+//   deletePost(idPost);
+// };
 
-// export function showDate() {
-//   // const date = new Date(Date.UTC(2012, 11, 20, 3, 0, 0));
-//   const date = Date.now();
-//   console.log(date);
+// export const removePost = (idPost) => {
+//   deletePost(idPost)
+//     .then((deleteDocs) => {
+//       const btnRemove = document.getElementById(idPost);
+//       btnRemove.addEventListener('click', () => {
+//         deleteDocs.docs.forEach((doc)=>{
+//           const idPost = doc.id;
 
-//   // an application may want to use UTC and make that visible
-//   // const options = { timeZone: 'UTC', timeZoneName: 'short' };
-//   // console.log(date.toLocaleTimeString('sp-CO', options));
-// }
-// showDate();
+//         });
+//       });
+//     });
+// };
+
+// export const removePost = () => {
+// const btnRemove = document.querySelectorAll('.btn_remove');
+// btnRemove.addEventListener('click', console.log('hola estoy probando'));
+
+// ------
+// FER
+
+// // Paso a paso
+
+// // Contar con el boton que se necesita para editar (Lapicito)
+// const editForm = document.getElementById('edit_button');
+// // Lograr que se active al ser clickeado, mediante un addEventListener
+// editForm.addEventListener('click', (e) => {
+//   e.preventDefault();
+//   console.log(e);
+// // Que al ser clickeado el boton muestre una ventana con las opciones de aceptar y cancelar
+//   // const chanPost = window.confirm('¿Deseas editar esta publicacion?');
+//   // Que al dar click en aceptar muestre el post elegido para ser editado en un
+//   // formato que permita la manipulación de este
+
+//   // Que en esta misma instacia permita guardar la edición mediante un botón
+
+//   // Que se muestre en el feed el post editado
+// });
