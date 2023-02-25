@@ -104,7 +104,7 @@ export async function edPost(postId, postEd) {
 
 export function updateCollection() {
   onSnapshot(collection(db, 'Posts'), (docu) => {
-    console.log('Current data: ', docu, Date.now());
+    console.log('Current data: ', docu);
   });
 }
 
