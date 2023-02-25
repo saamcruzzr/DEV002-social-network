@@ -1,7 +1,7 @@
 // PARA QUE NO ME LO BORRE EN FEED BRANCH
 // eslint-disable-next-line import/no-cycle
 import { onNavigate } from '../main.js';
-import { loginUser, registerGoogle } from '../firebase/functions.js';
+import { loginUser, registerGoogle, updateCollection } from '../firebase/functions.js';
 import { savePost, showPost } from './Feed.js';
 
 export const Login = () => {
@@ -53,6 +53,10 @@ export const Login = () => {
           onNavigate('/feed');
           savePost();
           showPost();
+          updateCollection();
+          // .then((idPost) => {
+          //   removePost(idPost);
+          // });
         })
         .catch((error) => {
           if (error.code === 'auth/user-not-found') {
@@ -99,6 +103,7 @@ export const Login = () => {
         onNavigate('/feed');
         savePost();
         showPost();
+        updateCollection();
         // });
       })
       .catch((error) => {

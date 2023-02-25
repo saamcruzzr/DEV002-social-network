@@ -1,4 +1,4 @@
-/*PARA QUE NO ME LO BORRE EN FEED BRANCH*/
+/* /PARA QUE NO ME LO BORRE EN FEED BRANCH/ */
 /* Fuentes Alegreya Sans y Alegreya Sans SC
 font-family: 'Alegreya Sans', sans-serif;
 font-family: 'Alegreya Sans SC', sans-serif;*/
@@ -21,7 +21,7 @@ font-family: 'Alegreya Sans SC', sans-serif;*/
     --button-bg-color: #242424;
     --text-color: #FFF;
     --post-bg-color: #e4729c;
-    /*nombre caracteristico??*/
+    /* /nombre caracteristico??/ */
     --amarillo-beige-arena: #E4C988;
     --naranja: #C27664;
     --text-corrida: 'Alegreya Sans', sans-serif;
@@ -34,7 +34,7 @@ font-family: 'Alegreya Sans SC', sans-serif;*/
     background-color: #2E4A45;
     color: #fff;
     font-weight: 500;
-    /*border: 2px solid red;*/
+    /* border: 2px solid red; */
 }
 
 .title {
@@ -130,7 +130,7 @@ input {
 
 .btnFeed {
     border: 2px solid var(--title-color);
-    width: max-content; /**/
+    width: max-content;
     padding: 10px;
 }
 .btnLog {
@@ -234,6 +234,7 @@ hr {
     flex-direction: column;
 }
 .textarea_profile {
+    font-size: 20px;
     outline: none;   
     border: 2px solid var(--amarillo-beige-arena);
     border-radius: 4px;
@@ -264,10 +265,73 @@ hr {
     width: max-content;
     border: 2px solid var(--naranja);
 }
-
-.imgLike {
+.likear {
+    border: 1px solid greenyellow;
+}
+.likear:hover {
+    background-color: #e4729c;
+}
+.imgLikeRosa, .imgLikeVacio {
+    border: 1px solid red;
     margin-left: 5%;
     width: 40px;
+    background: none;
 }
 
+.imgEdit {
+    width: 50%;
+    height: 50%;
+    position: relative;
+    right: -4%;
+}
+#edit_button {
+    width: 20%;
+    height: 20%;
+    position: relative;
+    right: -80%;
+    top: 5%;
+    border: none;
+    z-index: auto;
+}
 
+/* /ELIMINAR POST/ */
+.postUsers {
+    position: relative;
+}
+.container_remove {
+    border: 1px solid yellow;
+    position: absolute;
+    bottom: 15px;
+    right: 40px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    /* padding: 5px; */
+}
+/* .textRemove {
+    border:1px solid red;
+    width: min-content;
+} */
+.imgRemove {
+    border:1px solid blue;
+    width: 35px;
+    height: 35px;
+}
+
+/* BOTÓN DE EDITAR */
+
+.imgEdit {
+    width: 50%;
+    height: 50%;
+    position: relative;
+    right: -4%;
+}
+#edit_button {
+    width: 20%;
+    height: 20%;
+    position: relative;
+    right: -80%;
+    top: 5%;
+    border: none;
+    z-index: auto;
+}
