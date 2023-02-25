@@ -2,10 +2,12 @@
 // eslint-disable-next-line import/no-cycle
 // import { onNavigate } from '../main.js';
 // import { async } from 'regenerator-runtime';
-import { auth } from '../firebase/firebase.js';
+import {
+  auth, doc, getDoc, db,
+} from '../firebase/firebase.js';
 // eslint-disable-next-line import/no-cycle
 import {
-  addPost, getPost, observerUser, edPost, deletePost, darLike,
+  addPost, getPost, observerUser, edPost, deletePost, darLike, quitarLike,
 } from '../firebase/functions.js';
 
 export const Feed = () => {
@@ -89,6 +91,7 @@ export const showPost = () => {
                 <div class='likear' id=${doc.id}>
                   <img class='imgLikeRosa' src="./IMG/corazonRosa.png" alt="Corazón pintado de rosa">
                   <img class ='imgLikeVacio' src="./IMG/corazon.png" alt="Corazón sin pintar"></img>
+                  <span id=${'c'}${doc.id}>0</span>
                 </div>
                 <div class='container_remove'>
                   <!--<p class='textRemove'>Eliminar Publicación</p>-->
@@ -192,7 +195,7 @@ export const showPost = () => {
       // y se agrega elem uid al array
       const likePost = sectionPosts.querySelectorAll('.likear');
       likePost.forEach((btnLike) => {
-        btnLike.addEventListener('click', () => {
+        btnLike.addEventListener('click', async () => {
           const userUidLike = auth.currentUser.uid;
           // const x = doc.data().userUid;
           // const x = db.doc;
@@ -200,13 +203,42 @@ export const showPost = () => {
           // console.log(`AQUI ${x}`);
           // console.log(btnLike.id);
           // if () {
-          //   // si en totalLikes existe userUidLike se ejecuta quitarLike
-
+          // si en totalLikes existe userUidLike se ejecuta quitarLike
           // quitarLike(userUidLike, btnLike.id);
           // } else {
-          //   // si en totalLikes NO existe userUidLike se ejecuta darLike
-          darLike(userUidLike, btnLike.id);
+          // si en totalLikes NO existe userUidLike se ejecuta darLike
+          // darLike(userUidLike, btnLike.id);
           // }
+          const docRef = doc(db, 'Posts', btnLike.id);
+          const docSnap = await getDoc(docRef);
+
+          if (docSnap.exists()) {
+            // console.log('Document data:', docSnap.data().totalLikes);
+            if (docSnap.data().totalLikes.includes(userUidLike)) {
+              quitarLike(userUidLike, btnLike.id)
+                .then(() => {
+                  console.log('Document data:', docSnap.data().totalLikes.length);
+                  const numero = document.getElementById(`${'c'}${btnLike.id}`);
+                  console.log(numero);
+                  numero.innerHTML = docSnap.data().totalLikes.length;
+                });
+              // .then((result) => console.log(result));
+            } else {
+              darLike(userUidLike, btnLike.id)
+                // .then(() => console.log('Document data:', docSnap.data().totalLikes.length));
+                // .then((result) => console.log(result));
+                .then(() => {
+                  console.log('Document data:', docSnap.data().totalLikes.length);
+                  const numero = document.getElementById(`${'c'}${btnLike.id}`);
+                  console.log(numero);
+                  numero.innerHTML = docSnap.data().totalLikes.length;
+                });
+            }
+            // console.log('Document data:', docSnap.data().totalLikes);
+          } else {
+            // doc.data() will be undefined in this case
+            console.log('No such document!');
+          }
         });
       });
 
