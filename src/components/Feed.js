@@ -69,26 +69,26 @@ export const showPost = () => {
       sectionPosts.innerHTML = '';
       const userLoginFirebase = auth.currentUser.uid;
       // console.log(auth);
-      postSnapshot.docs.forEach((doc) => {
-        const userPost = doc.data().userUid;
-        // console.log(doc.data().post);
+      postSnapshot.docs.forEach((docu) => {
+        const userPost = docu.data().userUid;
+        // console.log(docu.data().post);
         if (userLoginFirebase === userPost) {
           const articlePost = `
             <article class='postUsers'>
-              <div name='feed' id=${doc.id}>
-                <label id='nameUserPost' for='name' class='name_user'>${doc.data().nameUser}</label>
+              <div name='feed' id=${docu.id}>
+                <label id='nameUserPost' for='name' class='name_user'>${docu.data().nameUser}</label>
                 <button type='button' class='btn_edit'>
                   <img class='imgEdit' src='./IMG/boligrafo.png' alt='Lápiz de edición'>
                 </button>
-                <h4 id='textPost' class='textarea_post' name='textarea'>${doc.data().post}</h4>
-                <div class='likear' id=${doc.id}>
+                <h4 id='textPost' class='textarea_post' name='textarea'>${docu.data().post}</h4>
+                <div class='likear' id=${docu.id}>
                   <img class='imgLikeRosa' src="./IMG/corazonRosa.png" alt="Corazón pintado de rosa">
                   <img class ='imgLikeVacio' src="./IMG/corazon.png" alt="Corazón sin pintar"></img>
-                  <span id=${'c'}${doc.id}>0</span>
+                  <span id=${'c'}${docu.id}>0</span>
                 </div>
                 <div class='container_remove'>
                   <!--<p class='textRemove'>Eliminar Publicación</p>-->
-                  <button class='btn_remove' id=${'de'}${doc.id}>
+                  <button class='btn_remove' id=${'de'}${docu.id}>
                     <img class='imgRemove' src="./IMG/eliminar.png" alt="Eliminar publicación">
                   </button>
                 </div>
@@ -102,9 +102,9 @@ export const showPost = () => {
           const articlePost = `
           <article class='postUsers'>
             <div name='feed' id='post'>
-              <label id='nameUserPost' for='name' class='name_user'>${doc.data().nameUser}</label>
-              <h4 id='textPost' class='textarea_post' name='textarea'>${doc.data().post}</h4>
-              <div class='likear' id=${doc.id}>
+              <label id='nameUserPost' for='name' class='name_user'>${docu.data().nameUser}</label>
+              <h4 id='textPost' class='textarea_post' name='textarea'>${docu.data().post}</h4>
+              <div class='likear' id=${docu.id}>
                 <img class='imgLikeRosa' src="./IMG/corazonRosa.png" alt="Corazón pintado de rosa">
                 <img class ='imgLikeVacio' src="./IMG/corazon.png" alt="Corazón sin pintar"></img>
               </div>
