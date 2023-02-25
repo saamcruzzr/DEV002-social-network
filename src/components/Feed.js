@@ -45,22 +45,15 @@ export const Feed = () => {
 
 export const savePost = () => {
   const postForm = document.getElementById('profile');
-  // console.log('aqui mismito');
-  // if (postForm) {
   postForm.addEventListener('submit', (e) => {
     e.preventDefault();
     const txtPost = postForm.textProfile.value;
     const errorPost = document.getElementById('errorNoPost');
     if (txtPost !== '') {
-      // }
       const callback = (txt, uid, nameU, dateP) => {
-      // console.log(`se ejecutó el callback ${uid}`);
         addPost(txt, uid, nameU, dateP);
       };
       observerUser(callback, txtPost);
-      // .then((userPost) => {
-      //   console.log(`este es el final${userPost}`);
-      // });
       document.getElementsByClassName('textarea_profile')[0].value = '';
     } else {
       errorPost.textContent = 'No has agregado texto a tu publicación';
@@ -105,11 +98,6 @@ export const showPost = () => {
             </article>
           `;
           sectionPosts.innerHTML += articlePost;
-        //   const btnRemove = sectionPosts.querySelector(`#${doc.id}`);
-        //   btnRemove.addEventListener('click', () => {
-        //     console.log('acaaaaa')
-        // })
-        //   console.log(btnRemove);
         } else {
           const articlePost = `
           <article class='postUsers'>
@@ -130,7 +118,6 @@ export const showPost = () => {
         `;
           sectionPosts.innerHTML += articlePost;
         }
-        // removePost(doc.id);
       });
 
       // DELETE
@@ -236,28 +223,6 @@ export const showPost = () => {
     });
 };
 
-// export const removePost = (idPost) => {
-//   deletePost(idPost);
-// };
-
-// export const removePost = (idPost) => {
-//   deletePost(idPost)
-//     .then((deleteDocs) => {
-//       const btnRemove = document.getElementById(idPost);
-//       btnRemove.addEventListener('click', () => {
-//         deleteDocs.docs.forEach((doc)=>{
-//           const idPost = doc.id;
-
-//         });
-//       });
-//     });
-// };
-
-// export const removePost = () => {
-// const btnRemove = document.querySelectorAll('.btn_remove');
-// btnRemove.addEventListener('click', console.log('hola estoy probando'));
-
-// ------
 // FER
 
 // // Paso a paso
