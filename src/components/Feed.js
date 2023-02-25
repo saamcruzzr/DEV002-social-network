@@ -92,6 +92,7 @@ export const showPost = () => {
                 <div class='likear' id=${doc.id}>
                   <img class='imgLikeRosa' src="./IMG/corazonRosa.png" alt="Corazón pintado de rosa">
                   <img class ='imgLikeVacio' src="./IMG/corazon.png" alt="Corazón sin pintar"></img>
+                  <span id=${'c'}${doc.id}>0</span>
                 </div>
                 <div class='container_remove'>
                   <!--<p class='textRemove'>Eliminar Publicación</p>-->
@@ -212,12 +213,28 @@ export const showPost = () => {
           const docSnap = await getDoc(docRef);
 
           if (docSnap.exists()) {
-            console.log('Document data:', docSnap.data().totalLikes);
+            // console.log('Document data:', docSnap.data().totalLikes);
             if (docSnap.data().totalLikes.includes(userUidLike)) {
-              quitarLike(userUidLike, btnLike.id);
+              quitarLike(userUidLike, btnLike.id)
+                .then(() => {
+                  console.log('Document data:', docSnap.data().totalLikes.length);
+                  const numero = document.getElementById(`${'c'}${btnLike.id}`);
+                  console.log(numero);
+                  numero.innerHTML = docSnap.data().totalLikes.length;
+                });
+                // .then((result) => console.log(result));
             } else {
-              darLike(userUidLike, btnLike.id);
+              darLike(userUidLike, btnLike.id)
+                // .then(() => console.log('Document data:', docSnap.data().totalLikes.length));
+                // .then((result) => console.log(result));
+                .then(() => {
+                  console.log('Document data:', docSnap.data().totalLikes.length);
+                  const numero = document.getElementById(`${'c'}${btnLike.id}`);
+                  console.log(numero);
+                  numero.innerHTML = docSnap.data().totalLikes.length;
+                });
             }
+            // console.log('Document data:', docSnap.data().totalLikes);
           } else {
             // doc.data() will be undefined in this case
             console.log('No such document!');

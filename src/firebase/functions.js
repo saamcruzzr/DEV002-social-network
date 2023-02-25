@@ -103,27 +103,29 @@ export async function edPost(postId, postEd) {
 // ACTUALIZA documentos a cada rato
 
 export function updateCollection() {
-  onSnapshot(collection(db, 'Posts'), (docu) => {
-    console.log('Current data: ', docu);
+  onSnapshot(collection(db, 'Posts'), (document) => {
+    document.forEach((docu) => console.log(docu));
   });
 }
 
 // LIKES
-export function darLike(userUidLike, idPost) {
+export async function darLike(userUidLike, idPost) {
   const likes = doc(db, 'Posts', idPost);
   // const userUidLike = auth.currentUser.uid;
-  updateDoc(likes, {
+  await updateDoc(likes, {
     totalLikes: arrayUnion(userUidLike),
     // totalLikes: arrayUnion(auth.currentUser.uid),
   });
+  return likes;
 }
 
-export function quitarLike(userUidDislike, idPost) {
+export async function quitarLike(userUidDislike, idPost) {
   const dislikes = doc(db, 'Posts', idPost);
   // const userUidDislike = auth.currentUser.uid;
-  updateDoc(dislikes, {
+  await updateDoc(dislikes, {
     totalLikes: arrayRemove(userUidDislike),
   });
+  return dislikes;
 }
 
 // DOCUMENTACIÓN LIKES
