@@ -71,6 +71,7 @@ export const showPost = () => {
       // console.log(auth);
       postSnapshot.docs.forEach((doc) => {
         const userPost = doc.data().userUid;
+        // console.log(doc.data().post);
         if (userLoginFirebase === userPost) {
           const articlePost = `
             <article class='postUsers'>
@@ -83,6 +84,7 @@ export const showPost = () => {
                 <div class='likear' id=${doc.id}>
                   <img class='imgLikeRosa' src="./IMG/corazonRosa.png" alt="Corazón pintado de rosa">
                   <img class ='imgLikeVacio' src="./IMG/corazon.png" alt="Corazón sin pintar"></img>
+                  <span id=${'c'}${doc.id}>0</span>
                 </div>
                 <div class='container_remove'>
                   <!--<p class='textRemove'>Eliminar Publicación</p>-->
@@ -129,7 +131,7 @@ export const showPost = () => {
             deletePost(btn.id)
               .then(() => { showPost(); });
           } else {
-            console.log('no se cancela nada');
+            console.log('no se borra nada');
           }
         });
       });
@@ -143,12 +145,13 @@ export const showPost = () => {
       const btnEdit = sectionPosts.querySelectorAll('.btn_edit');
       btnEdit.forEach((btnE) => {
         btnE.addEventListener('click', (e) => {
+          const editPost = prompt('inserte nuevo texto');
           console.log(e);
           console.log(e.target.parentElement.parentElement.id);
           console.log(btnE.id);
           const idPost = e.target.parentElement.parentElement.id;
-          // let editPost = doc.data().post;
-          edPost(idPost);
+          edPost(idPost, editPost);
+          showPost();
         });
       });
 
@@ -175,29 +178,36 @@ export const showPost = () => {
       likePost.forEach((btnLike) => {
         btnLike.addEventListener('click', async () => {
           const userUidLike = auth.currentUser.uid;
-          // const x = doc.data().userUid;
-          // const x = db.doc;
-          console.log(userUidLike);
-          // console.log(`AQUI ${x}`);
-          console.log(btnLike.id);
-          // if () {
-          //   // si en totalLikes existe userUidLike se ejecuta quitarLike
-
+          // si en totalLikes existe userUidLike se ejecuta quitarLike
           // quitarLike(userUidLike, btnLike.id);
-          // } else {
-          //   // si en totalLikes NO existe userUidLike se ejecuta darLike
-          darLike(userUidLike, btnLike.id);
-          // }
+          // si en totalLikes NO existe userUidLike se ejecuta darLike
+          // darLike(userUidLike, btnLike.id);
           const docRef = doc(db, 'Posts', btnLike.id);
           const docSnap = await getDoc(docRef);
 
           if (docSnap.exists()) {
-            console.log('Document data:', docSnap.data().totalLikes);
+            // console.log('Document data:', docSnap.data().totalLikes);
             if (docSnap.data().totalLikes.includes(userUidLike)) {
-              quitarLike(userUidLike, btnLike.id);
+              quitarLike(userUidLike, btnLike.id)
+                .then(() => {
+                  console.log('Document data:', docSnap.data().totalLikes.length);
+                  const numero = document.getElementById(`${'c'}${btnLike.id}`);
+                  console.log(numero);
+                  numero.innerHTML = docSnap.data().totalLikes.length;
+                });
+              // .then((result) => console.log(result));
             } else {
-              darLike(userUidLike, btnLike.id);
+              darLike(userUidLike, btnLike.id)
+                // .then(() => console.log('Document data:', docSnap.data().totalLikes.length));
+                // .then((result) => console.log(result));
+                .then(() => {
+                  console.log('Document data:', docSnap.data().totalLikes.length);
+                  const numero = document.getElementById(`${'c'}${btnLike.id}`);
+                  console.log(numero);
+                  numero.innerHTML = docSnap.data().totalLikes.length;
+                });
             }
+            // console.log('Document data:', docSnap.data().totalLikes);
           } else {
             // doc.data() will be undefined in this case
             console.log('No such document!');
