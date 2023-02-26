@@ -139,7 +139,7 @@ export const showPost = () => {
             if (idH4.slice(2) === idBtn.slice(2)) {
               // console.log(textToEdit);
               const textToEdit = h4T.innerHTML;
-              let editPost = window.prompt('inserte nuevo texto', textToEdit);
+              let editPost = prompt('inserte nuevo texto', textToEdit);
               if (editPost === null) {
                 editPost = textToEdit;
               }
