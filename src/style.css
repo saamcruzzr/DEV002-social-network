@@ -90,10 +90,10 @@ font-family: 'Alegreya Sans SC', sans-serif;*/
     width: 250px;
     margin: auto;
 }
-label {
+/* label {
     margin-top: 10px;
-    /* border: 2px solid red; */
-}
+    border: 2px solid red; 
+} */
 .text_login {
     color: var(--post-bg-color);
     font-size: 25px;
@@ -178,10 +178,7 @@ input {
     color: var(--amarillo-beige-arena);
     margin-top: 1%;
 }
-.name_user {
-    color: #FFF;
-    margin: 6% 15% 2% 23%;
-}
+
 hr {
     width: 100%;
     height: 1px;
@@ -264,24 +261,42 @@ hr {
     width: max-content;
     border: 2px solid var(--naranja);
 }
-.likear {
-    border: 1px solid greenyellow;
-}
-.likear:hover {
-    background-color: #e4729c;
-}
-.imgLikeRosa, .imgLikeVacio {
-    border: 1px solid red;
-    margin-left: 5%;
-    width: 40px;
-    background: none;
+
+/* POSTS */
+
+.postUsers {
+    position: relative;
 }
 
+.name_user {
+    color: #FFF;
+    width: 75%;
+    border: 2px solid red;
+    /* margin: 6% 15% 2% 23%; */
+}
+#nameAndEdit{
+    display: flex;
+    flex-direction: row;
+    border: 2px solid greenyellow;
+    padding-right: 7%;
+    padding-left: 7%;
+    align-items: center;
+}
+
+/* EDIT */
+.btn_edit{
+    box-sizing: content-box;
+    /* padding-right: 10%;
+    padding-top: 1rem; */
+    width: 25%;
+    border: 2px solid red;
+}
 .imgEdit {
-    width: 50%;
-    height: 50%;
-    position: relative;
-    right: -4%;
+    width: 2.3rem;
+    /* width: 50%; */
+    /* height: 50%; */
+    /* position: relative; */
+    /* right: -4%; */
 }
 #edit_button {
     width: 20%;
@@ -293,12 +308,24 @@ hr {
     z-index: auto;
 }
 
-/* ELIMINAR POST */
-.postUsers {
-    position: relative;
+/* LIKE */
+/* .likear {
+    border: 1px solid greenyellow;
+} */
+.likear:hover {
+    background-color: #e4729c;
 }
+.imgLikeRosa, .imgLikeVacio {
+    /* border: 1px solid red; */
+    margin-left: 5%;
+    width: 40px;
+    background: none;
+}
+
+/* ELIMINAR POST */
+
 .container_remove {
-    border: 1px solid yellow;
+    /* border: 1px solid yellow; */
     position: absolute;
     bottom: 15px;
     right: 40px;
@@ -307,27 +334,12 @@ hr {
     align-items: center;
     /* padding: 5px; */
 }
+.btn_remove{
+    border: none;
+}
 
 .imgRemove {
-    border:1px solid blue;
+    /* border:1px solid blue; */
     width: 35px;
     height: 35px;
-}
-
-/* BOTÓN DE EDITAR */
-
-.imgEdit {
-    width: 50%;
-    height: 50%;
-    position: relative;
-    right: -4%;
-}
-#edit_button {
-    width: 20%;
-    height: 20%;
-    position: relative;
-    right: -80%;
-    top: 5%;
-    border: none;
-    z-index: auto;
 }

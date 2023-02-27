@@ -79,10 +79,12 @@ export const showPost = () => {
           const articlePost = `
             <article class='postUsers'>
               <div name='feed' id=${docu.id}>
-                <label id='nameUserPost' for='name' class='name_user'>${docu.data().nameUser}</label>
-                <button type='button' id=${'ed'}${docu.id} class='btn_edit'>
-                  <img class='imgEdit' src='./IMG/boligrafo.png' alt='Lápiz de edición'>
-                </button>
+                <div id='nameAndEdit'>
+                  <label id='nameUserPost' for='name' class='name_user'>${docu.data().nameUser}</label>
+                  <button type='button' id=${'ed'}${docu.id} class='btn_edit'>
+                    <img class='imgEdit' src='./IMG/boligrafo.png' alt='Lápiz de edición'>
+                  </button>
+                </div>
                 <h4 id=${'h4'}${docu.id} class='textarea_post' name='textarea'>${docu.data().post}</h4>
                 <div class='likear' id=${docu.id}>
                   <img class='imgLikeRosa' src='./IMG/corazonRosa.png' alt='Corazón pintado de rosa'>
@@ -104,7 +106,9 @@ export const showPost = () => {
           const articlePost = `
           <article class='postUsers'>
             <div name='feed' id='post'>
-              <label id='nameUserPost' for='name' class='name_user'>${docu.data().nameUser}</label>
+              <div id='nameAndEdit'>
+                <label id='nameUserPost' for='name' class='name_user'>${docu.data().nameUser}</label>
+              </div>
               <h4 id='textPost' class='textarea_post' name='textarea'>${docu.data().post}</h4>
               <div class='likear' id=${docu.id}>
                 <img class='imgLikeRosa' src='./IMG/corazonRosa.png' alt='Corazón pintado de rosa'>
