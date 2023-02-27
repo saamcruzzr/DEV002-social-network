@@ -98,8 +98,8 @@ export async function edPost(postId, postEd) {
 // ACTUALIZA documentos a cada rato
 
 export function updateCollection() {
-  onSnapshot(collection(db, 'Posts'), (docu) => {
-    console.log('Current data: ', docu);
+  onSnapshot(collection(db, 'Posts'), (document) => {
+    document.forEach((docu) => console.log(docu));
   });
 }
 

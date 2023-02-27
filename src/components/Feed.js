@@ -84,7 +84,7 @@ export const showPost = () => {
                 <div class='likear' id=${docu.id}>
                   <img class='imgLikeRosa' src="./IMG/corazonRosa.png" alt="Corazón pintado de rosa">
                   <img class ='imgLikeVacio' src="./IMG/corazon.png" alt="Corazón sin pintar"></img>
-                  <span id=${'c'}${docu.id}>0</span>
+                  <span id=${'c'}${doc.id}>0</span>
                 </div>
                 <div class='container_remove'>
                   <!--<p class='textRemove'>Eliminar Publicación</p>-->
@@ -178,10 +178,17 @@ export const showPost = () => {
       likePost.forEach((btnLike) => {
         btnLike.addEventListener('click', async () => {
           const userUidLike = auth.currentUser.uid;
+          // const x = doc.data().userUid;
+          // const x = db.doc;
+          // console.log(userUidLike);
+          // console.log(`AQUI ${x}`);
+          // console.log(btnLike.id);
+          // if () {
           // si en totalLikes existe userUidLike se ejecuta quitarLike
           // quitarLike(userUidLike, btnLike.id);
           // si en totalLikes NO existe userUidLike se ejecuta darLike
           // darLike(userUidLike, btnLike.id);
+          // }
           const docRef = doc(db, 'Posts', btnLike.id);
           const docSnap = await getDoc(docRef);
 
