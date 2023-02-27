@@ -95,30 +95,40 @@ export async function edPost(postId, postEd) {
   return changePost;
 }
 
-// ACTUALIZA documentos a cada rato
-
+// ACTUALIZA la coleccion a cada rato
 export function updateCollection() {
-  onSnapshot(collection(db, 'Posts'), (docu) => {
-    console.log('Current data: ', docu);
-  });
+  onSnapshot(collection(db, 'Posts'));
+  // onSnapshot(collection(db, 'Posts'), (docu) => {
+  // console.log('Current data: ', docu);
+  // });
 }
 
 // LIKES
 export async function darLike(userUidLike, idPost) {
   const likes = doc(db, 'Posts', idPost);
+  // console.log(likes);
   // const userUidLike = auth.currentUser.uid;
   await updateDoc(likes, {
     totalLikes: arrayUnion(userUidLike),
     // totalLikes: arrayUnion(auth.currentUser.uid),
   });
-  return likes;
+  // const numberLikes = await getDoc(doc(db, 'Posts', idPost).totalLikes);
+  // return numberLikes;
+  // const prueba = console.log(likes);
+  // return prueba;
+  // return likes;
 }
 
 export async function quitarLike(userUidDislike, idPost) {
   const dislikes = doc(db, 'Posts', idPost);
+  // console.log(dislikes);
   // const userUidDislike = auth.currentUser.uid;
   await updateDoc(dislikes, {
     totalLikes: arrayRemove(userUidDislike),
   });
-  return dislikes;
+  // const numberLikes = await getDoc(doc(db, 'Posts', idPost).totalLikes);
+  // return numberLikes;
+  // const prueba = console.log(idPost);
+  // return prueba;
+  // return dislikes;
 }
