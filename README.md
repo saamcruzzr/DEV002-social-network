@@ -8,15 +8,15 @@
 * [4. Prototipo de Alta Fidelidad](#4-prototipo-de-alta-fidelidad)
 * [5. Link a Netlify](#5-link-a-netlify)
 
-## 1. Definición de Producto
+# 1. Definición de Producto
 
 SabiOld, es una SPA diseñada para conectar a los adultos mayores, estas personas que han sido relegadas y dejadas de lado en el mundo actual debido a las redes sociales que están destinas a jóvenes y adultos. 
 
 La finalidad de esta aplicación es lograr que cada adulto mayor pueda compartir experiencias, vivencias y pensamientos con sus contemporaneos. Los colores, botones y tamaños de fuente están diseñados justamente para sean comprendidos por nuestros usuarios.
 
-## 2. Historias de Usuario
+# 2. Historias de Usuario
 
-# HU1: REGISTRARSE
+## HU1: Registrarse
 
 **Yo como:** Adulto mayor nuevo en tecnología y sin una cuenta en SabiOld(nombre)
 **Quiero:** poder registrarme en la RS SabiOld  (nombre) de manera fácil y rápida
@@ -66,7 +66,7 @@ La finalidad de esta aplicación es lograr que cada adulto mayor pueda compartir
 
 - Verificar que se generó el registro en la base de datos con acceso google
 
-# HU2: INICIAR SESIÓN
+## HU2: Iniciar Sesión
 
 **Yo como:** Adulto mayor con intención de ver lo que han compartido mis contemporáneos
 **Quiero:** iniciar sesión en la red social
@@ -100,7 +100,7 @@ La finalidad de esta aplicación es lograr que cada adulto mayor pueda compartir
 - Ubicar el button que debe ser clickeado para ingresar y que tenga la determinada funcionalidad
 - Crear acceso para inicio de sesion con google
 
-# HU3 Hacer Publicaciones
+## HU3: Hacer Publicaciones
 
 **Yo como:** Adulto mayor con problemas visuales y amante del pensamiento crítico
 **Quiero:** Escribir textos y publicarlos sin esforzar la vista
@@ -136,7 +136,7 @@ La finalidad de esta aplicación es lograr que cada adulto mayor pueda compartir
 
 - Mostrar publicación
 
-# HU4 (Dar o Quitar like)
+## HU4: Dar o Quitar like
 
 **Yo como:** Adulto mayor interesado en la política 
 **Quiero:** interactuar mediante likes con otras publicaciones
@@ -166,7 +166,7 @@ La finalidad de esta aplicación es lograr que cada adulto mayor pueda compartir
 
 - Que se pueda interactuar correctamente con el botón de like
 
-# HU5 (Conteo de likes)
+## HU5: Conteo de likes
 
 **Yo como:** Adulta mayor interesada en conocer el agrado de mis publicaciones
 **Quiero:** saber a cuántas personas les a gustado mi publicación  
@@ -180,7 +180,7 @@ La finalidad de esta aplicación es lograr que cada adulto mayor pueda compartir
 
 - Que se muestre el número de interacciones correcto
 
-# HU6 (Eliminar post pidiendo confirmación)
+## HU6: Eliminar post pidiendo confirmación
 
 **Yo como:** Adulto mayor que había publicado mi opinión sobre una noticia
 **Quiero:** poder eliminar post de autoría propia previa confirmación
@@ -212,7 +212,7 @@ La finalidad de esta aplicación es lograr que cada adulto mayor pueda compartir
 
 - Que se pueda cancelar el proceso de eliminación mediante el cuadro de confirmación
 
-# HU7 Editar Post
+## HU7: Editar Post
 
 **Yo como:** Adulto mayor que omití una palabra en mi publicación
 **Quiero:** Poder editar mi publicación y que sea fácil reconocer que estoy en “modo edición” 
@@ -234,32 +234,33 @@ La finalidad de esta aplicación es lograr que cada adulto mayor pueda compartir
 
 - Que al ser guardado el post con las respectivas correcciones o modificaciones se actualice
 
-## 3. Prototipo de Baja Fidelidad
+# 3. Prototipo de Baja Fidelidad
 
 A continuación se encuentran los prototipos de baja fidelidad de cada una de las colaboradoras del proyecto.
 
 _Fernanda Romero_
 
-![pb-fer] (https://github.com/FerRomero1990/DEV002-social-network/blob/main/PB%20Fer.png)
+![pb-fer](https://github.com/FerRomero1990/DEV002-social-network/blob/main/PB%20Fer.png)
+
 
 _Jess Cuellar_
 
-![pb-jess] (https://github.com/FerRomero1990/DEV002-social-network/blob/main/PB%20Jess.png)
+![pb-jess](https://github.com/FerRomero1990/DEV002-social-network/blob/main/PB%20Jess.png)
 
 _Sam Cruz_
 
-![pb-sam] (https://github.com/FerRomero1990/DEV002-social-network/blob/main/PB%20Sam.png)
+![pb-sam](https://github.com/FerRomero1990/DEV002-social-network/blob/main/PB%20Sam.png)
 
 _Prototipo Consolidado_
 
-![pb-consolidado] (https://github.com/FerRomero1990/DEV002-social-network/blob/main/PB%20Consolidado.png)
+![pb-consolidado](https://github.com/FerRomero1990/DEV002-social-network/blob/main/PB%20Consolidado.png)
 
-## 4. Prototipo de Alta Fidelidad
+# 4. Prototipo de Alta Fidelidad
 
 Posteriormente partiendo del consolidado del prototipo de baja fidelidad se procedió a realizar en Figma el prototipo de alta fidelidad del proyecto.
 
-![pa-consolidado] (https://github.com/FerRomero1990/DEV002-social-network/blob/main/PA%20Consolidado.png)
+![pa-consolidado](https://github.com/FerRomero1990/DEV002-social-network/blob/main/PA%20Consolidado.png)
 
-## 5. Link a Netlify
+# 5. Link a Netlify
 
 Finalmente podemos encontrar la aplicación desplegando el siguiente link: https://sabiold.netlify.app
