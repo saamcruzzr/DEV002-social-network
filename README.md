@@ -257,9 +257,13 @@ _Prototipo Consolidado_
 
 # 4. Prototipo de Alta Fidelidad
 
-Posteriormente partiendo del consolidado del prototipo de baja fidelidad se procedió a realizar en Figma el prototipo de alta fidelidad del proyecto.
+Partiendo del consolidado del prototipo de baja fidelidad se procedió a realizar en Figma el prototipo de alta fidelidad del proyecto.
 
 ![pa-consolidado](src/IMG-Readme/PA-Consolidado.png)
+
+Posterior al desarrollo del test de usabilidad se implementaron las modificaciones pertinentes teniendo en cuenta el feedback dado por los usuarios.
+
+![pa-post-tu](src/IMG-Readme/PA-Post-TU.png)
 
 # 5. Link a Netlify
 
