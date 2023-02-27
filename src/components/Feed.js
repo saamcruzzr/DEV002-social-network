@@ -188,7 +188,7 @@ export const showPost = () => {
                   // console.log('Document data:', docSnap.data().totalLikes.length);
                   const numero = document.getElementById(`${'c'}${btnLike.id}`);
                   // console.log(numero);
-                  numero.innerHTML = docSnap.data().totalLikes.length;
+                  numero.innerHTML = (docSnap.data().totalLikes.length) - 1;
                 });
               // .then((result) => console.log(result));
             } else {
@@ -199,7 +199,7 @@ export const showPost = () => {
                   // console.log('Document data:', docSnap.data().totalLikes.length);
                   const numero = document.getElementById(`${'c'}${btnLike.id}`);
                   // console.log(numero);
-                  numero.innerHTML = docSnap.data().totalLikes.length;
+                  numero.innerHTML = (docSnap.data().totalLikes.length) + 1;
                 });
             }
             // console.log('Document data:', docSnap.data().totalLikes);
