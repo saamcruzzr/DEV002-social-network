@@ -277,7 +277,7 @@ hr {
     padding-left: 1rem;
     /* border: 1px solid greenyellow; */
 }
-.likear:hover {
+.likear:active {
     background-color: #e4729c;
 }
 .imgLikeRosa, .imgLikeVacio {
@@ -290,7 +290,7 @@ hr {
     
 }
 .imgLikeVacio {
-
+    display: none;
 }
 .contador {
     padding: 10px;
@@ -298,12 +298,13 @@ hr {
     font-size: 1.5rem;
     font-weight: 500;
     position: relative;
+    background: none;
 }
 /* EDITAR */
 
 .btn_edit{
     box-sizing: content-box;
-    /* padding-left: 1rem;  ESTE JESS*/
+    /* padding-left: 1rem;   */
     padding-left: 3rem;
     border: none;
 }
