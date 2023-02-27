@@ -1,7 +1,3 @@
-// PARA QUE NO ME LO BORRE EN FEED BRANCH
-// eslint-disable-next-line import/no-cycle
-// import { onNavigate } from '../main.js';
-// import { async } from 'regenerator-runtime';
 import {
   auth, doc, getDoc, db,
 } from '../firebase/firebase.js';
@@ -68,23 +64,21 @@ export const showPost = () => {
       const sectionPosts = document.getElementById('posts');
       sectionPosts.innerHTML = '';
       const userLoginFirebase = auth.currentUser.uid;
-      // console.log(auth);
       postSnapshot.docs.forEach((docu) => {
         const userPost = docu.data().userUid;
-        // console.log(docu.data().post);
         if (userLoginFirebase === userPost) {
           const articlePost = `
             <article class='postUsers'>
               <div name='feed' id=${docu.id}>
                 <label id='nameUserPost' for='name' class='name_user'>${docu.data().nameUser}</label>
-                <button type='button' class='btn_edit'>
+                <button type='button' id=${'ed'}${docu.id} class='btn_edit'>
                   <img class='imgEdit' src='./IMG/boligrafo.png' alt='Lápiz de edición'>
                 </button>
-                <h4 id='textPost' class='textarea_post' name='textarea'>${docu.data().post}</h4>
+                <h4 id=${'h4'}${docu.id} class='textarea_post' name='textarea'>${docu.data().post}</h4>
                 <div class='likear' id=${docu.id}>
-                  <img class='imgLikeRosa' src="./IMG/corazonRosa.png" alt="Corazón pintado de rosa">
-                  <img class ='imgLikeVacio' src="./IMG/corazon.png" alt="Corazón sin pintar"></img>
-                  <span id=${'c'}${doc.id}>0</span>
+                  <img class='imgLikeRosa' src='./IMG/corazonRosa.png' alt='Corazón pintado de rosa'>
+                  <img class ='imgLikeVacio' src='./IMG/corazon.png' alt='Corazón sin pintar'></img>
+                  <span id=${'c'}${docu.id}>0</span>
                 </div>
                 <div class='container_remove'>
                   <!--<p class='textRemove'>Eliminar Publicación</p>-->
@@ -105,12 +99,9 @@ export const showPost = () => {
               <label id='nameUserPost' for='name' class='name_user'>${docu.data().nameUser}</label>
               <h4 id='textPost' class='textarea_post' name='textarea'>${docu.data().post}</h4>
               <div class='likear' id=${docu.id}>
-                <img class='imgLikeRosa' src="./IMG/corazonRosa.png" alt="Corazón pintado de rosa">
-                <img class ='imgLikeVacio' src="./IMG/corazon.png" alt="Corazón sin pintar"></img>
-              </div>
-              <div class='container_remove'>
-                <!--<p class='textRemove'>Eliminar Publicación</p>-->
-                <!--<img class='imgRemove' src="./IMG/eliminar.png" alt="Eliminar publicación">-->
+                <img class='imgLikeRosa' src='./IMG/corazonRosa.png' alt='Corazón pintado de rosa'>
+                <img class ='imgLikeVacio' src='./IMG/corazon.png' alt='Corazón sin pintar'></img>
+                <span id=${'c'}${docu.id}>0</span>
               </div>
             </div>
             <hr>
@@ -125,8 +116,8 @@ export const showPost = () => {
       const btnRemove = sectionPosts.querySelectorAll('.btn_remove');
       btnRemove.forEach((btn) => {
         btn.addEventListener('click', () => {
-          const confirm = window.confirm('¿Realmente deseas borrar este post?');
-          if (confirm === true) {
+          const confirmRemove = window.confirm('¿Realmente deseas borrar este post?');
+          if (confirmRemove === true) {
           // console.log(btn.id);
             deletePost(btn.id)
               .then(() => { showPost(); });
@@ -138,36 +129,28 @@ export const showPost = () => {
 
       // EDIT
 
-      // Paso a paso
-
-      // Contar con el boton que se necesita para editar (Lapicito)
-      // Lograr que se active al ser clickeado, mediante un addEventListener
       const btnEdit = sectionPosts.querySelectorAll('.btn_edit');
+      const h4Text = sectionPosts.querySelectorAll('.textarea_post');
       btnEdit.forEach((btnE) => {
-        btnE.addEventListener('click', (e) => {
-          const editPost = prompt('inserte nuevo texto');
-          console.log(e);
-          console.log(e.target.parentElement.parentElement.id);
-          console.log(btnE.id);
-          const idPost = e.target.parentElement.parentElement.id;
-          edPost(idPost, editPost);
-          showPost();
+        h4Text.forEach((h4T) => {
+          const idH4 = h4T.id;
+          const idBtn = btnE.id;
+          btnE.addEventListener('click', (e) => {
+            if (idH4.slice(2) === idBtn.slice(2)) {
+              // console.log(textToEdit);
+              const textToEdit = h4T.innerHTML;
+              let editPost = prompt('inserte nuevo texto', textToEdit);
+              if (editPost === null) {
+                editPost = textToEdit;
+              }
+              const idPost = e.target.parentElement.parentElement.id;
+              console.log(editPost);
+              edPost(idPost, editPost);
+              showPost();
+            }
+          });
         });
       });
-
-      // textarea 'textProfile'
-
-      // e.preventDefault();
-      // console.log(e);
-      // Que al ser clickeado el boton muestre una ventana con las opciones de aceptar y cancelar
-      // const chanPost = window.confirm('¿Deseas editar esta publicacion?');
-      // Que al dar click en aceptar muestre el post elegido para ser editado en un
-      // formato que permita la manipulación de este
-
-      // Que en esta misma instacia permita guardar la edición mediante un botón
-
-      // Que se muestre en el feed el post editado
-      // });
 
       // LIKE
 
@@ -188,18 +171,23 @@ export const showPost = () => {
           // quitarLike(userUidLike, btnLike.id);
           // si en totalLikes NO existe userUidLike se ejecuta darLike
           // darLike(userUidLike, btnLike.id);
-          // }
+          // console.log(btnLike.id);
           const docRef = doc(db, 'Posts', btnLike.id);
           const docSnap = await getDoc(docRef);
-
+          // console.log(docRef);
+          // console.log(`${'docSnap: '}${docSnap}`);
+          // console.log(docSnap.exists());
+          // console.log(docSnap.data());
+          // console.log(userUidLike);
           if (docSnap.exists()) {
             // console.log('Document data:', docSnap.data().totalLikes);
+            // console.log(docSnap.data().totalLikes.includes(userUidLike));
             if (docSnap.data().totalLikes.includes(userUidLike)) {
               quitarLike(userUidLike, btnLike.id)
                 .then(() => {
-                  console.log('Document data:', docSnap.data().totalLikes.length);
+                  // console.log('Document data:', docSnap.data().totalLikes.length);
                   const numero = document.getElementById(`${'c'}${btnLike.id}`);
-                  console.log(numero);
+                  // console.log(numero);
                   numero.innerHTML = docSnap.data().totalLikes.length;
                 });
               // .then((result) => console.log(result));
@@ -208,9 +196,9 @@ export const showPost = () => {
                 // .then(() => console.log('Document data:', docSnap.data().totalLikes.length));
                 // .then((result) => console.log(result));
                 .then(() => {
-                  console.log('Document data:', docSnap.data().totalLikes.length);
+                  // console.log('Document data:', docSnap.data().totalLikes.length);
                   const numero = document.getElementById(`${'c'}${btnLike.id}`);
-                  console.log(numero);
+                  // console.log(numero);
                   numero.innerHTML = docSnap.data().totalLikes.length;
                 });
             }
