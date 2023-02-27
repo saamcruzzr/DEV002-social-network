@@ -1,4 +1,3 @@
-// PARA QUE NO ME LO BORRE EN FEED BRANCH
 // eslint-disable-next-line import/no-cycle
 import { onNavigate } from '../main.js';
 import {
@@ -63,10 +62,8 @@ export const Register = () => {
     if (confirmPassword === password && name !== '') {
       registerUser(email, password)
         .then((userCredential) => {
-        // Signed in
+        // Sign in
           const user = userCredential.user;
-          // console.log(`userEmailRegister:${user}`);
-
           addUser({
             authUid: user.uid,
             name,
@@ -82,23 +79,18 @@ export const Register = () => {
           const errorEmail = document.getElementById('errorEmail');
           const errorPassword = document.getElementById('errorPassword');
           if (error.code === 'auth/invalid-email') { // no teclea email
-            // const errorEmail = document.getElementById('errorEmail');
             errorEmail.textContent = 'Es necesario poner email';
           }
           if (error.code === 'auth/missing-email') { // no hay email
-            // const errorEmail = document.getElementById('errorEmail');
             errorEmail.textContent = 'Es necesario poner email';
           }
           if (error.code === 'auth/internal-error') { // no tiene @ "affd.fafa.fa"
-            // const errorEmail = document.getElementById('errorEmail');
             errorEmail.textContent = 'Es necesario poner email válido';
           }
           if (error.code === 'auth/email-already-in-use') { // ya está en uso el correo
-            // const errorEmail = document.getElementById('errorEmail');
             errorEmail.textContent = 'Este email ya está en uso';
           }
           if (error.code === 'auth/weak-password') { // menos de 6 caracteres
-            // const errorPassword = document.getElementById('errorPassword');
             errorPassword.textContent = 'La contraseña debe contener más de 6 caracteres';
           }
         });
@@ -116,10 +108,7 @@ export const Register = () => {
   googleRegister.addEventListener('click', () => {
     registerGoogle()
       .then((result) => {
-        // console.log('registrada con google', result);
         const user = result.user;
-        // console.log(`userGoogleRegister:${user}`);
-
         addUser({
           authUid: user.uid,
           name: user.displayName,

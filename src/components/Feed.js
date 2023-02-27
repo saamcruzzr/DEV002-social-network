@@ -6,6 +6,8 @@ import {
   addPost, getPost, observerUser, edPost, deletePost, darLike, quitarLike,
 } from '../firebase/functions.js';
 
+// FEED
+
 export const Feed = () => {
   const FeedDiv = document.createElement('div');
   const sectionFeed = `
@@ -39,6 +41,8 @@ export const Feed = () => {
   return FeedDiv;
 };
 
+// GUARDAR POST
+
 export const savePost = () => {
   const postForm = document.getElementById('profile');
   postForm.addEventListener('submit', (e) => {
@@ -57,10 +61,11 @@ export const savePost = () => {
   });
 };
 
+// MOSTRAR POST
+
 export const showPost = () => {
   getPost()
     .then((postSnapshot) => {
-      // console.log(postSnapshot);
       const sectionPosts = document.getElementById('posts');
       sectionPosts.innerHTML = '';
       const userLoginFirebase = auth.currentUser.uid;
@@ -87,7 +92,6 @@ export const showPost = () => {
                   </button>
                 </div>
               </div>
-              
               <hr>
             </article>
           `;
@@ -118,7 +122,6 @@ export const showPost = () => {
         btn.addEventListener('click', () => {
           const confirmRemove = window.confirm('¿Realmente deseas borrar este post?');
           if (confirmRemove === true) {
-          // console.log(btn.id);
             deletePost(btn.id)
               .then(() => { showPost(); });
           } else {
@@ -154,86 +157,30 @@ export const showPost = () => {
 
       // LIKE
 
-      // si le dan click al div, y el array likes estaba vacío
-      // se cambia a corazón pintado
-      // y se agrega elem uid al array
       const likePost = sectionPosts.querySelectorAll('.likear');
       likePost.forEach((btnLike) => {
         btnLike.addEventListener('click', async () => {
           const userUidLike = auth.currentUser.uid;
-          // const x = doc.data().userUid;
-          // const x = db.doc;
-          // console.log(userUidLike);
-          // console.log(`AQUI ${x}`);
-          // console.log(btnLike.id);
-          // if () {
-          // si en totalLikes existe userUidLike se ejecuta quitarLike
-          // quitarLike(userUidLike, btnLike.id);
-          // si en totalLikes NO existe userUidLike se ejecuta darLike
-          // darLike(userUidLike, btnLike.id);
-          // console.log(btnLike.id);
           const docRef = doc(db, 'Posts', btnLike.id);
           const docSnap = await getDoc(docRef);
-          // console.log(docRef);
-          // console.log(`${'docSnap: '}${docSnap}`);
-          // console.log(docSnap.exists());
-          // console.log(docSnap.data());
-          // console.log(userUidLike);
           if (docSnap.exists()) {
-            // console.log('Document data:', docSnap.data().totalLikes);
-            // console.log(docSnap.data().totalLikes.includes(userUidLike));
             if (docSnap.data().totalLikes.includes(userUidLike)) {
               quitarLike(userUidLike, btnLike.id)
                 .then(() => {
-                  // console.log('Document data:', docSnap.data().totalLikes.length);
                   const numero = document.getElementById(`${'c'}${btnLike.id}`);
-                  // console.log(numero);
                   numero.innerHTML = (docSnap.data().totalLikes.length) - 1;
                 });
-              // .then((result) => console.log(result));
             } else {
               darLike(userUidLike, btnLike.id)
-                // .then(() => console.log('Document data:', docSnap.data().totalLikes.length));
-                // .then((result) => console.log(result));
                 .then(() => {
-                  // console.log('Document data:', docSnap.data().totalLikes.length);
                   const numero = document.getElementById(`${'c'}${btnLike.id}`);
-                  // console.log(numero);
                   numero.innerHTML = (docSnap.data().totalLikes.length) + 1;
                 });
             }
-            // console.log('Document data:', docSnap.data().totalLikes);
           } else {
-            // doc.data() will be undefined in this case
             console.log('No such document!');
           }
         });
       });
-
-      // si le dan click al div, y el array likes contiene elem uid
-      // se cambia a corazón vacío y se quita elem al array
-
-      // sino le dan click, se queda el corazón vacío y no hace nada más....
-      // (no se si va afuera en un if englobando al addEL o ya no se pone)
     });
 };
-
-// FER
-
-// // Paso a paso
-
-// // Contar con el boton que se necesita para editar (Lapicito)
-// const editForm = document.getElementById('edit_button');
-// // Lograr que se active al ser clickeado, mediante un addEventListener
-// editForm.addEventListener('click', (e) => {
-//   e.preventDefault();
-//   console.log(e);
-// // Que al ser clickeado el boton muestre una ventana con las opciones de aceptar y cancelar
-//   // const chanPost = window.confirm('¿Deseas editar esta publicacion?');
-//   // Que al dar click en aceptar muestre el post elegido para ser editado en un
-//   // formato que permita la manipulación de este
-
-//   // Que en esta misma instacia permita guardar la edición mediante un botón
-
-//   // Que se muestre en el feed el post editado
-// });

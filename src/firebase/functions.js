@@ -1,7 +1,4 @@
 /* eslint-disable import/no-cycle */
-// PARA QUE NO ME LO BORRE EN FEED BRANCH
-// import { async } from 'regenerator-runtime';
-// import { async } from 'regenerator-runtime';
 import { showPost } from '../components/Feed.js';
 import {
   auth,
@@ -11,11 +8,8 @@ import {
   addDoc,
   collection,
   db,
-  // userUid,
   provider,
-  // userLog,
   getDocs,
-  // onSnapshot,
   onAuthStateChanged,
   doc,
   deleteDoc,
@@ -49,20 +43,13 @@ export function loginUser(email, password) {
 export function observerUser(callback, txt) {
   return onAuthStateChanged(auth, (user) => {
     if (user) {
-      // User is signed in, see docs for a list of available properties
-      // https://firebase.google.com/docs/reference/js/firebase.User
       const uid = user.uid;
       const nameU = user.displayName;
       const dateP = Date.now();
       // console.log(uid);
       callback(txt, uid, nameU, dateP);
       showPost();
-      // ...
     }
-    //      else {
-    //   // User is signed out
-    //   // ... los regrese al inicio de sesión!!!
-    // }
   });
 }
 
@@ -98,37 +85,20 @@ export async function edPost(postId, postEd) {
 // ACTUALIZA la coleccion a cada rato
 export function updateCollection() {
   onSnapshot(collection(db, 'Posts'));
-  // onSnapshot(collection(db, 'Posts'), (docu) => {
-  // console.log('Current data: ', docu);
-  // });
 }
 
-// LIKES
+// Agregar Likes
 export async function darLike(userUidLike, idPost) {
   const likes = doc(db, 'Posts', idPost);
-  // console.log(likes);
-  // const userUidLike = auth.currentUser.uid;
   await updateDoc(likes, {
     totalLikes: arrayUnion(userUidLike),
-    // totalLikes: arrayUnion(auth.currentUser.uid),
   });
-  // const numberLikes = await getDoc(doc(db, 'Posts', idPost).totalLikes);
-  // return numberLikes;
-  // const prueba = console.log(likes);
-  // return prueba;
-  // return likes;
 }
 
+// Quitar Likes
 export async function quitarLike(userUidDislike, idPost) {
   const dislikes = doc(db, 'Posts', idPost);
-  // console.log(dislikes);
-  // const userUidDislike = auth.currentUser.uid;
   await updateDoc(dislikes, {
     totalLikes: arrayRemove(userUidDislike),
   });
-  // const numberLikes = await getDoc(doc(db, 'Posts', idPost).totalLikes);
-  // return numberLikes;
-  // const prueba = console.log(idPost);
-  // return prueba;
-  // return dislikes;
 }

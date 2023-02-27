@@ -1,4 +1,3 @@
-// PARA QUE NO ME LO BORRE EN FEED BRANCH
 // eslint-disable-next-line import/no-cycle
 import { onNavigate } from '../main.js';
 import { loginUser, registerGoogle, updateCollection } from '../firebase/functions.js';
@@ -54,9 +53,6 @@ export const Login = () => {
           savePost();
           showPost();
           updateCollection();
-          // .then((idPost) => {
-          //   removePost(idPost);
-          // });
         })
         .catch((error) => {
           if (error.code === 'auth/user-not-found') {
@@ -78,33 +74,10 @@ export const Login = () => {
   googleLogin.addEventListener('click', () => {
     registerGoogle()
       .then(() => {
-        // console.log(`es una prueba${result}`);
-        // if('email no esta registrado') {
-        //   console.log('Tu correo no está registrado');
-        // }
-        // console.log(result);
-        // console.log(result.user.email);
-        // console.log(result.user.displayName);
-        // console.log(result.user.auth);
-        // console.log(result.user.uid);
-
-        // console.log(result.email);
-
-        // console.log('registrada con google', result);
-        // const credential = GoogleAuthProvider.credentialFromResult(result);
-        // const token = credential.accessToken;
-        // const user = result.user;
-
-        // addUser({
-        //   authUid: user.uid,
-        //   name: user.displayName,
-        //   email: user.email,
-        // }).then(() => {
         onNavigate('/feed');
         savePost();
         showPost();
         updateCollection();
-        // });
       })
       .catch((error) => {
         if (error.code === 'auth/user-not-found') {
