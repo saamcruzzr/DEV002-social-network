@@ -47,7 +47,6 @@ export const savePost = () => {
   const btnPostPublicar = document.getElementById('btnPost');
   btnPostPublicar.addEventListener('click', () => {
     const txtPost = document.getElementById('textProfile').value;
-    // console.log(txtPost);
     const errorPost = document.getElementById('errorNoPost');
     if (txtPost !== '') {
       const callback = (txt, uid, nameU, dateP) => {
