@@ -240,26 +240,26 @@ A continuación se encuentran los prototipos de baja fidelidad de cada una de la
 
 _Fernanda Romero_
 
-![pb-fer](https://github.com/FerRomero1990/DEV002-social-network/blob/main/PB%20Fer.png)
+![pb-fer](src/IMG-Readme/PB-Fer.png)
 
 
 _Jess Cuellar_
 
-![pb-jess](https://github.com/FerRomero1990/DEV002-social-network/blob/main/PB%20Jess.png)
+![pb-jess](src/IMG-Readme/PB-Jess.png)
 
 _Sam Cruz_
 
-![pb-sam](https://github.com/FerRomero1990/DEV002-social-network/blob/main/PB%20Sam.png)
+![pb-sam](src/IMG-Readme/PB-Sam.png)
 
 _Prototipo Consolidado_
 
-![pb-consolidado](https://github.com/FerRomero1990/DEV002-social-network/blob/main/PB%20Consolidado.png)
+![pb-consolidado](src/IMG-Readme/PB-Consolidado.png)
 
 # 4. Prototipo de Alta Fidelidad
 
 Posteriormente partiendo del consolidado del prototipo de baja fidelidad se procedió a realizar en Figma el prototipo de alta fidelidad del proyecto.
 
-![pa-consolidado](https://github.com/FerRomero1990/DEV002-social-network/blob/main/PA%20Consolidado.png)
+![pa-consolidado](src/IMG-Readme/PA-Consolidado.png)
 
 # 5. Link a Netlify
 
