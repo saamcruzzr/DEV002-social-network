@@ -23,7 +23,7 @@ export const Feed = () => {
     <hr>
     <section class='section_feed'>
       <section class='section_profile'>
-        <form action='' method='post' name='profile' id='profile'>
+        <div id='profile'>
           <label for='name' class='name_profile'>Tú sabes quien soy:</label>
           <textarea id='textProfile' class='textarea_profile' name='textarea' placeholder='Aquí el texto a publicar'></textarea>
           <p class='error' id='errorNoPost'></p>
@@ -31,7 +31,7 @@ export const Feed = () => {
             <button class='button btnPost' id='btnPost'>Publicar</button>
             <button class='button btnPost' id='btnCancelPost'>Cancelar</button>
           </div>
-        </form>
+        </div>
       </section>
       <hr>
       <section class='section_posts' id='posts'></section>
@@ -44,10 +44,10 @@ export const Feed = () => {
 // GUARDAR POST
 
 export const savePost = () => {
-  const postForm = document.getElementById('profile');
-  postForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const txtPost = postForm.textProfile.value;
+  const btnPostPublicar = document.getElementById('btnPost');
+  btnPostPublicar.addEventListener('click', () => {
+    const txtPost = document.getElementById('textProfile').value;
+    // console.log(txtPost);
     const errorPost = document.getElementById('errorNoPost');
     if (txtPost !== '') {
       const callback = (txt, uid, nameU, dateP) => {
@@ -58,6 +58,11 @@ export const savePost = () => {
     } else {
       errorPost.textContent = 'No has agregado texto a tu publicación';
     }
+  });
+  const btnPostCancelar = document.getElementById('btnCancelPost');
+  btnPostCancelar.addEventListener('click', () => {
+    const txtPost = document.getElementById('textProfile');
+    txtPost.value = '';
   });
 };
 
